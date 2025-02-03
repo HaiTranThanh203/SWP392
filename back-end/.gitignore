@@ -1,0 +1,27 @@
+# Loại bỏ thư mục node_modules (thư viện cài đặt từ npm)
+node_modules/
+/.pnp
+.pnp.js
+# Bỏ file môi trường chứa thông tin nhạy cảm
+.env
+
+# Bỏ file log, cache và debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# Loại bỏ dữ liệu build
+dist/
+build/
+tmp/
+temp/
+
+# Loại bỏ thư mục của hệ điều hành
+.DS_Store
+Thumbs.db
+
+# Bỏ thư mục của editor như VS Code
+.vscode/
+.idea/
