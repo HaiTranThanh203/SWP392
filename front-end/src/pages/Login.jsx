@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode"; // Adjusted import
+
 import { useNavigate } from "react-router-dom";
 
-const GOOGLE_CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -21,9 +20,7 @@ const LoginForm = () => {
           "http://localhost:9999/api/v1/users/login",
           {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
           }
         );
@@ -82,7 +79,6 @@ const LoginForm = () => {
     }
 
     setErrors(newErrors);
-
     return Object.keys(newErrors).length === 0;
   };
 
@@ -93,9 +89,7 @@ const LoginForm = () => {
       // Send JWT token to backend for verification or account creation if it doesn't exist
       fetch("http://localhost:9999/api/v1/users/google-login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ token: credentialResponse.credential }),
       })
         .then((response) => response.json())
@@ -126,135 +120,110 @@ const LoginForm = () => {
 
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
-      <Container
-        fluid
-        className="d-flex justify-content-center align-items-center"
-        style={{ minHeight: "100vh" }}
-      >
-        <Row>
-          <Col>
-            <div className="text-center mb-4">
-              <a href="/">
-                <img
-                  src="../images/logo.jpg"
-                  href="/"
-                  alt="Logo"
-                  className="mb-3"
-                  style={{ width: "100px" }}
-                />
-              </a>
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="w-full max-w-md px-4">
+          <div className="text-center mb-6">
+            <a href="/">
+              <img
+                src="../images/logo.jpg"
+                alt="Logo"
+                className="mx-auto mb-3 w-24"
+              />
+            </a>
+            <h1 className="text-2xl font-bold">FPTU Social Website</h1>
+            <p className="text-gray-600">
+              The Internet Home Place, where many communities reside
+            </p>
+          </div>
 
-              <h1>FPTU Social Website</h1>
-              <p>The Internet Home Place, where many communities reside</p>
+          <div className="bg-white shadow-md rounded-lg p-6">
+            <h2 className="text-xl font-bold mb-2">Log In</h2>
+            <h6 className="text-sm text-gray-500 mb-4">
+              By continuing, you agree to our User Agreement and acknowledge
+              that you understand the Privacy Policy
+            </h6>
+
+            <div className="mb-4">
+              <GoogleLogin
+                onSuccess={handleGoogleSuccess}
+                onError={handleGoogleFailure}
+                useOneTap
+              />
             </div>
 
-            <Card className="p-4 shadow-sm" style={{ width: "500px" }}>
-              <Card.Body>
-                <h2 className="fw-bold">Log In</h2>
-                <h6 className="mb-4 fw-normal">
-                  By continuing, you agree to our User Agreement and acknowledge
-                  that you understand the Privacy Policy
-                </h6>
+            <div className="flex items-center my-4">
+              <div className="flex-grow bg-gray-300 h-px"></div>
+              <span className="mx-4 text-gray-500">OR</span>
+              <div className="flex-grow bg-gray-300 h-px"></div>
+            </div>
 
-                <div className="mb-2">
-                  <GoogleLogin
-                    onSuccess={handleGoogleSuccess}
-                    onError={handleGoogleFailure}
-                    useOneTap
-                  />
-                </div>
-
-                <div className="d-flex align-items-center my-2">
-                  <div
-                    className="flex-grow-1 bg-secondary"
-                    style={{ height: "1px" }}
-                  ></div>
-                  <span className="mx-4 text-muted">OR</span>
-                  <div
-                    className="flex-grow-1 bg-secondary"
-                    style={{ height: "1px" }}
-                  ></div>
-                </div>
-
-                <Form noValidate validated={validated} onSubmit={handleLogin}>
-                  <Form.Group className="mb-3" controlId="formEmail">
-                    <Form.Control
-                      type="email"
-                      placeholder="Email or username *"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      isInvalid={!!errors.email}
-                      style={{
-                        borderRadius: "20px",
-                        height: "60px",
-                        backgroundColor: "#d7d6d6",
-                      }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.email}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  <Form.Group controlId="formPassword" className="mt-3">
-                    <Form.Control
-                      type="password"
-                      placeholder="Password *"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      isInvalid={!!errors.password}
-                      style={{
-                        borderRadius: "20px",
-                        height: "60px",
-                        backgroundColor: "#d7d6d6",
-                      }}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.password}
-                    </Form.Control.Feedback>
-                  </Form.Group>
-
-                  {errors.form && (
-                    <div className="text-danger mt-3">{errors.form}</div>
-                  )}
-
-                  <div className="mt-3">
-                    <a
-                      href="/forgot-password"
-                      style={{ textDecoration: "none", color: "#0086c9" }}
-                    >
-                      Forgot Password?
-                    </a>
+            <form noValidate onSubmit={handleLogin}>
+              <div className="mb-4">
+                <input
+                  type="email"
+                  placeholder="Email or username *"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className={`w-full p-4 rounded-full bg-gray-200 focus:outline-none ${
+                    errors.email ? "border border-red-500" : ""
+                  }`}
+                />
+                {errors.email && (
+                  <div className="text-red-500 text-sm mt-1">
+                    {errors.email}
                   </div>
+                )}
+              </div>
 
-                  <div className="mt-3">
-                    New to our community?{" "}
-                    <a
-                      href="/signup"
-                      style={{ textDecoration: "none", color: "#0086c9" }}
-                    >
-                      Sign up
-                    </a>
+              <div className="mb-4">
+                <input
+                  type="password"
+                  placeholder="Password *"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className={`w-full p-4 rounded-full bg-gray-200 focus:outline-none ${
+                    errors.password ? "border border-red-500" : ""
+                  }`}
+                />
+                {errors.password && (
+                  <div className="text-red-500 text-sm mt-1">
+                    {errors.password}
                   </div>
+                )}
+              </div>
 
-                  <Button
-                    type="submit"
-                    className="mt-4 w-100"
-                    style={{
-                      borderRadius: "20px",
-                      height: "45px",
-                      backgroundColor: "#ff5e00",
-                    }}
-                  >
-                    Log In
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+              {errors.form && (
+                <div className="text-red-500 text-sm mb-4">{errors.form}</div>
+              )}
+
+              <div className="mb-4">
+                <a
+                  href="/forgot-password"
+                  className="text-blue-600 hover:underline"
+                >
+                  Forgot Password?
+                </a>
+              </div>
+
+              <div className="mb-4">
+                New to our community?{" "}
+                <a href="/signup" className="text-blue-600 hover:underline">
+                  Sign up
+                </a>
+              </div>
+
+              <button
+                type="submit"
+                className="w-full py-3 rounded-full bg-orange-500 text-white font-semibold hover:bg-orange-600 transition"
+              >
+                Log In
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </GoogleOAuthProvider>
   );
 };

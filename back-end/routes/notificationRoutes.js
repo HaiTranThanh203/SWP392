@@ -1,7 +1,6 @@
-const express = require('express');
-
+const express = require("express");
+const notificationController = require("../controllers/notificationController");
 const router = express.Router();
-router
-  .route('/')
+router.route("/");
 
 module.exports = router;
