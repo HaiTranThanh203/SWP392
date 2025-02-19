@@ -1,4 +1,6 @@
 const User = require('../models/userModel');
+const APIFeatures = require('../utils/apiFeatures');
+const catchAsync = require('../utils/catchAsync');
 const {
   factoryDeleteOne,
   factoryUpdateOne,
@@ -94,6 +96,7 @@ exports.searchUsers = catchAsync(async (req, res, next) => {
       message: 'Query parameter is required for searching',
     });
   }
+  console.log("Search Query:", query); // Debug query
 
   // Tìm kiếm theo displayName
   const searchFilter = { username: new RegExp(query, 'i') };
