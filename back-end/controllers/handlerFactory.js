@@ -70,12 +70,15 @@ exports.factoryGetAll = (Model, filter) =>
     if (req.params.postId) filter.postId = req.params.postId;
 
     const features = new APIFeatures(
-      Model.find(filter).populate('communityId').populate('userId'), // Add populate for Community and User
+      Model.find(filter)
+        .populate('userId') // Populate userId như bình thường
+        .populate(Model.schema.paths.communityId ? 'communityId' : ''), // ✅ Kiểm tra nếu có mới populate
       req.query
     )
       .filter()
       .sort()
       .limitFields();
+    
 
     const doc = await features.query;
     res.status(200).json(doc);
