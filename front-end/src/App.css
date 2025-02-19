@@ -1,42 +1,60 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.login-container {
+  width: 550px;
+  margin: 150px auto;
+  padding: 20px;
+  border: 9px solid #ccc;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.sign-up-title {
+  font-size: 28px; /* Điều chỉnh kích cỡ chữ theo ý muốn */
+  font-weight: bold; /* In đậm chữ */
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.submit-button {
+  width: 180px;
+  padding: 10px;
+  background-color: #FFA500;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 16px;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.forgot-password-container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card {
-  padding: 2em;
+.forgot-password-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-.read-the-docs {
-  color: #888;
+a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+.frog-icon {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 110px;
+  left: 725px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 3px solid #FFA500;
+  background-color: #fff;
+  background-image: url('../src/assets/images/Avatar.png');
+  background-size: cover;
+  background-position: center;
 }
