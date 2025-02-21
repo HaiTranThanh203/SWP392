@@ -1,38 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
-
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import Router
+import Header from './components/Header.jsx';
+import Sidebar from './components/SideBar.jsx';
+import Footer from './components/Footer.jsx';
+import ListFriends from './components/ListFriends.jsx';
+import ViewCommunity from './components/ViewCommunity.jsx';
+import PostDetail from './components/PostDetail.jsx';
+import CreatePost from './components/CreatePost.jsx';
+import ReportPost from './components/ReportPost.jsx';
+import Chat from './components/Chat.jsx';
+import AddFriends from './components/AddFriends.jsx';
+import SearchByCommunity from './components/SearchByCommunity.jsx';
+import EditPost from './components/EditPost.jsx'
+const App = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router> {/* Đặt Router bao bọc toàn bộ ứng dụng */}
+      <div className="flex flex-col min-h-screen">
+      <Header/>
+        <div className="flex flex-1">
+          <Sidebar />
+          <main className="flex-1 p-6">
+            <Routes> {/* Routes chứa các route của ứng dụng */}
+              <Route path="/listfriend" element={<ListFriends />} /> {/* Định nghĩa đường dẫn */}
+              <Route path="/viewcommunity" element={<ViewCommunity />} /> {/* Định nghĩa đường dẫn */}
+              <Route path="/postdetail" element={<PostDetail />} /> {/* Định nghĩa đường dẫn */}
+              <Route path="/createpost" element={<CreatePost />} /> {/* Định nghĩa đường dẫn */}
+              <Route path="/reportpost" element={<ReportPost />} /> {/* Định nghĩa đường dẫn */}
+              <Route path="/chat" element={<Chat />} /> {/* Định nghĩa đường dẫn */}
+              <Route path="/addfriends" element={<AddFriends />} /> {/* Định nghĩa đường dẫn */}
+              <Route path="/searchbycommunity" element={<SearchByCommunity />} /> {/* Định nghĩa đường dẫn */}
+              <Route path="/editpost" element={<EditPost />} />
+            </Routes>
+          </main>
+        </div>
+        <Footer />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <div><h1 class="text-3xl font-bold  ">
-    Hello world!
-  </h1></div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    </Router>
+  );
+};
 
-export default App
+export default App;
