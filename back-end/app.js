@@ -13,6 +13,7 @@ const commentRouter = require('./routes/commentRoutes');
 const reportRouter = require('./routes/reportRoutes');
 const notificationRouter = require('./routes/notificationRoutes');
 const newsRouter = require('./routes/newsRoute');
+const messageRouter = require('./routes/messageRoutes');
 const path = require('path');
 // 1) MIDDLEWARES
 // app.set('trust proxy', 3);
@@ -56,6 +57,7 @@ app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/reports', reportRouter);
 app.use('/api/v1/notifications', notificationRouter);
 app.use('/api/v1/news', newsRouter);
+app.use('/api/v1/messages',messageRouter );
 // app.use('/api/v1/news', newsRouter);
 // 3) ERROR HANDLING
 // Bắt lỗi các route API không hợp lệ
