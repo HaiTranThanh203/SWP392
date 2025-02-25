@@ -62,7 +62,7 @@ const DetailNews = () => {
       {/* Update News Button */}
       <div className="mb-6 text-center">
         <Link
-          to={`/admin/updatenews/${newsItem.id}`}  // Link to the Update News page, passing the news id
+          to={`/admin/update-news/${newsItem.id}`}  // Link to the Update News page, passing the news id
           className="bg-blue-500 text-white py-2 px-6 rounded-md shadow-md hover:bg-blue-600 text-sm"
         >
           Update News

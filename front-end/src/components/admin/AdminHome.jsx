@@ -9,7 +9,7 @@ const AdminHome = () => {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-semibold">News</h1>
           <Link
-            to="/admin/createnews"
+            to="/admin/create-news"
             className="bg-orange-500 text-white py-2 px-6 rounded-md shadow-md hover:bg-orange-600 text-sm"
           >
             Create New

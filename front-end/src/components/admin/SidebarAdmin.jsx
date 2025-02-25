@@ -11,7 +11,7 @@ const SidebarAdmin = () => {
           <li className="text-lg">
             <div className="flex items-center space-x-2">
               <HiOutlineDocument className="text-xl" />
-              <Link to="/admin/managernews" className="text-lg hover:text-orange-500">
+              <Link to="/admin/manager-news" className="text-lg hover:text-orange-500">
                 Manager News
               </Link>
             </div>
@@ -20,13 +20,13 @@ const SidebarAdmin = () => {
           {/* Manager Users */}
           <li className="flex items-center space-x-2 text-lg">
             <HiOutlineUsers className="text-xl" />
-            <Link to="/admin/managerusers" className="hover:text-orange-500">Manager Users</Link>
+            <Link to="/admin/manager-users" className="hover:text-orange-500">Manager Users</Link>
           </li>
 
           {/* Manager Reports */}
           <li className="flex items-center space-x-2 text-lg">
             <HiOutlineExclamationCircle className="text-xl" />
-            <Link to="/admin/managerreports" className="hover:text-orange-500">Manager Reports</Link>
+            <Link to="/admin/manager-reports" className="hover:text-orange-500">Manager Reports</Link>
           </li>
         </ul>
       </div>
