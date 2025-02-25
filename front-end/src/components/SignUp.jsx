@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import frogImage from '../assets/images/Avatar.png';
+import background from '../assets/images/background1.jpg';
 
 function SignUp() {
   const [username, setUsername] = useState('');
@@ -30,18 +31,17 @@ function SignUp() {
         },
       });
 
-      // Kiểm tra phản hồi từ server
       if (response.data.status === 'success') {
         setSuccessMessage('Đăng ký thành công! Vui lòng kiểm tra email để kích hoạt tài khoản.');
-        setErrorMessage(''); // Reset lỗi nếu thành công
+        setErrorMessage('');
       } else {
         setErrorMessage('Đã có lỗi xảy ra. Vui lòng thử lại!');
-        setSuccessMessage(''); // Reset thông báo thành công nếu có lỗi
+        setSuccessMessage('');
       }
     } catch (error) {
       console.error('Đăng ký thất bại:', error);
       setErrorMessage(error.response?.data?.message || 'Đã có lỗi xảy ra. Vui lòng thử lại!');
-      setSuccessMessage(''); // Reset thông báo thành công nếu có lỗi
+      setSuccessMessage('');
     }
   };
 
@@ -51,73 +51,90 @@ function SignUp() {
   };
 
   return (
-    <div className="login-container">
-      <div className="frog-icon"></div>
-      <h1 className="sign-up-title">Sign Up New Account</h1>
-      
-      <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Username</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Nhập tên người dùng"
-            required
-            style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
+    <div className="flex items-center justify-center min-h-screen bg-gray-100" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }} >
+      <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-lg border-4 border-gray-300">
+        <h1 className="text-2xl font-bold mb-4 text-center">Sign Up New Account</h1>
+        <div className="flex justify-center mb-4">
+          <img
+            src={frogImage}
+            alt="Frog Icon"
+            className="w-20 h-20 rounded-full border-4 border-orange-500 bg-white"
           />
         </div>
-        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Nhập email"
-            required
-            style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Mã sinh viên</label>
-          <input
-            type="text"
-            value={studentCode}
-            onChange={(e) => setStudentCode(e.target.value)}
-            placeholder="Nhập mã sinh viên"
-            required
-            style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Mật khẩu</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Nhập mật khẩu"
-            required
-            style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
-          />
-        </div>
-        <div style={{ marginBottom: '15px', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '5px', fontWeight: 'bold' }}>Hình ảnh</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            style={{ width: '100%', padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
-          />
-        </div>
-        <button type="submit" className="submit-button">Sign Up</button>
-        <div style={{ marginTop: '10px' }}>
-          Đã có tài khoản? <a href="/login">Đăng nhập</a>
-        </div>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2">Username</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Nhập tên người dùng"
+              required
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+          </div>
 
-      {/* Hiển thị thông báo */}
-      {successMessage && <div style={{ color: 'green', marginTop: '10px' }}>{successMessage}</div>}
-      {errorMessage && <div style={{ color: 'red', marginTop: '10px' }}>{errorMessage}</div>}
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Nhập email"
+              required
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2">Mã sinh viên</label>
+            <input
+              type="text"
+              value={studentCode}
+              onChange={(e) => setStudentCode(e.target.value)}
+              placeholder="Nhập mã sinh viên"
+              required
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2">Mật khẩu</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Nhập mật khẩu"
+              required
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-gray-700 font-medium mb-2">Hình ảnh</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full p-2 border border-gray-300 rounded-lg"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50"
+          >
+            Sign Up
+          </button>
+        </form>
+
+        {successMessage && <div className="text-green-500 mt-4">{successMessage}</div>}
+        {errorMessage && <div className="text-red-500 mt-4">{errorMessage}</div>}
+
+        <div className="mt-4 text-center">
+          Đã có tài khoản? <a href="/login" className="text-orange-500 hover:underline">Đăng nhập</a>
+        </div>
+      </div>
     </div>
   );
 }
