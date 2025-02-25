@@ -28,6 +28,7 @@ app.use(
       'http://localhost:3000',
       'http://127.0.0.1:9999',
       'http://127.0.0.1:3000',
+      'http://localhost:5173'
     ],
   })
 );
@@ -63,9 +64,9 @@ app.use('/api/v1/friendships', friendshipRouter);
 // app.use('/api/v1/news', newsRouter);
 // 3) ERROR HANDLING
 // Bắt lỗi các route API không hợp lệ
-app.all('/api/v1/*', (req, res, next) => {
-  next(new AppError(`Can not find ${req.originalUrl} on this server!`, 404));
-});
+// app.all('/api/v1/*', (req, res, next) => {
+//   next(new AppError(`Can not find ${req.originalUrl} on this server!`, 404));
+// });
 
 // Chuyển tất cả các route không phải API tới frontend
 app.get("*", (req, res, next) => {

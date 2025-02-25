@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const http = require('http');
 
+
 process.on('uncaughtException', (err) => {
   console.log(err.name, err.message);
   console.log('UNCAUGHT EXCEPTION! 🔴 Shutting Down...');
@@ -9,7 +10,9 @@ process.on('uncaughtException', (err) => {
 });
 dotenv.config({ path: './config.env' });
 const app = require('./app');
+
 const { initSocket } = require('./socket');
+
 const DB = process.env.LOCAL_DATABASE;
 // const DB = process.env.DATABASE.replace(
 //   '<password>',
