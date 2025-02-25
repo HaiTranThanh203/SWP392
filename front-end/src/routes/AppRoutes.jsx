@@ -28,7 +28,7 @@ import ViewNews from '../components/admin/ViewNews';
 import CreateNew from '../components/admin/CreateNew';
 import DetailNews from '../components/admin/DetailNews';
 import AdminHome from '../components/admin/AdminHome';
-
+import Home from '../pages/Home';
 // Layout component (Ẩn Header, Sidebar, Footer ở trang login/signup)
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -52,7 +52,7 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         {/* Route chính dành cho người dùng */}
-        <Route path="/" element={<Layout><Login /></Layout>} />
+        <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/login" element={<Layout><Login /></Layout>} />
         <Route path="/signup" element={<Layout><SignUp /></Layout>} />
         <Route path="/forgotpassword" element={<Layout><ForgotPassword /></Layout>} />
