@@ -23,45 +23,46 @@ exports.sendMessage = catchAsync(async (req, res, next) => {
 
 // Controller lấy tin nhắn với phân trang
 exports.getMessages = catchAsync(async (req, res, next) => {
-    // Lấy sender và recipient từ query string
-    const { sender, recipient } = req.query;
-    
-    if (!sender || !recipient) {
-      return res.status(400).json({
-        success: false,
-        message: 'Cần truyền đầy đủ sender và recipient để lấy tin nhắn giữa 2 người'
-      });
-    }
-    
-    // Tạo bộ lọc lấy tin nhắn giữa 2 người (theo cả 2 chiều)
-    const filter = {
-      $or: [
-        { sender: sender, recipient: recipient },
-        { sender: recipient, recipient: sender }
-      ]
-    };
-    
-    // Đặt mặc định limit = 15 nếu không có tham số limit từ client
-    if (!req.query.limit) req.query.limit = 15;
-    
-    // Đếm tổng số tin nhắn phù hợp với filter
-    const totalMessages = await Message.countDocuments(filter);
-    
-    // Áp dụng các tính năng lọc, sắp xếp, giới hạn trường và phân trang
-    const features = new APIFeatures(Message.find(filter), req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .paginate();
-    const messages = await features.query;
-    
-    res.status(200).json({
-      results: messages.length,
-      total: totalMessages,
-      totalPages: Math.ceil(totalMessages / req.query.limit),
-      data: messages
+  // Lấy sender và recipient từ query string
+  const { sender, recipient } = req.query;
+
+  if (!sender || !recipient) {
+    return res.status(400).json({
+      success: false,
+      message: 'Cần truyền đầy đủ sender và recipient để lấy tin nhắn giữa 2 người'
     });
+  }
+
+  // Bộ lọc lấy tin nhắn giữa 2 người (dù gửi theo chiều nào)
+  const filter = {
+    $or: [
+      { sender: sender, recipient: recipient },
+      { sender: recipient, recipient: sender }
+    ]
+  };
+
+  // Thiết lập phân trang
+  const limit = req.query.limit ? parseInt(req.query.limit) : 15;
+  const page = req.query.page ? parseInt(req.query.page) : 1;
+  const skip = (page - 1) * limit;
+
+  // Đếm tổng số tin nhắn phù hợp với filter
+  const totalMessages = await Message.countDocuments(filter);
+
+  // Lấy tin nhắn với sắp xếp theo createdAt (nếu cần), bỏ qua (skip) và giới hạn (limit)
+  const messages = await Message.find(filter)
+    .sort({ createdAt: 1 }) // Sắp xếp theo thời gian tăng dần, thay đổi nếu cần
+    .skip(skip)
+    .limit(limit);
+
+  res.status(200).json({
+    results: messages.length,
+    total: totalMessages,
+    totalPages: Math.ceil(totalMessages / limit),
+    data: messages
   });
+});
+
 // Hàm đánh dấu tin nhắn đã đọc
 exports.markMessagesAsRead = catchAsync(async (req, res, next) => {
   // Giả sử client gửi sender và recipient để xác định cuộc trò chuyện

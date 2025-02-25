@@ -14,28 +14,7 @@ import SearchByCommunity from './components/SearchByCommunity.jsx';
 import EditPost from './components/EditPost.jsx'
 const App = () => {
   return (
-    <Router> {/* Đặt Router bao bọc toàn bộ ứng dụng */}
-      <div className="flex flex-col min-h-screen">
-      <Header/>
-        <div className="flex flex-1">
-          <Sidebar />
-          <main className="flex-1 p-6">
-            <Routes> {/* Routes chứa các route của ứng dụng */}
-              <Route path="/listfriend" element={<ListFriends />} /> {/* Định nghĩa đường dẫn */}
-              <Route path="/viewcommunity" element={<ViewCommunity />} /> {/* Định nghĩa đường dẫn */}
-              <Route path="/postdetail" element={<PostDetail />} /> {/* Định nghĩa đường dẫn */}
-              <Route path="/createpost" element={<CreatePost />} /> {/* Định nghĩa đường dẫn */}
-              <Route path="/reportpost" element={<ReportPost />} /> {/* Định nghĩa đường dẫn */}
-              <Route path="/chat" element={<Chat />} /> {/* Định nghĩa đường dẫn */}
-              <Route path="/addfriends" element={<AddFriends />} /> {/* Định nghĩa đường dẫn */}
-              <Route path="/searchbycommunity" element={<SearchByCommunity />} /> {/* Định nghĩa đường dẫn */}
-              <Route path="/editpost" element={<EditPost />} />
-            </Routes>
-          </main>
-        </div>
-        <Footer />
-      </div>
-    </Router>
+    <><div>heloo</div></>
   );
 };
 
