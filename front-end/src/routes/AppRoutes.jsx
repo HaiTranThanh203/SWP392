@@ -17,10 +17,21 @@ import AddFriends from '../components/AddFriends.jsx';
 import SearchByCommunity from '../components/SearchByCommunity.jsx';
 import EditPost from '../components/EditPost.jsx';
 
+// Admin Components
+import AdminLayout from '../components/admin/AdminLayout';
+import ManagerNews from '../components/admin/ManagerNews';
+import ManagerReport from '../components/admin/ManagerReport';
+import ManagerUser from '../components/admin/ManagerUser';
+import UserDetail from '../components/admin/UserDetail';
+import UpdateNews from '../components/admin/UpdateNews';
+import ViewNews from '../components/admin/ViewNews';
+import CreateNew from '../components/admin/CreateNew';
+import DetailNews from '../components/admin/DetailNews';
+import AdminHome from '../components/admin/AdminHome';
+
+// Layout component (Ẩn Header, Sidebar, Footer ở trang login/signup)
 const Layout = ({ children }) => {
   const location = useLocation();
-  
-  // Các trang không cần Header, Sidebar, Footer
   const noLayoutRoutes = ['/login', '/signup', '/forgotpassword'];
   const hideLayout = noLayoutRoutes.includes(location.pathname);
 
@@ -39,24 +50,36 @@ const Layout = ({ children }) => {
 const AppRoutes = () => {
   return (
     <Router>
-      <Layout>
-        <Routes>
-          
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/listfriend" element={<ListFriends />} />
-          <Route path="/viewcommunity" element={<ViewCommunity />} />
-          <Route path="/postdetail" element={<PostDetail />} />
-          <Route path="/createpost" element={<CreatePost />} />
-          <Route path="/reportpost" element={<ReportPost />} />
-          <Route path="/chat" element={<Chat />} />
-          <Route path="/addfriends" element={<AddFriends />} />
-          <Route path="/searchbycommunity" element={<SearchByCommunity />} />
-          <Route path="/editpost" element={<EditPost />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        {/* Route chính dành cho người dùng */}
+        <Route path="/" element={<Layout><Login /></Layout>} />
+        <Route path="/login" element={<Layout><Login /></Layout>} />
+        <Route path="/signup" element={<Layout><SignUp /></Layout>} />
+        <Route path="/forgotpassword" element={<Layout><ForgotPassword /></Layout>} />
+        <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
+        <Route path="/listfriend" element={<Layout><ListFriends /></Layout>} />
+        <Route path="/viewcommunity" element={<Layout><ViewCommunity /></Layout>} />
+        <Route path="/postdetail" element={<Layout><PostDetail /></Layout>} />
+        <Route path="/createpost" element={<Layout><CreatePost /></Layout>} />
+        <Route path="/reportpost" element={<Layout><ReportPost /></Layout>} />
+        <Route path="/chat" element={<Layout><Chat /></Layout>} />
+        <Route path="/addfriends" element={<Layout><AddFriends /></Layout>} />
+        <Route path="/searchbycommunity" element={<Layout><SearchByCommunity /></Layout>} />
+        <Route path="/editpost" element={<Layout><EditPost /></Layout>} />
+
+        {/* Route dành cho Admin */}
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminHome />} />
+          <Route path="manager-news" element={<ManagerNews />} />
+          <Route path="manager-users" element={<ManagerUser />} />
+          <Route path="manager-reports" element={<ManagerReport />} />
+          <Route path="user-detail/:id" element={<UserDetail />} />
+          <Route path="update-news/:id" element={<UpdateNews />} />
+          <Route path="view-news" element={<ViewNews />} />
+          <Route path="create-news" element={<CreateNew />} />
+          <Route path="news-detail/:id" element={<DetailNews />} />
+        </Route>
+      </Routes>
     </Router>
   );
 };
