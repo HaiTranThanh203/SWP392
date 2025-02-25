@@ -22,7 +22,7 @@ exports.getAllUsersPaginate = catchAsync(async (req, res, next) => {
   // Define filter criteria based on query parameters
   let filter = {};
   if (status) filter.status = status;
-  if (email) filter.email = email;
+  if (email) filter.email = new RegExp(email, 'i');
   if (username) filter.username = new RegExp(username, 'i');
 
   // Apply filters and explicitly set the noIsActiveFilter flag to bypass isActive filtering
