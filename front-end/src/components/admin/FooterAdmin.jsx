@@ -14,6 +14,6 @@ const FooterAdmin = () => {
       </div>
     </footer>
   );
-};
+}
 
 export default FooterAdmin;
