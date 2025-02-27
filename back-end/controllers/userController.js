@@ -61,15 +61,15 @@ exports.getAllUsersPaginate = catchAsync(async (req, res, next) => {
   const users = await features.query;
 
   // Get the total number of matching documents
-  const totalUsers = await User.countDocuments(filter);
+  const totalUsers = await User.countDocuments();
 
   // Get the count of active and inactive users
   const activeUsersCount = await User.countDocuments({
-    ...filter,
+    
     isActive: true,
   });
   const inactiveUsersCount = await User.countDocuments({
-    ...filter,
+
     isActive: false,
   });
 
