@@ -1,35 +1,57 @@
-const User = require('../models/userModel');
-const Friendship = require('../models/friendshipModel');
-const APIFeatures = require('../utils/apiFeatures');
-const catchAsync = require('../utils/catchAsync');
+const User = require("../models/userModel");
+const Friendship = require("../models/friendshipModel");
+const APIFeatures = require("../utils/apiFeatures");
+const catchAsync = require("../utils/catchAsync");
 const {
   factoryDeleteOne,
   factoryUpdateOne,
   factoryGetOne,
   factoryGetAll,
   factoryCreateOne,
-} = require('./handlerFactory');
+} = require("./handlerFactory");
+
 // CRUD
+const filterObj = (obj, ...excluded) => {
+  const newObj = {};
+  Object.keys(obj).forEach((el) => {
+    if (!excluded.includes(el)) newObj[el] = obj[el];
+  });
+  return newObj;
+};
+exports.updateMe = catchAsync(async (req, res, next) => {
+  if (req.body.password || req.body.passwordConfirm) {
+    return next(new AppError("This route is not for password update!", 400));
+  }
+  const filterBody = filterObj(req.body, "isActive");
+  if (req.file) filterBody.avatar = req.file.name;
+  const updatedUser = await User.findByIdAndUpdate(req.body.id, filterBody, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({
+    status: "success",
+    user: updatedUser,
+  });
+});
 exports.getUserById = factoryGetOne(User);
 exports.createNewUser = factoryCreateOne(User);
 exports.getAllUsers = factoryGetAll(User);
 exports.updateUser = factoryUpdateOne(User);
 exports.deleteUser = factoryDeleteOne(User);
-
 exports.getAllUsersPaginate = catchAsync(async (req, res, next) => {
   const { page = 1, limit = 10, status, email, username } = req.query;
 
   // Define filter criteria based on query parameters
   let filter = {};
   if (status) filter.status = status;
-  if (email) filter.email = new RegExp(email, 'i');
-  if (username) filter.username = new RegExp(username, 'i');
+  if (email) filter.email = new RegExp(email, "i");
+  if (username) filter.username = new RegExp(username, "i");
 
   // Apply filters and explicitly set the noIsActiveFilter flag to bypass isActive filtering
   const features = new APIFeatures(
     User.find(filter)
       .setOptions({ noIsActiveFilter: true }) // Disable isActive filtering
-      .select('username email role studentCode isActive'),
+      .select("username email role studentCode isActive"),
     req.query
   )
     .sort()
@@ -67,7 +89,7 @@ exports.toggleUserActiveStatus = catchAsync(async (req, res, next) => {
   // Find the user by ID, bypassing the `isActive` filter and selecting it explicitly
   const user = await User.findOne({ _id: id })
     .setOptions({ noIsActiveFilter: true })
-    .select('+isActive');
+    .select("+isActive");
 
   if (!user) {
     return next(new AppError(`No user found with ID ${id}`, 404));
@@ -79,9 +101,9 @@ exports.toggleUserActiveStatus = catchAsync(async (req, res, next) => {
 
   // Response after successful update
   res.status(200).json({
-    status: 'success',
+    status: "success",
     message: `User status has been updated to ${
-      user.isActive ? 'active' : 'inactive'
+      user.isActive ? "active" : "inactive"
     }.`,
     data: {
       user,
@@ -93,21 +115,21 @@ exports.searchUsers = catchAsync(async (req, res, next) => {
 
   if (!query) {
     return res.status(400).json({
-      status: 'fail',
-      message: 'Query parameter is required for searching',
+      status: "fail",
+      message: "Query parameter is required for searching",
     });
   }
   console.log("Search Query:", query); // Debug query
 
   // Tìm kiếm theo displayName
-  const searchFilter = { username: new RegExp(query, 'i') };
+  const searchFilter = { username: new RegExp(query, "i") };
 
   const users = await User.find(searchFilter)
-    .select('username displayName email avatar') // Chỉ lấy các trường cần thiết
+    .select("username displayName email avatar") // Chỉ lấy các trường cần thiết
     .limit(10);
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     results: users.length,
     data: users,
   });
@@ -118,26 +140,26 @@ exports.searchUsers2 = catchAsync(async (req, res, next) => {
   if (!keyword || !userId) {
     return res.status(400).json({
       success: false,
-      message: 'Cần truyền keyword và userId trong query'
+      message: "Cần truyền keyword và userId trong query",
     });
   }
 
   // Tìm kiếm user theo từ khóa (tìm trong username hoặc displayName)
   const users = await User.find({
     $or: [
-      { username: { $regex: keyword, $options: 'i' } },
-      { displayName: { $regex: keyword, $options: 'i' } }
-    ]
-  }).select('_id username displayName avatar');
+      { username: { $regex: keyword, $options: "i" } },
+      { displayName: { $regex: keyword, $options: "i" } },
+    ],
+  }).select("_id username displayName avatar");
 
   // Lấy danh sách bạn bè của người dùng hiện tại (status accepted)
   const friendships = await Friendship.find({
-    status: 'accepted',
-    $or: [{ requester: userId }, { recipient: userId }]
+    status: "accepted",
+    $or: [{ requester: userId }, { recipient: userId }],
   });
 
   // Tạo mảng lưu các id của bạn bè
-  const friendIds = friendships.map(fs => {
+  const friendIds = friendships.map((fs) => {
     if (fs.requester.toString() === userId.toString()) {
       return fs.recipient.toString();
     } else {
@@ -146,17 +168,17 @@ exports.searchUsers2 = catchAsync(async (req, res, next) => {
   });
 
   // Gắn thêm trường isFriend cho từng user trong kết quả tìm kiếm
-  const results = users.map(user => ({
+  const results = users.map((user) => ({
     _id: user._id,
     username: user.username,
     displayName: user.displayName,
     avatar: user.avatar,
-    isFriend: friendIds.includes(user._id.toString())
+    isFriend: friendIds.includes(user._id.toString()),
   }));
 
   res.status(200).json({
     success: true,
     results: results.length,
-    data: results
+    data: results,
   });
 });
