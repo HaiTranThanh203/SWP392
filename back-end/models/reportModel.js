@@ -13,7 +13,7 @@ const reportSchema = new mongoose.Schema(
       enum: ['Post', 'Comment', 'User'],
     },
     description: String,
-    status: { type: String, enum: ['Waiting', 'Approved', 'Cancel'] },
+    status: { type: String, enum: ['Waiting', 'Approved', 'Cancel'], default: 'Waiting' },
   },
   {
     timestamps: true,
