@@ -1,46 +1,56 @@
 import axios from 'axios';
 import { message } from 'antd';
-import { BASE_URL, api} from "./api";
+
+export const BASE_URL = 'http://localhost:9999/api/v1';
+
+// Hàm trả về header chung
+export const getCommonHeader = () => {
+  return {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('token'),
+  };
+};
 
 // Function to toggle user status by ID
 export const toggleUserStatus = async (userId) => {
-    try {
-        const response = await api.patch(`${BASE_URL}/users/${userId}/toggle-active`, {}, );
-        return response.data;
-    } catch (error) {
-        message.error('Error updating user status: ' + error.message);
-        throw error;
-    }
+  try {
+    const response = await axios.patch(
+      `${BASE_URL}/users/${userId}/toggle-active`,
+      {}, // Body (nếu có) có thể là {} nếu không cần dữ liệu
+      { headers: getCommonHeader() }
+    );
+    return response.data;
+  } catch (error) {
+    message.error('Error updating user status: ' + error.message);
+    throw error;
+  }
 };
-// Function to get all users with pagination
-// http://localhost:9999/api/v1/users/list?page=1&limit=5&email=test123&username=test1 -co the search theo email va username
 
-
- // Update with your actual base URL
-
-// Function to fetch list of users with filters
+// Function to fetch list of users with filters (pagination, search)
 export const getListUser = async (page = 1, limit = 5, status = '', email = '', username = '') => {
   try {
     const response = await axios.get(`${BASE_URL}/users/list`, {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem('token'),
-      },
-      params: { page, limit, status, email, username }
+      headers: getCommonHeader(),
+      params: { page, limit, status, email, username },
     });
-    return response.data;  // Assuming the users are inside `data` key
+    return response.data; // Giả sử dữ liệu chính nằm trong response.data
   } catch (error) {
     message.error('Error fetching users: ' + error.message);
     throw error;
   }
 };
 
-// export const getUserById = async (id) => {}
-// try {
-//     const endpoint = `${BASE_URL}/api/v1/users/${id}`;
-//     const response = await api.get(endpoint);
-//     return response.data;
-// } catch (error) {
-//     console.error('Error fetching user details:', error);
-//     throw error;
-// }
+// Function to get user details by ID
+export const getUserById = async (id) => {
+  try {
+    const endpoint = `${BASE_URL}/users/${id}`;
+    const response = await axios.get(endpoint, {
+      headers: getCommonHeader(),
+    });
+    return response.data;
+  } catch (error) {
+    message.error('Error fetching user details: ' + error.message);
+    throw error;
+  }
+};
