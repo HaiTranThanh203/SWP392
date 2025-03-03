@@ -1,49 +1,100 @@
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getUserById, toggleUserStatus } from '../../services/UserAdminService';
+import { message } from 'antd';
 
 const UserDetail = () => {
-  const { id } = useParams(); // Extract the user ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [toggleLoading, setToggleLoading] = useState(false);
 
-  // Sample user data
-    const users = [
-      { id: 1, image: 'https://randomuser.me/api/portraits/children/1.jpg', title: 'Musk', description: 'Musk\'s attorney, Marc Toberoff, confirmed the development, as per the report.', status: 'Active', email: 'QA@gmail.com', phone: '03396343450', role: 'User' },
-      { id: 2, image: 'https://randomuser.me/api/portraits/children/2.jpg', title: 'Elon Musk', description: 'Elon Musk and a group of investors have made a $97.4 billion offer to buy OpenAI\'s controlling non-profit entity.', status: 'Active', email: 'elon.musk@gmail.com', phone: '03396343451', role: 'Admin' },
-      { id: 3, image: 'https://randomuser.me/api/portraits/men/3.jpg', title: 'Marc Toberoff', description: 'Musk\'s attorney, Marc Toberoff, confirmed the development, as per the report.', status: 'Active', email: 'marc.toberoff@gmail.com', phone: '03396343452', role: 'User' },
-      { id: 4, image: 'https://randomuser.me/api/portraits/men/4.jpg', title: 'The Bid', description: 'The bid is backed by Musk\'s own AI company, xAI (founded in 2023).', status: 'DeActive', email: 'thebid@gmail.com', phone: '03396343453', role: 'User' },
-    ];
+  useEffect(() => {
+    async function fetchUserDetail() {
+      try {
+        setLoading(true);
+        const response = await getUserById(id);
+        console.log("User Detail Response:", response);
+        // Giả sử response.data chứa chi tiết của user
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error fetching user detail:", error);
+        message.error("Failed to load user details.");
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchUserDetail();
+  }, [id]);
 
-  const user = users.find((user) => user.id === parseInt(id));
+  const handleToggleStatus = async () => {
+    try {
+      setToggleLoading(true);
+      const res = await toggleUserStatus(id);
+      console.log("Toggle Status Response:", res);
+      message.success("User status updated successfully.");
+      // Sau khi toggle, reload lại chi tiết user
+      const response = await getUserById(id);
+      setUser(response.data);
+    } catch (error) {
+      console.error("Error toggling user status:", error);
+      message.error("Failed to update user status.");
+    } finally {
+      setToggleLoading(false);
+    }
+  };
 
-  if (!user) return <div>User not found</div>;
+  if (loading) return <div className="p-8 text-center text-xl">Loading...</div>;
+  if (!user) return <div className="p-8 text-center text-xl">User not found</div>;
 
   return (
-    <div className="p-8 max-w-lg mx-auto bg-orange-100 rounded-lg">
-      <div className="text-2xl font-semibold text-center mb-6">User Detail</div>
-      <div className="flex items-center mb-4">
-        <img src={user.image} alt={user.title} className="w-20 h-20 rounded-full mr-4" />
-        <div className="text-lg font-medium">{user.title}</div>
+    <div className="p-8 max-w-lg mx-auto bg-white rounded-lg shadow-lg">
+      <div className="text-2xl font-bold text-center mb-6">User Detail</div>
+      <div className="flex items-center mb-6">
+        <img
+          src={user.image || 'https://via.placeholder.com/80'}
+          alt={user.username}
+          className="w-20 h-20 rounded-full mr-4"
+        />
+        <div className="text-xl font-medium">{user.username}</div>
       </div>
       <div className="mb-4">
-        <strong>Email Address:</strong> {user.email}
+        <span className="font-semibold">Email:</span> {user.email}
       </div>
       <div className="mb-4">
-        <strong>User Name:</strong> {user.title}
+        <span className="font-semibold">Username:</span> {user.username}
       </div>
       <div className="mb-4">
-        <strong>ID:</strong> {user.id}
+        <span className="font-semibold">ID:</span> {user._id || user.id}
       </div>
       <div className="mb-4">
-        <strong>Phone:</strong> {user.phone}
+        <span className="font-semibold">Phone:</span> {user.phone || 'N/A'}
       </div>
       <div className="mb-4">
-        <strong>Role:</strong> {user.role}
+        <span className="font-semibold">Role:</span> {user.role}
       </div>
-      <div className="mb-4">
-        <strong>Status:</strong> {user.status}
+      <div className="mb-6">
+        <span className="font-semibold">Status:</span>{" "}
+        <span className={`font-semibold ${user.isActive ? 'text-green-600' : 'text-red-600'}`}>
+          {user.isActive ? 'Active' : 'DeActive'}
+        </span>
       </div>
-      <button onClick={() => navigate(-1)} className="bg-gray-500 text-white py-2 px-4 rounded-md">
-        Close
-      </button>
+      <div className="flex justify-between">
+        <button
+          onClick={() => navigate(-1)}
+          className="bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded focus:outline-none"
+        >
+          Back
+        </button>
+        <button
+          onClick={handleToggleStatus}
+          disabled={toggleLoading}
+          className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded focus:outline-none"
+        >
+          {toggleLoading ? 'Processing...' : 'Toggle Status'}
+        </button>
+      </div>
     </div>
   );
 };
