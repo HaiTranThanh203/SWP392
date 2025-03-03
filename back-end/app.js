@@ -28,7 +28,10 @@ app.use(
       "http://localhost:3000",
       "http://127.0.0.1:9999",
       "http://127.0.0.1:3000",
-      "http://localhost:5173" // Add this line
+
+ 
+      "http://localhost:5173",
+
     ],
   })
 );

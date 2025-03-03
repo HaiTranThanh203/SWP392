@@ -16,6 +16,7 @@ import Chat from '../components/Chat.jsx';
 import AddFriends from '../components/AddFriends.jsx';
 import SearchByCommunity from '../components/SearchByCommunity.jsx';
 import EditPost from '../components/EditPost.jsx';
+import Profile from '../components/Profile.jsx';
 
 // Admin Components
 import AdminLayout from '../components/admin/AdminLayout';
@@ -29,6 +30,7 @@ import CreateNew from '../components/admin/CreateNew';
 import DetailNews from '../components/admin/DetailNews';
 import AdminHome from '../components/admin/AdminHome';
 import Home from '../pages/Home';
+
 // Layout component (Ẩn Header, Sidebar, Footer ở trang login/signup)
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -52,10 +54,11 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         {/* Route chính dành cho người dùng */}
-        <Route path="/" element={<Layout><Home /></Layout>} />
-        <Route path="/login" element={<Layout><Login /></Layout>} />
-        <Route path="/signup" element={<Layout><SignUp /></Layout>} />
-        <Route path="/forgotpassword" element={<Layout><ForgotPassword /></Layout>} />
+        <Route path="/home" element={<Layout><Home /></Layout>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/profile" element={<Layout><Profile /></Layout>} />
         <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
         <Route path="/listfriend" element={<Layout><ListFriends /></Layout>} />
         <Route path="/viewcommunity" element={<Layout><ViewCommunity /></Layout>} />
