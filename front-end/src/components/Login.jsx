@@ -20,7 +20,7 @@ function Login() {
           password,
         }
       );
-      console.log("Đăng nhập thành công:", response.data);
+      // console.log("Đăng nhập thành công:", response.data);
       const data = response.data; // Lấy dữ liệu từ response
 
       // Kiểm tra nếu đăng nhập thành công
