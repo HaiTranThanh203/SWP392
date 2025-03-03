@@ -33,9 +33,9 @@ function Login() {
 
         // Điều hướng người dùng dựa trên vai trò
         if (data.user.role === "student") {
-          navigate("/dashboard"); // Điều hướng đến trang chủ cho student
+          navigate("/Home"); // Điều hướng đến trang chủ cho student
         } else if (data.user.role === "admin") {
-          navigate("/dashboard"); // Điều hướng đến trang quản lý cho admin
+          navigate("/Admin/manager-reports"); // Điều hướng đến trang quản lý cho admin
         }
       } else {
         console.error("Login failed", data.message);

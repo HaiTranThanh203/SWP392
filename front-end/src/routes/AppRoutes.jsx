@@ -30,6 +30,8 @@ import CreateNew from '../components/admin/CreateNew';
 import DetailNews from '../components/admin/DetailNews';
 import AdminHome from '../components/admin/AdminHome';
 import Home from '../pages/Home';
+import PublicNewsList from '../components/PublicNewsList.jsx';
+import NewsDetail from '../components/NewsDetail.jsx';
 
 // Layout component (Ẩn Header, Sidebar, Footer ở trang login/signup)
 const Layout = ({ children }) => {
@@ -69,7 +71,9 @@ const AppRoutes = () => {
         <Route path="/addfriends" element={<Layout><AddFriends /></Layout>} />
         <Route path="/searchbycommunity" element={<Layout><SearchByCommunity /></Layout>} />
         <Route path="/editpost" element={<Layout><EditPost /></Layout>} />
-
+ 
+<Route path="/news" element={<Layout><PublicNewsList /></Layout>} />
+<Route path="/news/:id" element={<Layout><NewsDetail /></Layout>} />
         {/* Route dành cho Admin */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminHome />} />

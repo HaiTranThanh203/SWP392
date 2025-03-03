@@ -14,12 +14,12 @@ export default function Sidebar() {
         {/* Home */}
         <li className="flex items-center space-x-4">
           <FaHome className="text-xl" />
-          <a href="#" className="text-lg hover:text-indigo-400">Home</a>
+          <a href="Home" className="text-lg hover:text-indigo-400">Home</a>
         </li>
         {/* News */}
         <li className="flex items-center space-x-4">
           <FaNewspaper className="text-xl" />
-          <a href="#" className="text-lg hover:text-indigo-400">News</a>
+          <a href="news" className="text-lg hover:text-indigo-400">News</a>
         </li>
         {/* Chat */}
         <li className="flex items-center space-x-4">
