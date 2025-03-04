@@ -109,9 +109,10 @@ exports.getCommentByPostId = async (req, res, next) => {
     }
 
     const comments = await Comment.find({ postId })
-      .populate("userId", "name email") // Chỉ lấy thông tin cần thiết
+      .populate("userId", "name avatar email") // Chỉ lấy thông tin cần thiết
       .populate("parentId")
-      .populate("childrens");
+      .populate("childrens")
+      .sort({createAt: -1});
 
     if (!comments || comments.length === 0) {
       return res
