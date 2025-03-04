@@ -14,6 +14,7 @@ const {
 const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
+
 router.post("/forgotPassword", forgotPassword);
 router.put("/change-password", protect, changePassword);
 router.get("/logout", logout);
@@ -27,6 +28,6 @@ router.get("/search2", userController.searchUsers);
 // router.get("/:id", userController.getUserById);
 router.get("/profile", protect, userController.getUserProfile);
 router.patch("/:id/toggle-active", userController.toggleUserActiveStatus);
-
+router.use(protect);
 router.route("/update-me").patch(userController.updateMe);
 module.exports = router;

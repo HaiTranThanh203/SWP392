@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
-import { FaThumbsUp, FaThumbsDown, FaComment, FaReply, FaEllipsisV, FaPaperPlane } from 'react-icons/fa'; // Icons for like, dislike, comment, reply, send
-import avatar1 from '../assets/images/avatar1.png';
-import avatar2 from '../assets/images/avatar2.png';
-import avatar3 from '../assets/images/avatar3.png';
-import bag from '../assets/images/bag.png';
-
+import React, { useState } from "react";
+import {
+  FaThumbsUp,
+  FaThumbsDown,
+  FaComment,
+  FaReply,
+  FaEllipsisV,
+  FaPaperPlane,
+} from "react-icons/fa"; // Icons for like, dislike, comment, reply, send
+import avatar1 from "../assets/images/avatar1.png";
+import avatar2 from "../assets/images/avatar2.png";
+import avatar3 from "../assets/images/avatar3.png";
+import bag from "../assets/images/bag.png";
+import { doGetPostDetail } from "../services/PostService"; // Service to get post detail
 const PostDetail = () => {
   const [postDropdownOpen, setPostDropdownOpen] = useState(false); // State for post dropdown
   const [commentDropdownOpen, setCommentDropdownOpen] = useState(null); // State for comment dropdown
@@ -24,6 +31,14 @@ const PostDetail = () => {
       ],
     },
   ]); // State to handle comments and replies
+  const fetchPostDetail = async () => {
+    try {
+      const postDetail = await doGetPostDetail("67b5c44be8fbbee8bb94c841");
+      console.log("Chi tiết bài viết:", postDetail);
+    } catch (error) {
+      console.error("Không thể lấy bài viết:", error);
+    }
+  };
 
   const handleAddComment = (e) => {
     e.preventDefault();
@@ -52,15 +67,21 @@ const PostDetail = () => {
 
   // Toggle functions for each dropdown
   const togglePostDropdown = () => setPostDropdownOpen(!postDropdownOpen);
-  const toggleCommentDropdown = (index) => setCommentDropdownOpen(commentDropdownOpen === index ? null : index);
-  const toggleReplyDropdown = (index) => setReplyDropdownOpen(replyDropdownOpen === index ? null : index);
+  const toggleCommentDropdown = (index) =>
+    setCommentDropdownOpen(commentDropdownOpen === index ? null : index);
+  const toggleReplyDropdown = (index) =>
+    setReplyDropdownOpen(replyDropdownOpen === index ? null : index);
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col">
       {/* Post Detail Section */}
       <div className="bg-white p-6 rounded-lg shadow-md">
         <div className="flex items-center space-x-2">
-          <img src={avatar2} alt="User Avatar" className="h-12 w-12 rounded-full" />
+          <img
+            src={avatar2}
+            alt="User Avatar"
+            className="h-12 w-12 rounded-full"
+          />
           <div>
             <h2 className="font-semibold text-lg">funny</h2>
             <p className="text-xs text-gray-500">2 hr ago</p>
@@ -73,14 +94,20 @@ const PostDetail = () => {
             {postDropdownOpen && (
               <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
                 <ul>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Save post</li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Report post</li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    Save post
+                  </li>
+                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                    Report post
+                  </li>
                 </ul>
               </div>
             )}
           </div>
         </div>
-        <p className="mt-2 text-gray-700">I’m looking for this bag. Contact me via this account.</p>
+        <p className="mt-2 text-gray-700">
+          I’m looking for this bag. Contact me via this account.
+        </p>
         <img src={bag} alt="Bag" className="mt-4 w-32 h-32 object-cover" />
         <div className="flex items-center space-x-6 mt-4">
           <div className="flex items-center space-x-1 text-gray-500">
@@ -100,7 +127,10 @@ const PostDetail = () => {
 
       {/* Comment Section */}
       <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-        <form onSubmit={handleAddComment} className="flex items-center space-x-2">
+        <form
+          onSubmit={handleAddComment}
+          className="flex items-center space-x-2"
+        >
           <input
             type="text"
             placeholder="Add a comment..."
@@ -110,7 +140,8 @@ const PostDetail = () => {
           />
           <button
             type="submit"
-            className="bg-500 text-dark py-2 px-4 rounded-md text-sm hover:bg-orange-400 transition duration-300">
+            className="bg-500 text-dark py-2 px-4 rounded-md text-sm hover:bg-orange-400 transition duration-300"
+          >
             <FaPaperPlane className="inline-block mr-2" />
           </button>
         </form>
@@ -121,7 +152,11 @@ const PostDetail = () => {
             <div key={index}>
               {/* Main Comment */}
               <div className="flex items-center space-x-2">
-                <img src={avatar3} alt="User Avatar" className="h-8 w-8 rounded-full" />
+                <img
+                  src={avatar3}
+                  alt="User Avatar"
+                  className="h-8 w-8 rounded-full"
+                />
                 <div>
                   <h3 className="font-semibold text-sm">{comment.user}</h3>
                   <p className="text-xs text-gray-500">{comment.time}</p>
@@ -140,7 +175,9 @@ const PostDetail = () => {
                   {commentDropdownOpen === index && (
                     <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
                       <ul>
-                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Report Comment</li>
+                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                          Report Comment
+                        </li>
                       </ul>
                     </div>
                   )}
@@ -151,7 +188,11 @@ const PostDetail = () => {
               <div className="ml-8 space-y-2 mt-4">
                 {comment.replies.map((reply, replyIndex) => (
                   <div key={replyIndex} className="flex items-center space-x-2">
-                    <img src={avatar1} alt="Reply Avatar" className="h-8 w-8 rounded-full" />
+                    <img
+                      src={avatar1}
+                      alt="Reply Avatar"
+                      className="h-8 w-8 rounded-full"
+                    />
                     <div>
                       <h3 className="font-semibold text-sm">{reply.user}</h3>
                       <p className="text-xs text-gray-500">{reply.time}</p>
@@ -166,7 +207,9 @@ const PostDetail = () => {
                       {replyDropdownOpen === replyIndex && (
                         <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
                           <ul>
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Report Comment</li>
+                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                              Report Comment
+                            </li>
                           </ul>
                         </div>
                       )}
