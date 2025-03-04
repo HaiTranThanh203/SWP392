@@ -1,182 +1,142 @@
-import React, { useState } from 'react';
-import { FaThumbsUp, FaThumbsDown, FaComment, FaReply, FaEllipsisV, FaPaperPlane } from 'react-icons/fa'; // Icons for like, dislike, comment, reply, send
-import avatar1 from '../assets/images/avatar1.png';
-import avatar2 from '../assets/images/avatar2.png';
-import avatar3 from '../assets/images/avatar3.png';
-import bag from '../assets/images/bag.png';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { FaThumbsUp, FaThumbsDown, FaComment, FaEllipsisV, FaPaperPlane } from "react-icons/fa";
+import avatar2 from "../assets/images/avatar2.png";
+import avatar3 from "../assets/images/avatar3.png";
 
 const PostDetail = () => {
-  const [postDropdownOpen, setPostDropdownOpen] = useState(false); // State for post dropdown
-  const [commentDropdownOpen, setCommentDropdownOpen] = useState(null); // State for comment dropdown
-  const [replyDropdownOpen, setReplyDropdownOpen] = useState(null); // State for reply dropdown
-  const [comment, setComment] = useState(""); // State to handle comment input
-  const [comments, setComments] = useState([
-    {
-      user: "Sian Nguyen",
-      time: "1 hr ago",
-      content: "I like your post. I would like to share my journey.",
-      replies: [
-        {
-          user: "Hannah",
-          time: "18 minutes ago",
-          content: "So interesting!",
-        },
-      ],
-    },
-  ]); // State to handle comments and replies
+  const { postId } = useParams();
+  const [post, setPost] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [commentInput, setCommentInput] = useState("");
+  const [postDropdownOpen, setPostDropdownOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    axios.get(`http://localhost:9999/api/v1/posts/${postId}`, { withCredentials: true })
+      .then(response => {
+        if (response.data && response.data.data) {
+          setPost(response.data.data);
+        } else {
+          console.error("API trả về không đúng định dạng:", response);
+          setError("Không thể tải bài viết.");
+        }
+        setLoading(false);
+      })
+      .catch(error => {
+        console.error("Lỗi khi lấy bài viết:", error);
+        setError("Không thể tải bài viết.");
+        setLoading(false);
+      });
+
+    axios.get(`http://localhost:9999/api/v1/comments/get-by-post/${postId}`, { withCredentials: true })
+      .then(response => {
+        if (response.data && response.data.data) {
+          setComments(response.data.data);
+        } else {
+          console.error("API bình luận trả về không đúng:", response);
+          setComments([]);
+        }
+      })
+      .catch(error => {
+        console.error("Lỗi khi lấy bình luận:", error);
+        setComments([]);
+      });
+  }, [postId]);
+
+
 
   const handleAddComment = (e) => {
     e.preventDefault();
-    // Add a new comment
-    setComments([
-      ...comments,
-      {
-        user: "You", // Example, replace with actual user
-        time: "Just now",
-        content: comment,
-        replies: [],
-      },
-    ]);
-    setComment(""); // Reset the input field
+    if (!commentInput.trim()) return;
+
+    axios.post(`http://localhost:9999/api/v1/comments`, {
+      postId,
+      content: commentInput
+    }).then(response => {
+      setComments([...comments, response.data.data]);
+      setCommentInput("");
+    }).catch(error => console.error("Lỗi khi thêm bình luận:", error));
   };
 
-  const handleAddReply = (parentIndex, replyContent) => {
-    const updatedComments = [...comments];
-    updatedComments[parentIndex].replies.push({
-      user: "You", // Example, replace with actual user
-      time: "Just now",
-      content: replyContent,
-    });
-    setComments(updatedComments);
-  };
-
-  // Toggle functions for each dropdown
-  const togglePostDropdown = () => setPostDropdownOpen(!postDropdownOpen);
-  const toggleCommentDropdown = (index) => setCommentDropdownOpen(commentDropdownOpen === index ? null : index);
-  const toggleReplyDropdown = (index) => setReplyDropdownOpen(replyDropdownOpen === index ? null : index);
+  if (loading) return <p className="text-center text-gray-500">Đang tải bài viết...</p>;
+  if (error) return <p className="text-red-500 text-center">{error}</p>;
+  if (!post) return <p className="text-center text-gray-500">Bài viết không tồn tại!</p>;
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col">
-      {/* Post Detail Section */}
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <div className="flex items-center space-x-2">
-          <img src={avatar2} alt="User Avatar" className="h-12 w-12 rounded-full" />
-          <div>
-            <h2 className="font-semibold text-lg">funny</h2>
-            <p className="text-xs text-gray-500">2 hr ago</p>
-          </div>
-          <div className="ml-auto relative">
-            <FaEllipsisV
-              className="text-gray-600 cursor-pointer rotate-90"
-              onClick={togglePostDropdown}
-            />
-            {postDropdownOpen && (
-              <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
-                <ul>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Save post</li>
-                  <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Report post</li>
-                </ul>
+        {loading ? (
+          <p className="text-center text-gray-500">Đang tải bài viết...</p>
+        ) : error ? (
+          <p className="text-red-500 text-center">{error}</p>
+        ) : post ? (
+          <>
+            <div className="flex items-center space-x-2">
+              <img
+                src={post.userId?.avatar || avatar2}  // Lấy avatar từ API, nếu không có thì dùng avatar mặc định
+                alt="User Avatar"
+                className="h-12 w-12 rounded-full"
+              />
+              <div>
+                <h2 className="font-semibold text-lg">
+                  {post.userId?.username || "Ẩn danh"} {/* Hiển thị tên người đăng bài */}
+                </h2>
+                <p className="text-xs text-gray-500">
+                  Upvotes: {post.upVotes ?? 0} - Downvotes: {post.downVotes ?? 0}
+                </p>
               </div>
-            )}
-          </div>
-        </div>
-        <p className="mt-2 text-gray-700">I’m looking for this bag. Contact me via this account.</p>
-        <img src={bag} alt="Bag" className="mt-4 w-32 h-32 object-cover" />
-        <div className="flex items-center space-x-6 mt-4">
-          <div className="flex items-center space-x-1 text-gray-500">
-            <FaThumbsUp className="text-lg" />
-            <span className="text-sm">15K</span>
-          </div>
-          <div className="flex items-center space-x-1 text-gray-500">
-            <FaThumbsDown className="text-lg" />
-            <span className="text-sm">1K</span>
-          </div>
-          <div className="flex items-center space-x-1 text-gray-500">
-            <FaComment className="text-lg" />
-            <span className="text-sm">80</span>
-          </div>
-        </div>
+            </div>
+
+            <p className="mt-2 text-gray-700">{post.content || "Không có nội dung"}</p>
+          </>
+        ) : (
+          <p className="text-center text-gray-500">Bài viết không tồn tại!</p>
+        )}
       </div>
 
-      {/* Comment Section */}
+
       <div className="bg-white p-6 rounded-lg shadow-md mt-6">
         <form onSubmit={handleAddComment} className="flex items-center space-x-2">
           <input
             type="text"
             placeholder="Add a comment..."
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
+            value={commentInput}
+            onChange={(e) => setCommentInput(e.target.value)}
             className="w-full p-2 border border-gray-300 rounded-md text-sm"
           />
-          <button
-            type="submit"
-            className="bg-500 text-dark py-2 px-4 rounded-md text-sm hover:bg-orange-400 transition duration-300">
+          <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md text-sm hover:bg-blue-600 transition duration-300">
             <FaPaperPlane className="inline-block mr-2" />
           </button>
         </form>
 
-        {/* Comments */}
         <div className="mt-6 space-y-4">
-          {comments.map((comment, index) => (
-            <div key={index}>
-              {/* Main Comment */}
-              <div className="flex items-center space-x-2">
-                <img src={avatar3} alt="User Avatar" className="h-8 w-8 rounded-full" />
-                <div>
-                  <h3 className="font-semibold text-sm">{comment.user}</h3>
-                  <p className="text-xs text-gray-500">{comment.time}</p>
-                  <p className="text-sm text-gray-700">{comment.content}</p>
-                  <div className="flex items-center space-x-2 text-gray-500 text-xs mt-1">
-                    <FaReply className="text-sm" />
-                    <span>Reply</span>
-                  </div>
-                </div>
-                {/* Ellipsis for comment dropdown */}
-                <div className="ml-auto relative" rotate-90>
-                  <FaEllipsisV
-                    className="text-gray-600 cursor-pointer rotate-90"
-                    onClick={() => toggleCommentDropdown(index)}
-                  />
-                  {commentDropdownOpen === index && (
-                    <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
-                      <ul>
-                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Report Comment</li>
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Replies */}
-              <div className="ml-8 space-y-2 mt-4">
-                {comment.replies.map((reply, replyIndex) => (
-                  <div key={replyIndex} className="flex items-center space-x-2">
-                    <img src={avatar1} alt="Reply Avatar" className="h-8 w-8 rounded-full" />
-                    <div>
-                      <h3 className="font-semibold text-sm">{reply.user}</h3>
-                      <p className="text-xs text-gray-500">{reply.time}</p>
-                      <p className="text-sm text-gray-700">{reply.content}</p>
-                    </div>
-                    {/* Ellipsis for reply dropdown */}
-                    <div className="ml-auto relative">
-                      <FaEllipsisV
-                        className="text-gray-600 cursor-pointer rotate-90"
-                        onClick={() => toggleReplyDropdown(replyIndex)}
-                      />
-                      {replyDropdownOpen === replyIndex && (
-                        <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
-                          <ul>
-                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Report Comment</li>
-                          </ul>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                ))}
+          {comments.length > 0 ? comments.map((comment, index) => (
+            <div key={index} className="flex items-center space-x-2">
+              <img
+                src={comment.userId?.avatar || avatar3}  // Lấy avatar từ API
+                alt="User Avatar"
+                className="h-8 w-8 rounded-full"
+              />
+              <div>
+                <h3 className="font-semibold text-sm">
+                  {comment.userId?.username || "Ẩn danh"} {/* Hiển thị tên người bình luận */}
+                </h3>
+                <p className="text-xs text-gray-500">
+                  {comment.createdAt ? new Date(comment.createdAt).toLocaleString() : "Không có thời gian"}
+                </p>
+                <p className="text-sm text-gray-700">{comment.content || "Không có nội dung"}</p>
               </div>
             </div>
-          ))}
+          )) : (
+            <p className="text-center text-gray-500">Chưa có bình luận nào.</p>
+          )}
         </div>
+
+
+
       </div>
     </div>
   );

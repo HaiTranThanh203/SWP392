@@ -39,11 +39,34 @@ exports.searchCommunities = catchAsync(async (req, res, next) => {
     data: communities,
   });
 });
+exports.factoryGetAll = (Model) => catchAsync(async (req, res, next) => {
+  // Tìm tất cả bản ghi của mô hình và populate userId
+  const docs = await Model.find()
+    .populate('userId', 'name email') // Thêm populate vào đây, ví dụ lấy name và email từ user
+    .exec();
 
+  res.status(200).json({
+    status: 'success',
+    results: docs.length,
+    data: docs,
+  });
+});
 // CRUD
 exports.getCommunityById = factoryGetOne(Community);
 exports.createNewCommunity = factoryCreateOne(Community);
-exports.getAllCommunities = factoryGetAll(Community);
+exports.getAllCommunities = catchAsync(async (req, res, next) => {
+  const docs = await Community.find()
+    .populate('createdBy', 'name email')  // Đảm bảo rằng trường này tồn tại và đúng
+    .populate('moderators', 'name email') // Nếu có
+    .exec();
+
+  res.status(200).json({
+    status: 'success',
+    results: docs.length,
+    data: docs,
+  });
+});
+
 exports.updateCommunity = factoryUpdateOne(Community);
 exports.deleteCommunity = factoryDeleteOne(Community);
 exports.addUserById = subscriptionController.createNewSubscription;

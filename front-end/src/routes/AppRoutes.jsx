@@ -9,7 +9,7 @@ import Sidebar from '../components/SideBar.jsx';
 import Footer from '../components/Footer.jsx';
 import ListFriends from '../components/ListFriends.jsx';
 import ViewCommunity from '../components/ViewCommunity.jsx';
-import PostDetail from '../components/PostDetail.jsx';
+import PostDetail from '../components/PostDetail.jsx'; // Đảm bảo import đúng
 import CreatePost from '../components/CreatePost.jsx';
 import ReportPost from '../components/ReportPost.jsx';
 import Chat from '../components/Chat.jsx';
@@ -29,6 +29,7 @@ import CreateNew from '../components/admin/CreateNew';
 import DetailNews from '../components/admin/DetailNews';
 import AdminHome from '../components/admin/AdminHome';
 import Home from '../pages/Home';
+
 // Layout component (Ẩn Header, Sidebar, Footer ở trang login/signup)
 const Layout = ({ children }) => {
   const location = useLocation();
@@ -59,7 +60,7 @@ const AppRoutes = () => {
         <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
         <Route path="/listfriend" element={<Layout><ListFriends /></Layout>} />
         <Route path="/viewcommunity" element={<Layout><ViewCommunity /></Layout>} />
-        <Route path="/postdetail" element={<Layout><PostDetail /></Layout>} />
+        <Route path="/postdetail/:postId" element={<Layout><PostDetail /></Layout>} /> {/* Cập nhật URL */}
         <Route path="/createpost" element={<Layout><CreatePost /></Layout>} />
         <Route path="/reportpost" element={<Layout><ReportPost /></Layout>} />
         <Route path="/chat" element={<Layout><Chat /></Layout>} />

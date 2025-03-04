@@ -20,8 +20,52 @@ const {
 // // Get feed for guest users
 const Comment = require("../models/commentModel");
 // CRUD
-exports.getPostById = factoryGetOne(Post, "communityId userId");
-exports.createNewPost = factoryCreateOne(Post);
+
+exports.getPostById = async (req, res, next) => {
+  try {
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ status: "fail", message: "ID không hợp lệ!" });
+    }
+
+    const post = await Post.findOne({ _id: req.params.id })
+      .populate("userId", "username avatar email")
+      .populate("communityId", "name");
+
+    if (!post) {
+      return res.status(404).json({ status: "fail", message: "Bài viết không tồn tại!" });
+    }
+
+    res.status(200).json({ status: "success", data: post });
+  } catch (error) {
+    res.status(500).json({ status: "error", message: "Lỗi server", error: error.message });
+  }
+};
+
+// Controller xử lý tạo bài viết mới với multer
+exports.createNewPost = catchAsync(async (req, res, next) => {
+  let imageUrl = '';
+
+  // Nếu có file ảnh, xử lý upload
+  if (req.file) {
+    imageUrl = `/uploads/${req.file.filename}`;
+  }
+
+  const newPost = new Post({
+    communityId: req.body.communityId,
+    userId: req.body.userId,
+    title: req.body.title,
+    content: req.body.content,
+    media: imageUrl ? [imageUrl] : [],  // Lưu URL của ảnh vào mảng media
+  });
+
+  await newPost.save();
+
+  res.status(201).json({
+    status: 'success',
+    data: newPost,
+  });
+});
+
 exports.getAllPosts = factoryGetAll(Post);
 exports.updatePost = factoryUpdateOne(Post);
 //Nhận thông tin bài viết theo id param và phần id user trong body và vote trong body true là like false là dislike và none là xóaxóa
