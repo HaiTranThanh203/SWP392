@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Login from '../components/Login';
@@ -33,10 +34,11 @@ import Home from '../pages/Home';
 import PublicNewsList from '../components/PublicNewsList.jsx';
 import NewsDetail from '../components/NewsDetail.jsx';
 
+
 // Layout component (Ẩn Header, Sidebar, Footer ở trang login/signup)
 const Layout = ({ children }) => {
   const location = useLocation();
-  const noLayoutRoutes = ['/login', '/signup', '/forgotpassword'];
+  const noLayoutRoutes = ["/login", "/signup", "/forgotpassword"];
   const hideLayout = noLayoutRoutes.includes(location.pathname);
 
   return (
@@ -56,17 +58,18 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         {/* Route chính dành cho người dùng */}
-        <Route path="/" element={<Layout><Home /></Layout>} />
+
+        <Route path="/home" element={<Layout><Home /></Layout>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/profile" element={<Layout><Profile /></Layout>} />
         <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
         <Route path="/listfriend" element={<Layout><ListFriends /></Layout>} />
-        <Route path="/viewcommunity" element={<Layout><ViewCommunity /></Layout>} />
+        <Route path="/viewcommunity/:id" element={<Layout><ViewCommunity /></Layout>} />
         <Route path="/postdetail" element={<Layout><PostDetail /></Layout>} />
         <Route path="/createpost" element={<Layout><CreatePost /></Layout>} />
-        <Route path="/reportpost" element={<Layout><ReportPost /></Layout>} />
+        <Route path="/reportpost/:id" element={<Layout><ReportPost /></Layout>} />
         <Route path="/chat" element={<Layout><Chat /></Layout>} />
         <Route path="/addfriends" element={<Layout><AddFriends /></Layout>} />
         <Route path="/searchbycommunity" element={<Layout><SearchByCommunity /></Layout>} />
@@ -74,6 +77,7 @@ const AppRoutes = () => {
  
 <Route path="/news" element={<Layout><PublicNewsList /></Layout>} />
 <Route path="/news/:id" element={<Layout><NewsDetail /></Layout>} />
+
         {/* Route dành cho Admin */}
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<AdminHome />} />
