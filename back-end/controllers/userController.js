@@ -24,7 +24,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   }
   const filterBody = filterObj(req.body, "isActive");
   if (req.file) filterBody.avatar = req.file.name;
-  const updatedUser = await User.findByIdAndUpdate(req.body.id, filterBody, {
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, filterBody, {
     new: true,
     runValidators: true,
   });
@@ -65,11 +65,9 @@ exports.getAllUsersPaginate = catchAsync(async (req, res, next) => {
 
   // Get the count of active and inactive users
   const activeUsersCount = await User.countDocuments({
-    
     isActive: true,
   });
   const inactiveUsersCount = await User.countDocuments({
-
     isActive: false,
   });
 

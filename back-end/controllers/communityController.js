@@ -12,29 +12,27 @@ const {
   factoryGetOne,
   factoryGetAll,
   factoryCreateOne,
-
 } = require("./handlerFactory");
-
 
 exports.searchCommunities = catchAsync(async (req, res, next) => {
   const { query } = req.query;
 
   if (!query) {
     return res.status(400).json({
-      status: 'fail',
-      message: 'Query parameter is required for searching',
+      status: "fail",
+      message: "Query parameter is required for searching",
     });
   }
 
   // Tìm kiếm theo name của community
-  const searchFilter = { name: new RegExp(query, 'i') };
+  const searchFilter = { name: new RegExp(query, "i") };
 
   const communities = await Community.find(searchFilter)
-    .select('name description logo memberCount') // Chỉ lấy các trường cần thiết
+    .select("name description logo memberCount") // Chỉ lấy các trường cần thiết
     .limit(100); // Giới hạn số lượng kết quả trả về
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     results: communities.length,
     data: communities,
   });
@@ -121,6 +119,36 @@ exports.accessRequest = async (req, res, next) => {
     } else {
       res.status(404).json({ message: "Community not found" });
     }
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getUserInCommunity = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const sub = await Subscription.find({ communityId: id });
+    if (sub.length > 0) {
+      res.status(200).json(sub);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+exports.deleteUserFromCommunity = async (req, res, next) => {
+  try {
+    const cId = req.body.communityId;
+    const uid = req.body.userId;
+
+    // Cập nhật các trường cần thiết về null
+    await Subscription.updateMany(
+      { userId: uid, communityId: cId },
+      { $set: { userId: null, communityId: null } }
+    );
+
+    res.status(204).json({
+      message: "success",
+      data: null,
+    });
   } catch (error) {
     next(error);
   }
