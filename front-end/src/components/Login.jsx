@@ -20,7 +20,7 @@ function Login() {
           password,
         }
       );
-      console.log("Đăng nhập thành công:", response.data);
+      // console.log("Đăng nhập thành công:", response.data);
       const data = response.data; // Lấy dữ liệu từ response
 
       // Kiểm tra nếu đăng nhập thành công
@@ -33,9 +33,12 @@ function Login() {
 
         // Điều hướng người dùng dựa trên vai trò
         if (data.user.role === "student") {
+
           navigate("/"); // Điều hướng đến trang chủ cho student
+
+
         } else if (data.user.role === "admin") {
-          navigate("/dashboard"); // Điều hướng đến trang quản lý cho admin
+          navigate("/Admin/manager-reports"); // Điều hướng đến trang quản lý cho admin
         }
       } else {
         console.error("Login failed", data.message);

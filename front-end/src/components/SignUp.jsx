@@ -15,6 +15,26 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Kiểm tra định dạng email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setErrorMessage('Email không đúng định dạng.');
+      return;
+    }
+
+    // Kiểm tra định dạng mã sinh viên
+    const studentCodeRegex = /^(HE|HA|IS|MC)\d+$/i;
+    if (!studentCodeRegex.test(studentCode)) {
+      setErrorMessage('Mã sinh viên phải bắt đầu bằng HE, HA, IS hoặc MC.');
+      return;
+    }
+
+    // Kiểm tra độ dài mật khẩu
+    if (password.length < 6) {
+      setErrorMessage('Mật khẩu phải có ít nhất 6 ký tự.');
+      return;
+    }
+
     const formData = new FormData();
     formData.append('username', username);
     formData.append('email', email);
@@ -51,7 +71,7 @@ function SignUp() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }} >
+    <div className="flex items-center justify-center min-h-screen bg-gray-100" style={{ backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
       <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-lg border-4 border-gray-300">
         <h1 className="text-2xl font-bold mb-4 text-center">Sign Up New Account</h1>
         <div className="flex justify-center mb-4">
@@ -110,7 +130,7 @@ function SignUp() {
             />
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-gray-700 font-medium mb-2">Hình ảnh</label>
             <input
               type="file"
@@ -118,7 +138,7 @@ function SignUp() {
               onChange={handleImageChange}
               className="w-full p-2 border border-gray-300 rounded-lg"
             />
-          </div>
+          </div> */}
 
           <button
             type="submit"
