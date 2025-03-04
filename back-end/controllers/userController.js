@@ -24,7 +24,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   }
   const filterBody = filterObj(req.body, "isActive");
   if (req.file) filterBody.avatar = req.file.name;
-  const updatedUser = await User.findByIdAndUpdate(req.body.id, filterBody, {
+  const updatedUser = await User.findByIdAndUpdate(req.user.id, filterBody, {
     new: true,
     runValidators: true,
   });
@@ -65,11 +65,9 @@ exports.getAllUsersPaginate = catchAsync(async (req, res, next) => {
 
   // Get the count of active and inactive users
   const activeUsersCount = await User.countDocuments({
-    
     isActive: true,
   });
   const inactiveUsersCount = await User.countDocuments({
-
     isActive: false,
   });
 
@@ -182,3 +180,50 @@ exports.searchUsers2 = catchAsync(async (req, res, next) => {
     data: results,
   });
 });
+
+//Hàm lấy user profile\
+exports.getUserProfile = async (req, res) => {
+  try {
+    res.set("Cache-Control", "no-store");
+
+    // Kiểm tra xem req.user.id có hợp lệ không
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Không có quyền truy cập. Vui lòng đăng nhập lại!",
+      });
+    }
+
+    // Tìm user trong database
+    const user = await User.findById(req.user.id).select("-password");
+    if (!user) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Người dùng không tồn tại",
+      });
+    }
+
+    // Chuyển đổi thành object thuần túy để có thể chỉnh sửa dữ liệu
+    const userData = {
+      ...user.toObject(),
+      avatar: user.avatar || "https://example.com/default-avatar.png",
+    };
+
+    res.status(200).json({
+      status: "success",
+      message: "Lấy thông tin người dùng thành công",
+      data: userData,
+    });
+  } catch (error) {
+    console.error("Lỗi khi lấy thông tin người dùng:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Lỗi server, vui lòng thử lại sau!",
+    });
+  }
+};
+
+
+
+
+

@@ -74,9 +74,9 @@ exports.votePost = catchAsync(async (req, res, next) => {
   const post = await Post.findById(id);
   if (!post.votes) post.votes = new Map();
   if (req.body.vote == "none") {
-    post.votes.delete(req.body.id);
+    post.votes.delete(req.user.id);
   } else {
-    post.votes.set(req.body.id, req.body.vote);
+    post.votes.set(req.user.id, req.body.vote);
   }
   const updatedPost = await Post.findByIdAndUpdate(
     id,

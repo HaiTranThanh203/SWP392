@@ -10,7 +10,13 @@ router.route("/access/:id").patch(communityController.accessRequest);
 router.route("/edit/:id").patch(communityController.updateCommunity);
 router.route("/request/:id").patch(communityController.addRequest);
 router.route("/get-post/:id").get(communityController.getPostInCommunity);
-router.route("/search").get(communityController.searchCommunities);  // Tìm kiếm community
+
+router.get("/search", communityController.searchCommunities); // Tìm kiếm community
+router.get("/:id", communityController.getCommunityById);
+router.get("/", communityController.getAllCommunities);
+router.route("/get-user/:id").get(communityController.getUserInCommunity);
+
+
 
 
 
