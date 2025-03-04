@@ -59,6 +59,12 @@ exports.addFriend = catchAsync(async (req, res, next) => {
       message: 'Cần truyền requester và recipient'
     });
   }
+  if (requester === recipient) {
+    return res.status(400).json({
+      success: false,
+      message: 'requester và recipient giống nhau không hợp lệ.'
+    });
+  }
 
   // Kiểm tra xem đã tồn tại mối quan hệ nào giữa 2 người chưa
   let friendship = await Friendship.findOne({
@@ -114,7 +120,12 @@ exports.acceptFriendRequest = catchAsync(async (req, res, next) => {
       message: 'Cần truyền requester và recipient'
     });
   }
-
+  if (requester === recipient) {
+    return res.status(400).json({
+      success: false,
+      message: 'requester và recipient giống nhau không hợp lệ.'
+    });
+  }
   // Tìm lời mời kết bạn mà người nhận phải chấp nhận
   const friendship = await Friendship.findOne({
     requester,

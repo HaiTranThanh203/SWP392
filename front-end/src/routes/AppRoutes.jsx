@@ -56,7 +56,7 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         {/* Route chính dành cho người dùng */}
-        <Route path="/home" element={<Layout><Home /></Layout>} />
+        <Route path="/" element={<Layout><Home /></Layout>} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
