@@ -90,6 +90,7 @@ function Profile() {
   }
 
   return (
+    
     <div className="p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-semibold text-blue-600 mb-4">Profile</h2>
       <div className="mb-8">
@@ -101,20 +102,35 @@ function Profile() {
               alt="Avatar"
               className="w-24 h-24 rounded-full border border-gray-300"
             />
+            <button className="mt-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded inline-flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              Upload new images
+            </button>
           </div>
           <div className="w-3/4 pl-6">
             <div className="flex flex-col space-y-2">
               <div className="flex items-center">
                 <span className="w-1/4 font-semibold">Email:</span>
                 <span className="w-3/4">{user.email || "N/A"}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732a2.5 2.5 0 013.536 3.536z" />
+                </svg>
               </div>
               <div className="flex items-center">
                 <span className="w-1/4 font-semibold">Username:</span>
                 <span className="w-3/4">{user.username || "N/A"}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732a2.5 2.5 0 013.536 3.536z" />
+                </svg>
               </div>
               <div className="flex items-center">
                 <span className="w-1/4 font-semibold">Student Code:</span>
                 <span className="w-3/4">{user.studentCode || "N/A"}</span>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732a2.5 2.5 0 013.536 3.536z" />
+                </svg>
               </div>
             </div>
           </div>

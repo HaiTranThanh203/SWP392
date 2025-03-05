@@ -16,5 +16,4 @@ router.get("/:id", communityController.getCommunityById);
 
 
 
-
 module.exports = router;

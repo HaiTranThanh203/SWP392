@@ -16,7 +16,7 @@ const {
 
 exports.searchCommunities = catchAsync(async (req, res, next) => {
   const { query } = req.query;
-
+  
   if (!query) {
     return res.status(400).json({
       status: "fail",
@@ -26,7 +26,7 @@ exports.searchCommunities = catchAsync(async (req, res, next) => {
 
   // Tìm kiếm theo name của community
   const searchFilter = { name: new RegExp(query, "i") };
-
+ 
   const communities = await Community.find(searchFilter)
     .select("name description logo memberCount") // Chỉ lấy các trường cần thiết
     .limit(100); // Giới hạn số lượng kết quả trả về
@@ -37,6 +37,7 @@ exports.searchCommunities = catchAsync(async (req, res, next) => {
     data: communities,
   });
 });
+
 exports.factoryGetAll = (Model) => catchAsync(async (req, res, next) => {
   // Tìm tất cả bản ghi của mô hình và populate userId
   const docs = await Model.find()
