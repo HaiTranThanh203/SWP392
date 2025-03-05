@@ -1,21 +1,28 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FaPaperPlane, FaSearch } from 'react-icons/fa';
-import avatarDefault from '../assets/images/avatar1.png';
-import socket from '../services/socketClient';
-import { toast } from 'react-toastify';
-import { getFriends } from '../services/friendshipService'; // Hàm lấy danh sách bạn bè
-import { sendMessage, getMessages } from '../services/MessageService';
-
+import React, { useState, useEffect, useRef } from "react";
+import { FaPaperPlane, FaSearch } from "react-icons/fa";
+import avatarDefault from "../assets/images/avatar1.png";
+import socket from "../services/socketClient";
+import { toast } from "react-toastify";
+import { getFriends } from "../services/friendshipService";
+import { sendMessage, getMessages } from "../services/MessageService";
 
 const Chat = () => {
-  const currentUser = JSON.parse(localStorage.getItem('user'));
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   const currentUserId = currentUser?.id;
 
   const [friends, setFriends] = useState([]);
   const [selectedFriend, setSelectedFriend] = useState(null);
   const [messages, setMessages] = useState([]);
-  const [message, setMessage] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [message, setMessage] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // State for pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const limit = 20; // Nếu có hơn 20 tin nhắn, tự động phân trang
+
+  // Ref cho container tin nhắn
+  const messageContainerRef = useRef(null);
 
   // Use a ref to always have the latest selectedFriend inside our socket listener
   const selectedFriendRef = useRef(selectedFriend);
@@ -23,7 +30,7 @@ const Chat = () => {
     selectedFriendRef.current = selectedFriend;
   }, [selectedFriend]);
 
-  // Fetch friend list
+  // Fetch friend list từ API
   const fetchFriends = async () => {
     try {
       const res = await getFriends(currentUserId);
@@ -32,71 +39,115 @@ const Chat = () => {
         setSelectedFriend(res.data[0]);
       }
     } catch (error) {
-      toast.error('Error fetching friends: ' + error.message);
+      toast.error("Error fetching friends: " + error.message);
     }
   };
 
-  // Fetch messages between current user and friend
-  const fetchMessages = async (friendId) => {
+  // Fetch messages cho cuộc trò chuyện (với phân trang)
+  const fetchMessages = async (friendId, page = 1) => {
     try {
-      const res = await getMessages(currentUserId, friendId);
-      setMessages(res.data);
+      const res = await getMessages(currentUserId, friendId, limit, page);
+      // Nếu page = 1, set toàn bộ tin nhắn, còn nếu >1, prepend tin nhắn cũ vào state
+      if (page === 1) {
+        setMessages(res.data);
+      } else {
+        setMessages((prev) => [...res.data, ...prev]);
+      }
+      setHasMore(page < res.totalPages);
+      setCurrentPage(page);
     } catch (error) {
-      toast.error('Error fetching messages: ' + error.message);
+      toast.error("Error fetching messages: " + error.message);
     }
   };
 
-  // On component mount, fetch friends and join current user room
+  // Fetch danh sách bạn bè và join room
   useEffect(() => {
     if (currentUserId) {
       fetchFriends();
-      socket.emit('joinRoom', currentUserId);
+      socket.emit("joinRoom", currentUserId);
     }
   }, [currentUserId]);
 
-  // When selectedFriend changes, fetch messages for that conversation
+  // Khi chọn friend mới, load trang 1 của cuộc trò chuyện
   useEffect(() => {
     if (selectedFriend) {
-      fetchMessages(selectedFriend._id);
+      fetchMessages(selectedFriend._id, 1);
     }
   }, [selectedFriend]);
 
-  // Set up a persistent socket listener for new messages
+  // Lắng nghe socket để nhận tin nhắn realtime
   useEffect(() => {
     const handleNewMessage = (newMsg) => {
-      // Check if new message belongs to the current conversation
       if (
         selectedFriendRef.current &&
-        (
-          (newMsg.sender === currentUserId && newMsg.recipient === selectedFriendRef.current._id) ||
-          (newMsg.sender === selectedFriendRef.current._id && newMsg.recipient === currentUserId)
-        )
+        ((newMsg.sender === currentUserId &&
+          newMsg.recipient === selectedFriendRef.current._id) ||
+          (newMsg.sender === selectedFriendRef.current._id &&
+            newMsg.recipient === currentUserId))
       ) {
         setMessages((prev) => [...prev, newMsg]);
       }
     };
 
-    socket.on('newMessage', handleNewMessage);
+    socket.on("newMessage", handleNewMessage);
     return () => {
-      socket.off('newMessage', handleNewMessage);
+      socket.off("newMessage", handleNewMessage);
     };
-  }, [currentUserId]); // no dependency on selectedFriend because we use a ref
+  }, [currentUserId]);
 
-  // Send message handler
+  // Handler gửi tin nhắn
+
+  // Handler for sending a message (cách 1: không cập nhật state, chờ socket)
   const handleSendMessage = async (e) => {
     e.preventDefault();
     if (!message.trim() || !selectedFriend) return;
     try {
-      const res = await sendMessage(currentUserId, selectedFriend._id, message);
-      // Optionally update messages immediately (the sender will receive newMessage as well)
-      setMessages((prev) => [...prev, res.data]);
-      setMessage('');
+      await sendMessage(currentUserId, selectedFriend._id, message);
+      setMessage("");
     } catch (error) {
-      toast.error('Error sending message: ' + error.message);
+      toast.error("Error sending message: " + error.message);
     }
   };
 
-  // Filter friends based on search term
+  // Hàm tự động load thêm tin nhắn cũ (page tiếp theo)
+  const fetchMoreMessages = async () => {
+    if (selectedFriend) {
+      const nextPage = currentPage + 1;
+      try {
+        const res = await getMessages(
+          currentUserId,
+          selectedFriend._id,
+          limit,
+          nextPage
+        );
+        setMessages((prev) => [...res.data, ...prev]); // Prepend tin nhắn cũ vào danh sách
+        setCurrentPage(nextPage);
+        setHasMore(nextPage < res.totalPages);
+      } catch (error) {
+        toast.error("Error loading more messages: " + error.message);
+      }
+    }
+  };
+
+  // Sử dụng scroll event để tự động load tin nhắn cũ khi cuộn lên đầu container
+  useEffect(() => {
+    const container = messageContainerRef.current;
+    if (!container) return;
+
+    const onScroll = () => {
+      // Nếu cuộn lên gần đầu (ví dụ: scrollTop < 50px) và còn tin nhắn cũ
+      if (container.scrollTop < 50 && hasMore) {
+        fetchMoreMessages();
+      }
+    };
+
+    container.addEventListener("scroll", onScroll);
+    return () => {
+      container.removeEventListener("scroll", onScroll);
+    };
+  }, [hasMore, currentPage, selectedFriend]);
+
+  // Lọc danh sách bạn bè theo search term
   const filteredFriends = friends.filter((friend) => {
     const friendName = friend.displayName || friend.username;
     return friendName.toLowerCase().includes(searchTerm.toLowerCase());
@@ -104,7 +155,7 @@ const Chat = () => {
 
   return (
     <div className="flex h-screen">
-      {/* Sidebar: Friend list with search */}
+      {/* Sidebar: Danh sách bạn bè và ô tìm kiếm */}
       <div className="w-1/4 bg-gray-100 p-4 flex flex-col">
         <h2 className="text-lg font-semibold text-gray-700">Friends</h2>
         <div className="mt-4 flex items-center bg-white border border-gray-300 p-2 rounded-md">
@@ -123,7 +174,9 @@ const Chat = () => {
               key={friend._id}
               onClick={() => setSelectedFriend(friend)}
               className={`flex items-center space-x-2 cursor-pointer p-2 rounded-md ${
-                selectedFriend && friend._id === selectedFriend._id ? 'bg-gray-200' : ''
+                selectedFriend && friend._id === selectedFriend._id
+                  ? "bg-gray-200"
+                  : ""
               }`}
             >
               <img
@@ -141,38 +194,53 @@ const Chat = () => {
 
       {/* Chat Section */}
       <div className="flex-1 bg-white flex flex-col p-4">
-        {/* Header: Selected friend info */}
+        {/* Header: Thông tin người bạn được chọn */}
         <div className="flex items-center border-b border-gray-300 pb-2">
           <img
-            src={selectedFriend ? (selectedFriend.avatar || avatarDefault) : avatarDefault}
-            alt={selectedFriend ? selectedFriend.displayName || selectedFriend.username : ''}
+            src={
+              selectedFriend
+                ? selectedFriend.avatar || avatarDefault
+                : avatarDefault
+            }
+            alt={
+              selectedFriend
+                ? selectedFriend.displayName || selectedFriend.username
+                : ""
+            }
             className="h-10 w-10 rounded-full mr-3"
           />
           <h2 className="text-base font-semibold text-gray-700">
             {selectedFriend
               ? selectedFriend.displayName || selectedFriend.username
-              : 'Select a friend'}
+              : "Select a friend"}
           </h2>
         </div>
 
         {/* Message list */}
-        <div className="flex-1 mt-4 space-y-2 overflow-y-auto">
-          {messages.length > 0 ? (
+        <div
+          ref={messageContainerRef}
+          className="flex-1 mt-2 space-y-2 overflow-y-auto"
+        >
+          {messages?.length > 0 ? (
             messages.map((msg, index) => (
               <div
                 key={index}
-                className={`flex ${
-                  msg.sender === currentUserId ? 'justify-end' : 'justify-start'
+                className={`flex flex-col ${
+                  msg.sender === currentUserId ? "items-end" : "items-start"
                 }`}
               >
                 <div
                   className={`max-w-xs px-3 py-1 rounded-lg text-white ${
-                    msg.sender === currentUserId ? 'bg-orange-400' : 'bg-gray-400'
+                    msg.sender === currentUserId
+                      ? "bg-orange-400"
+                      : "bg-gray-400"
                   }`}
                 >
-                  <p className="text-sm">{msg.content}</p>
-                  <p className="text-xs text-gray-200">{msg.time}</p>
+                  <p className="text-sm">{msg.plainContent}</p>
                 </div>
+                <p className="text-xs text-gray-400 mt-1">
+                  {new Date(msg.updatedAt).toLocaleString()}
+                </p>
               </div>
             ))
           ) : (
@@ -180,8 +248,11 @@ const Chat = () => {
           )}
         </div>
 
-        {/* Message input form */}
-        <form onSubmit={handleSendMessage} className="mt-2 pt-2 border-t border-gray-300 flex items-center">
+        {/* Form gửi tin nhắn */}
+        <form
+          onSubmit={handleSendMessage}
+          className="mt-2 pt-2 border-t border-gray-300 flex items-center"
+        >
           <input
             type="text"
             placeholder="Type your message..."
@@ -202,4 +273,3 @@ const Chat = () => {
 };
 
 export default Chat;
-

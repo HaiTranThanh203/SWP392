@@ -8,26 +8,20 @@ const { getIo } = require('../socket');
 exports.sendMessage = catchAsync(async (req, res, next) => {
   const { sender, recipient, content } = req.body;
 
-  // Tạo và lưu tin nhắn vào MongoDB
+  // Create and save the message in the database
   const message = await Message.create({ sender, recipient, content });
 
-  // Lấy instance của socket.io
+  // Get socket.io instance
   const io = getIo();
-
-  // Debug logs to check room emission
-  console.log(`Emitting newMessage to recipient room: ${recipient}`);
-  console.log(`Emitting newMessage to sender room: ${sender}`);
-
-  // Phát tin nhắn tới phòng của người nhận và người gửi
+  console.log(`Emitting newMessage to rooms: ${sender} and ${recipient}`);
   io.to(recipient).emit('newMessage', message);
   io.to(sender).emit('newMessage', message);
 
   res.status(201).json({
     success: true,
-    data: message
+    data: message,
   });
 });
-
 
 // Controller lấy tin nhắn với phân trang
 exports.getMessages = catchAsync(async (req, res, next) => {
