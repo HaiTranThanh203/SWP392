@@ -26,7 +26,6 @@ export default function Sidebar() {
           <a href="/" className="text-lg hover:text-indigo-400">
             Home
           </a>
-
         </li>
         {/* News */}
         <li className="flex items-center space-x-4">
