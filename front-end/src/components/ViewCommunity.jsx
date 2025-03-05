@@ -415,7 +415,8 @@ const ViewCommunity = () => {
             <div className="flex items-center space-x-2 text-gray-600 text-sm">
               <FaCalendarAlt className="text-base" />
               <span>
-                Created - {new Date(communityDetail.createdAt).toDateString()}{" "}
+                Created At -{" "}
+                {new Date(communityDetail.createdAt).toDateString()}{" "}
               </span>
             </div>
             <div className="flex items-center space-x-2 text-gray-600 text-sm">
