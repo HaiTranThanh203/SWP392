@@ -7,9 +7,7 @@ const {
   changePassword,
   logout,
 } = require("../controllers/authController");
-const {
-  getUserProfile
-} = require("../controllers/userController");
+const { getUserProfile } = require("../controllers/userController");
 
 const router = express.Router();
 router.post("/signup", signup);
@@ -24,10 +22,10 @@ router.get("/search", userController.searchUsers);
 // Endpoint tìm kiếm user với flag isFriend
 // Ví dụ: GET http://localhost:9999/api/users/search?keyword=abc&userId=YOUR_USER_ID
 router.get("/search2", userController.searchUsers);
-
-// router.get("/:id", userController.getUserById);
 router.get("/profile", protect, userController.getUserProfile);
 router.patch("/:id/toggle-active", userController.toggleUserActiveStatus);
-router.use(protect);
-router.route("/update-me").patch(userController.updateMe);
+router.patch("/update-me", protect, userController.updateMe);
+
+router.get("/:id", userController.getUserById);
+
 module.exports = router;
