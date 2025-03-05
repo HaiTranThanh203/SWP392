@@ -108,6 +108,7 @@ exports.toggleUserActiveStatus = catchAsync(async (req, res, next) => {
     },
   });
 });
+
 exports.searchUsers = catchAsync(async (req, res, next) => {
   const { query } = req.query;
 
@@ -132,6 +133,7 @@ exports.searchUsers = catchAsync(async (req, res, next) => {
     data: users,
   });
 });
+
 exports.searchUsers2 = catchAsync(async (req, res, next) => {
   const { keyword, userId } = req.query;
 

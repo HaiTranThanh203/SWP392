@@ -157,7 +157,7 @@ const AppRoutes = () => {
           }
         />
         <Route
-          path="/searchbycommunity"
+          path="/search-community"
           element={
             <Layout>
               <SearchByCommunity />
