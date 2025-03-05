@@ -38,6 +38,7 @@ import Home from "../pages/Home";
 import PublicNewsList from "../components/PublicNewsList.jsx";
 import NewsDetail from "../components/NewsDetail.jsx";
 import CreateCommunity from "../components/CreateCommunity.jsx";
+import DetailReport from "../components/admin/DetailReport.jsx";
 
 // Layout component (Ẩn Header, Sidebar, Footer ở trang login/signup)
 const Layout = ({ children }) => {
@@ -196,6 +197,7 @@ const AppRoutes = () => {
           <Route path="manager-news" element={<ManagerNews />} />
           <Route path="manager-users" element={<ManagerUser />} />
           <Route path="manager-reports" element={<ManagerReport />} />
+          <Route path="report/:id" element={<DetailReport />} /> 
           <Route path="user-detail/:id" element={<UserDetail />} />
           <Route path="update-news/:id" element={<UpdateNews />} />
           <Route path="view-news" element={<ViewNews />} />
