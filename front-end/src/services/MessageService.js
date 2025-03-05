@@ -29,7 +29,7 @@ export const sendMessage = async (sender, recipient, content) => {
 };
 
 // Lấy danh sách tin nhắn giữa 2 người (có phân trang)
-export const getMessages = async (sender, recipient, limit = 15, page = 1) => {
+export const getMessages = async (sender, recipient, limit = 20, page = 1) => {
   try {
     const response = await axios.get(`${BASE_URL}/messages`, {
       headers: getCommonHeader(),
