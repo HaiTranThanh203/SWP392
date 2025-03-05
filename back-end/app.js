@@ -28,10 +28,7 @@ app.use(
       "http://localhost:3000",
       "http://127.0.0.1:9999",
       "http://127.0.0.1:3000",
-
- 
       "http://localhost:5173",
-
     ],
   })
 );
@@ -62,7 +59,7 @@ app.use("/api/v1/reports", reportRouter);
 app.use("/api/v1/notifications", notificationRouter);
 app.use("/api/v1/news", newsRouter);
 app.use("/api/v1/messages", chatRouter);
-app.use("/api/v1/friends", friendRouter);
+app.use("/api/v1/friendships", friendRouter);
 
 // 3) ERROR HANDLING
 // Bắt lỗi các route API không hợp lệ
