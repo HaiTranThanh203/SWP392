@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -64,29 +63,132 @@ const AppRoutes = () => {
       <Routes>
         {/* Route chính dành cho người dùng */}
 
-        <Route path="/" element={<Layout><Home /></Layout>} />
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <Home />
+            </Layout>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
 
+        <Route
+          path="/profile"
+          element={
+            <Layout>
+              <Profile />
+            </Layout>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <Layout>
+              <Dashboard />
+            </Layout>
+          }
+        />
+        <Route
+          path="/listfriend"
+          element={
+            <Layout>
+              <ListFriends />
+            </Layout>
+          }
+        />
+        <Route
+          path="/createcommunity"
+          element={
+            <Layout>
+              <CreateCommunity />
+            </Layout>
+          }
+        />
+        <Route
+          path="/viewcommunity/:id"
+          element={
+            <Layout>
+              <ViewCommunity />
+            </Layout>
+          }
+        />
+        <Route
+          path="/postdetail"
+          element={
+            <Layout>
+              <PostDetail />
+            </Layout>
+          }
+        />
 
-        <Route path="/profile" element={<Layout><Profile /></Layout>} />
-        <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
-        <Route path="/listfriend" element={<Layout><ListFriends /></Layout>} />
-<Route path="/createcommunity" element={<Layout><CreateCommunity /></Layout>}/>
-        <Route path="/viewcommunity/:id" element={<Layout><ViewCommunity /></Layout>} />
-        <Route path="/postdetail" element={<Layout><PostDetail /></Layout>} />
+        <Route
+          path="/createpost"
+          element={
+            <Layout>
+              <CreatePost />
+            </Layout>
+          }
+        />
+        <Route
+          path="/reportpost/:id"
+          element={
+            <Layout>
+              <ReportPost />
+            </Layout>
+          }
+        />
+        <Route
+          path="/chat"
+          element={
+            <Layout>
+              <Chat />
+            </Layout>
+          }
+        />
+        <Route
+          path="/addfriends"
+          element={
+            <Layout>
+              <AddFriends />
+            </Layout>
+          }
+        />
+        <Route
+          path="/searchbycommunity"
+          element={
+            <Layout>
+              <SearchByCommunity />
+            </Layout>
+          }
+        />
+        <Route
+          path="/editpost"
+          element={
+            <Layout>
+              <EditPost />
+            </Layout>
+          }
+        />
 
-        <Route path="/createpost" element={<Layout><CreatePost /></Layout>} />
-        <Route path="/reportpost/:id" element={<Layout><ReportPost /></Layout>} />
-        <Route path="/chat" element={<Layout><Chat /></Layout>} />
-        <Route path="/addfriends" element={<Layout><AddFriends /></Layout>} />
-        <Route path="/searchbycommunity" element={<Layout><SearchByCommunity /></Layout>} />
-        <Route path="/editpost" element={<Layout><EditPost /></Layout>} />
- 
-<Route path="/news" element={<Layout><PublicNewsList /></Layout>} />
-<Route path="/news/:id" element={<Layout><NewsDetail /></Layout>} />
-
+        <Route
+          path="/news"
+          element={
+            <Layout>
+              <PublicNewsList />
+            </Layout>
+          }
+        />
+        <Route
+          path="/news/:id"
+          element={
+            <Layout>
+              <NewsDetail />
+            </Layout>
+          }
+        />
 
         {/* Route dành cho Admin */}
         <Route path="/admin" element={<AdminLayout />}>
