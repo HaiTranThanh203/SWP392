@@ -43,6 +43,9 @@ function SignUp() {
     if (image) {
       formData.append('image', image);
     }
+    else {
+      formData.append('image', 'https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image//avatar2.png');
+    }
 
     try {
       const response = await axios.post('http://localhost:9999/api/v1/users/signup', formData, {

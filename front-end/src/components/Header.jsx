@@ -12,6 +12,7 @@ export default function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/login");
   };
 
@@ -29,32 +30,33 @@ export default function Header() {
       results = await searchUsers(query);
     }
 
-    console.log("Search results:", results); // Debug xem có dữ liệu không
+    console.log("Search results:", results); // Debug: check if data exists
 
     if (results && results.data) {
-      navigate(`${path}?query=${query}`, { state: { results: results.data } }); // Truyền kết quả qua state
+      navigate(`${path}?query=${query}`, { state: { results: results.data } });
     }
   };
 
-
   return (
     <header className="bg-white p-4 shadow-md flex items-center justify-between w-full">
+      {/* Logo and Title */}
       <div className="flex items-center space-x-3">
         <img src={logo} alt="Logo" className="h-8" />
-        <h1 className="text-orange-500 text-xl font-semibold">FPT Student Space</h1>
+        <h1 className="text-orange-500 text-xl font-semibold">
+          FPT Student Space
+        </h1>
       </div>
 
-      {/* Thanh tìm kiếm */}
+      {/* Search bar with dropdown filter */}
       <div className="flex items-center space-x-4 mx-auto">
-
         <div className="flex items-center space-x-2 bg-white border border-gray-300 rounded-full p-2 w-96">
           <input
             type="text"
             placeholder="Search..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={(e) => { // Thêm xử lý sự kiện onKeyDown
-              if (e.key === 'Enter') {
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
                 handleSearch();
               }
             }}
@@ -62,15 +64,15 @@ export default function Header() {
           />
           <FaSearch
             className="text-gray-400 text-xl cursor-pointer"
-            onClick={handleSearch} // Thêm xử lý sự kiện onClick
+            onClick={handleSearch}
           />
         </div>
 
-        {/* Dropdown chọn bộ lọc */}
+        {/* Dropdown Filter */}
         <div className="relative">
           <button
-            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-md inline-flex items-center w-32 justify-center"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-md inline-flex items-center w-32 justify-center"
           >
             {selectedFilter} <FaCaretDown className="ml-2" />
           </button>
@@ -78,14 +80,20 @@ export default function Header() {
             <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg">
               <ul>
                 <li
+                  onClick={() => {
+                    setSelectedFilter("Friends");
+                    setIsDropdownOpen(false);
+                  }}
                   className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => { setSelectedFilter("Friends"); setIsDropdownOpen(false); }}
                 >
                   Friends
                 </li>
                 <li
+                  onClick={() => {
+                    setSelectedFilter("Community");
+                    setIsDropdownOpen(false);
+                  }}
                   className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => { setSelectedFilter("Community"); setIsDropdownOpen(false); }}
                 >
                   Community
                 </li>
@@ -95,7 +103,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Các nút điều hướng */}
+      {/* Navigation Buttons */}
       <div className="flex items-center space-x-4">
         <FaBell className="text-gray-600 text-xl cursor-pointer" />
 

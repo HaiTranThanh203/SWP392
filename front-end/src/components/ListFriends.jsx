@@ -7,7 +7,7 @@ import {
   acceptFriendRequest,
   rejectFriendRequest,
   unfriend,
-} from '../services/friendshipService';
+} from '../services/FriendShipService';
 
 // Giả sử currentUserId được lấy từ context hoặc localStorage
 const currentUser = JSON.parse(localStorage.getItem("user")) || null;

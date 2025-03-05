@@ -40,7 +40,9 @@ import NewsDetail from "../components/NewsDetail.jsx";
 import CreateCommunity from "../components/CreateCommunity.jsx";
 import DetailReport from "../components/admin/DetailReport.jsx";
 
-// Layout component (Ẩn Header, Sidebar, Footer ở trang login/signup)
+import ProtectedRoute from "./ProtectedRoute";
+
+// Layout component: hiển thị Header, Sidebar, Footer trừ các route login, signup, forgotpassword
 const Layout = ({ children }) => {
   const location = useLocation();
   const noLayoutRoutes = ["/login", "/signup", "/forgotpassword"];
@@ -62,147 +64,149 @@ const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        {/* Route chính dành cho người dùng */}
-
-        <Route
-          path="/"
-          element={
-            <Layout>
-              <Home />
-            </Layout>
-          }
-        />
+        {/* Public Routes */}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
 
-        <Route
-          path="/profile"
-          element={
-            <Layout>
-              <Profile />
-            </Layout>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <Layout>
-              <Dashboard />
-            </Layout>
-          }
-        />
-        <Route
-          path="/listfriend"
-          element={
-            <Layout>
-              <ListFriends />
-            </Layout>
-          }
-        />
-        <Route
-          path="/createcommunity"
-          element={
-            <Layout>
-              <CreateCommunity />
-            </Layout>
-          }
-        />
-        <Route
-          path="/viewcommunity/:id"
-          element={
-            <Layout>
-              <ViewCommunity />
-            </Layout>
-          }
-        />
-        <Route
-          path="/postdetail"
-          element={
-            <Layout>
-              <PostDetail />
-            </Layout>
-          }
-        />
+        {/* Protected Routes dành cho người dùng đã đăng nhập (student và admin) */}
+        <Route element={<ProtectedRoute allowedRoles={['student', 'admin']} />}>
+          <Route 
+            path="/" 
+            element={
+              <Layout>
+                <Home />
+              </Layout>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <Layout>
+                <Profile />
+              </Layout>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <Layout>
+                <Dashboard />
+              </Layout>
+            }
+          />
+          <Route
+            path="/listfriend"
+            element={
+              <Layout>
+                <ListFriends />
+              </Layout>
+            }
+          />
+          <Route
+            path="/createcommunity"
+            element={
+              <Layout>
+                <CreateCommunity />
+              </Layout>
+            }
+          />
+          <Route
+            path="/viewcommunity/:id"
+            element={
+              <Layout>
+                <ViewCommunity />
+              </Layout>
+            }
+          />
+          <Route
+            path="/postdetail"
+            element={
+              <Layout>
+                <PostDetail />
+              </Layout>
+            }
+          />
+          <Route
+            path="/createpost"
+            element={
+              <Layout>
+                <CreatePost />
+              </Layout>
+            }
+          />
+          <Route
+            path="/reportpost/:id"
+            element={
+              <Layout>
+                <ReportPost />
+              </Layout>
+            }
+          />
+          <Route
+            path="/chat"
+            element={
+              <Layout>
+                <Chat />
+              </Layout>
+            }
+          />
+          <Route
+            path="/addfriends"
+            element={
+              <Layout>
+                <AddFriends />
+              </Layout>
+            }
+          />
+          <Route
+            path="/search-community"
+            element={
+              <Layout>
+                <SearchByCommunity />
+              </Layout>
+            }
+          />
+          <Route
+            path="/editpost"
+            element={
+              <Layout>
+                <EditPost />
+              </Layout>
+            }
+          />
+          <Route
+            path="/news"
+            element={
+              <Layout>
+                <PublicNewsList />
+              </Layout>
+            }
+          />
+          <Route
+            path="/news/:id"
+            element={
+              <Layout>
+                <NewsDetail />
+              </Layout>
+            }
+          />
+        </Route>
 
-        <Route
-          path="/createpost"
-          element={
-            <Layout>
-              <CreatePost />
-            </Layout>
-          }
-        />
-        <Route
-          path="/reportpost/:id"
-          element={
-            <Layout>
-              <ReportPost />
-            </Layout>
-          }
-        />
-        <Route
-          path="/chat"
-          element={
-            <Layout>
-              <Chat />
-            </Layout>
-          }
-        />
-        <Route
-          path="/addfriends"
-          element={
-            <Layout>
-              <AddFriends />
-            </Layout>
-          }
-        />
-        <Route
-          path="/search-community"
-          element={
-            <Layout>
-              <SearchByCommunity />
-            </Layout>
-          }
-        />
-        <Route
-          path="/editpost"
-          element={
-            <Layout>
-              <EditPost />
-            </Layout>
-          }
-        />
-
-        <Route
-          path="/news"
-          element={
-            <Layout>
-              <PublicNewsList />
-            </Layout>
-          }
-        />
-        <Route
-          path="/news/:id"
-          element={
-            <Layout>
-              <NewsDetail />
-            </Layout>
-          }
-        />
-
-        {/* Route dành cho Admin */}
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route index element={<AdminHome />} />
-          <Route path="manager-news" element={<ManagerNews />} />
-          <Route path="manager-users" element={<ManagerUser />} />
-          <Route path="manager-reports" element={<ManagerReport />} />
-          <Route path="report/:id" element={<DetailReport />} /> 
-          <Route path="user-detail/:id" element={<UserDetail />} />
-          <Route path="update-news/:id" element={<UpdateNews />} />
-          <Route path="view-news" element={<ViewNews />} />
-          <Route path="create-news" element={<CreateNew />} />
-          <Route path="news-detail/:id" element={<DetailNews />} />
+        {/* Protected Routes dành riêng cho admin */}
+        <Route element={<ProtectedRoute allowedRoles={["admin"]} />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminHome />} />
+            <Route path="manager-news" element={<ManagerNews />} />
+            <Route path="manager-users" element={<ManagerUser />} />
+            <Route path="manager-reports" element={<ManagerReport />} />
+            <Route path="report/:id" element={<DetailReport />} />
+            <Route path="user-detail/:id" element={<UserDetail />} />
+            <Route path="update-news/:id" element={<UpdateNews />} />
+            <Route path="view-news" element={<ViewNews />} />
+            <Route path="create-news" element={<CreateNew />} />
+            <Route path="news-detail/:id" element={<DetailNews />} />
+          </Route>
         </Route>
       </Routes>
     </Router>
