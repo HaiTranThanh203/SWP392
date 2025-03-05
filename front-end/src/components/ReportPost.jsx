@@ -1,18 +1,38 @@
 import React, { useState } from "react";
 import avatar1 from "../assets/images/avatar1.png";
 import bag from "../assets/images/bag.png";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 const ReportPost = () => {
   const { id } = useParams();
-  const [selectedReason, setSelectedReason] = useState(null);
-  const [user, setUser] = useState("");
-  const handleReportSubmit = (e) => {
-    e.preventDefault();
-    if (!selectedReason) {
-      alert("Please select a reason for reporting.");
-    } else {
-      // Handle the submission of the report here
-      alert(`Report submitted for reason: ${selectedReason}`);
+  const [selectedReason, setSelectedReason] = useState("");
+  const storedUser = localStorage.getItem("user");
+  const userId = storedUser ? JSON.parse(storedUser).id : null;
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
+  const handleReportPost = async () => {
+    try {
+      const data = JSON.stringify({
+        userId: userId,
+        reportEntityId: id,
+        entityType: "Post",
+        description: selectedReason,
+        status: "Waiting",
+      });
+
+      await axios.post("http://localhost:9999/api/v1/reports/", data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      toast.success("Your report has been sent to admin!");
+      navigate("/");
+    } catch (error) {
+      console.error("Error submitting report:", error);
+      toast.error("Failed to submit report. Please try again.");
     }
   };
 
@@ -68,14 +88,13 @@ const ReportPost = () => {
             ))}
           </div>
 
-          <form onSubmit={handleReportSubmit} className="mt-6">
-            <button
-              type="submit"
-              className="bg-orange-500 text-white py-2 px-4 rounded-md text-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            >
-              Report
-            </button>
-          </form>
+          <button
+            onClick={handleReportPost}
+            type="submit"
+            className="bg-orange-500 text-white py-2 px-4 rounded-md text-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          >
+            Report
+          </button>
         </div>
       </div>
     </div>
