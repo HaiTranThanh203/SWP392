@@ -10,9 +10,10 @@ import {
 } from '../services/friendshipService';
 
 // Giả sử currentUserId được lấy từ context hoặc localStorage
-const currentUser = JSON.parse(localStorage.getItem("user"));
-const currentUserId = currentUser.id;
+const currentUser = JSON.parse(localStorage.getItem("user")) || null;
+const currentUserId = currentUser?.id || "67138908290ef9092c172bbf";
 console.log(currentUserId);
+
 
 const ListFriends = () => {
   const [acceptedFriends, setAcceptedFriends] = useState([]);
