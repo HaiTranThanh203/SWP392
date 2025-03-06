@@ -138,7 +138,7 @@ function Profile() {
       </div>
 
       <div className="flex justify-start space-x-4">
-        <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded">
+        <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded" onClick={() => window.location.href = "/listfriend"}>
           View List Friends
         </button>
         <button

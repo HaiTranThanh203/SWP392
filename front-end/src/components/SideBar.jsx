@@ -7,6 +7,7 @@ import {
   FaQuestionCircle,
   FaBook,
   FaCaretDown,
+  FaUserFriends
 } from "react-icons/fa"; // Import các icon
 
 export default function Sidebar() {
@@ -39,6 +40,12 @@ export default function Sidebar() {
           <FaComments className="text-xl" />
           <a href="/chat" className="text-lg hover:text-indigo-400">
             Chat
+          </a>
+        </li>
+        <li className="flex items-center space-x-4">
+          <FaUserFriends className="text-xl" />
+          <a href="/listfriend" className="text-lg hover:text-indigo-400">
+            Friends
           </a>
         </li>
 
