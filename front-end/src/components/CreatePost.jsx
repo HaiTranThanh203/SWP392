@@ -3,33 +3,48 @@ import axios from 'axios';
 import { FaUpload } from 'react-icons/fa';
 
 const CreatePost = () => {
-  const [communities, setCommunities] = useState([]); // Lấy từ backend
+  const [communities, setCommunities] = useState([]);
   const [community, setCommunity] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  // Lấy danh sách cộng đồng từ backend
+  // Lấy userId từ localStorage
+  const user = JSON.parse(localStorage.getItem('user')) || null;
+  const userId = user?.id || '';
+
   useEffect(() => {
-    axios.get('http://localhost:9999/api/v1/communities', { withCredentials: true })
+    if (!userId) return;
+
+    axios.get(`http://localhost:9999/api/v1/communities/${userId}/communities`)
       .then(response => {
-        if (response.data && response.data.data) {
+        if (response.data && response.data.success) {
           setCommunities(response.data.data);
         } else {
-          setError('Không thể lấy danh sách cộng đồng.');
+          setCommunities([]);
         }
       })
       .catch(error => {
-        console.error('Lỗi khi lấy danh sách cộng đồng:', error);
-        setError('Lỗi khi lấy danh sách cộng đồng.');
+        console.error("🚨 Error fetching user communities:", error);
+        setCommunities([]);
       });
-  }, []);
+  }, [userId]);
+
+
+  if (!userId) {
+    return <p className="text-red-500 text-center">⚠ You must be logged in to create a post.</p>;
+  }
 
   const handleImageChange = (e) => {
-    setImage(e.target.files[0]);
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setImage(file);
+    setPreviewImage(URL.createObjectURL(file));
   };
 
   const handlePostSubmit = async (e) => {
@@ -38,47 +53,53 @@ const CreatePost = () => {
     setError('');
     setSuccess('');
 
-    if (!community || !title || !description) {
-      setError('Vui lòng điền đầy đủ thông tin.');
+    if (!community || !title.trim() || !description.trim()) {
+      setError('⚠ Please select a community and fill in all required fields.');
       setLoading(false);
       return;
     }
 
     try {
-      let imageUrl = '';
+      let imagePath = '';
 
-      // Nếu có ảnh, upload ảnh trước
       if (image) {
         const formData = new FormData();
         formData.append('file', image);
 
         const uploadRes = await axios.post('http://localhost:9999/api/v1/uploads', formData, {
           headers: { 'Content-Type': 'multipart/form-data' },
-          withCredentials: true,
         });
 
-        imageUrl = uploadRes.data.imageUrl;
+        if (uploadRes.data && uploadRes.data.filePath) {
+          imagePath = uploadRes.data.filePath;
+        } else {
+          throw new Error("⚠ Upload failed - No filePath returned");
+        }
       }
 
-      // Gửi bài viết lên backend
       const postData = {
+        userId,
         communityId: community,
         title,
         content: description,
-        media: imageUrl ? [imageUrl] : [],
+        media: imagePath ? [imagePath] : [],
       };
 
-      await axios.post('http://localhost:9999/api/v1/posts/create', postData, {
-        withCredentials: true,
-      });
+      const postRes = await axios.post('http://localhost:9999/api/v1/posts/create', postData);
 
-      setSuccess('Bài viết đã được tạo thành công!');
-      setCommunity('');
-      setTitle('');
-      setDescription('');
-      setImage(null);
+      if (postRes.status === 201) {
+        setSuccess('🎉 Post created successfully!');
+        setCommunity('');
+        setTitle('');
+        setDescription('');
+        setImage(null);
+        setPreviewImage(null);
+      } else {
+        setError('❌ Failed to create post.');
+      }
     } catch (error) {
-      setError('Lỗi khi tạo bài viết. Vui lòng thử lại.');
+      console.error("❌ Error submitting post:", error.response || error);
+      setError('🚨 Error creating post. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -92,16 +113,16 @@ const CreatePost = () => {
       {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
 
       <form onSubmit={handlePostSubmit}>
-        {/* Community Dropdown */}
+        {/* Dropdown chọn community */}
         <div className="mb-4">
-          <label htmlFor="community" className="block text-sm text-gray-600 mb-2">Choose your communities:</label>
+          <label htmlFor="community" className="block text-sm text-gray-600 mb-2">Select Community:</label>
           <select
             id="community"
             value={community}
             onChange={(e) => setCommunity(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full p-2 border border-gray-300 rounded-md"
           >
-            <option value="">Select a community</option>
+            <option value="">-- Select Community --</option>
             {communities.length > 0 ? (
               communities.map((comm) => (
                 <option key={comm._id} value={comm._id}>
@@ -109,14 +130,15 @@ const CreatePost = () => {
                 </option>
               ))
             ) : (
-              <option value="">Không có cộng đồng nào</option>
+              <option value="" disabled>No communities joined</option>
             )}
           </select>
+
         </div>
 
-        {/* Title Input */}
+        {/* Title */}
         <div className="mb-4">
-          <label htmlFor="title" className="block text-sm text-gray-600 mb-2">Title: *</label>
+          <label htmlFor="title" className="block text-sm text-gray-600 mb-2">Title:</label>
           <input
             id="title"
             type="text"
@@ -124,29 +146,28 @@ const CreatePost = () => {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter your title"
             required
-            className="w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
 
         {/* Image Upload */}
         <div className="mb-4">
-          <label htmlFor="image" className="block text-sm text-gray-600 mb-2">Image:</label>
+          <label htmlFor="image" className="block text-sm text-gray-600 mb-2">Upload Image:</label>
           <input
             id="image"
             type="file"
+            accept="image/*"
             onChange={handleImageChange}
             className="hidden"
           />
-          <label
-            htmlFor="image"
-            className="w-full p-2 border border-gray-300 rounded-md text-sm cursor-pointer text-center flex items-center justify-center"
-          >
-            <span className="mr-2 text-gray-600">Upload images</span>
+          <label htmlFor="image" className="cursor-pointer flex items-center">
+            <span className="mr-2">Upload Image</span>
             <FaUpload className="text-gray-600" />
           </label>
+          {previewImage && <img src={previewImage} alt="Preview" className="mt-4 w-32 h-32 object-cover rounded-md" />}
         </div>
 
-        {/* Description Textarea */}
+        {/* Description */}
         <div className="mb-6">
           <label htmlFor="description" className="block text-sm text-gray-600 mb-2">Description:</label>
           <textarea
@@ -155,20 +176,17 @@ const CreatePost = () => {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter your description"
             rows="5"
-            className="w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full p-2 border border-gray-300 rounded-md"
           ></textarea>
         </div>
 
-        <div className="flex justify-end">
-          {/* Post Button */}
-          <button
-            type="submit"
-            className="bg-orange-500 text-white py-2 px-4 rounded-md text-sm hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            disabled={loading}
-          >
-            {loading ? 'Posting...' : 'Post'}
-          </button>
-        </div>
+        <button
+          type="submit"
+          className="bg-orange-500 text-white py-2 px-4 rounded-md hover:bg-orange-600 transition duration-300"
+          disabled={loading}
+        >
+          {loading ? 'Posting...' : 'Post'}
+        </button>
       </form>
     </div>
   );

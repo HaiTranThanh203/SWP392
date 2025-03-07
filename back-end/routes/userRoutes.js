@@ -17,6 +17,7 @@ router.post("/forgotPassword", forgotPassword);
 router.put("/change-password", protect, changePassword);
 router.get("/logout", logout);
 const userController = require("../controllers/userController");
+
 router.get("/list", userController.getAllUsersPaginate);
 router.get("/search", userController.searchUsers);
 // Endpoint tìm kiếm user với flag isFriend
@@ -29,5 +30,6 @@ router.patch("/:id/toggle-active", userController.toggleUserActiveStatus);
 router.patch("/update-me", protect, userController.updateMe);
 
 router.get("/:id", userController.getUserById);
+
 
 module.exports = router;

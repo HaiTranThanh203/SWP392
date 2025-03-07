@@ -1,18 +1,17 @@
-const mongoose = require('mongoose');
-const Community = require('./communityModel');
+const mongoose = require("mongoose");
+const Community = require("./communityModel");
+
 const postSchema = new mongoose.Schema(
   {
-    userId: { type: mongoose.Schema.ObjectId, ref: 'User' },
-    communityId: { type: mongoose.Schema.ObjectId, ref: 'Community' },
+    userId: { type: mongoose.Schema.ObjectId, ref: "User" },
+    communityId: { type: mongoose.Schema.ObjectId, ref: "Community" },
     title: String,
     content: String,
-    media: [
-      {
-        type: String,
-      },
-    ],
+    media: [{ type: String }],
     commentCount: { type: Number, default: 0 },
-    votes: { type: Map, of: Boolean, default: {} },
+    votes: { type: Map, of: String, default: {} }, // ✅ FIXED: Now stores "like" or "dislike"
+    upVotes: { type: Number, default: 0 },
+    downVotes: { type: Number, default: 0 },
     isEdited: { type: Boolean, default: false },
     isActive: { type: Boolean, default: true },
   },
@@ -22,22 +21,27 @@ const postSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
-// MIDDLEWARES
+
+// ✅ Fix: Prevent filtering issues
 postSchema.pre(/^find/, function (next) {
-  this.find({ isActive: { $ne: false } });
+  if (!this.getFilter().isActive) {
+    this.find({ isActive: { $ne: false } });
+  }
   next();
 });
-// After create a new post
-postSchema.post('save', async function (doc, next) {
+
+// ✅ Fix: Prevent errors when updating post count
+postSchema.post("save", async function (doc, next) {
   try {
-    // Increment postCount in the associated Community document
-    await Community.findByIdAndUpdate(doc.communityId, {
-      $inc: { postCount: 1 },
-    });
-    next(); // Call next middleware
+    if (doc.communityId) {
+      await Community.findByIdAndUpdate(doc.communityId, { $inc: { postCount: 1 } });
+    }
+    next();
   } catch (err) {
-    next(err); // Handle any errors
+    console.error("Error updating community post count:", err);
+    next(err);
   }
 });
-const Post = mongoose.model('Post', postSchema);
+
+const Post = mongoose.model("Post", postSchema);
 module.exports = Post;

@@ -147,17 +147,27 @@ exports.accessRequest = async (req, res, next) => {
     next(error);
   }
 };
-exports.getUserInCommunity = async (req, res, next) => {
+exports.getUserCommunities = async (req, res) => {
   try {
-    const id = req.params.id;
-    const sub = await Subscription.find({ communityId: id });
-    if (sub.length > 0) {
-      res.status(200).json(sub);
+    const { userId } = req.params;
+
+    if (!userId) {
+      return res.status(400).json({ success: false, message: "User ID is required" });
     }
+
+    const communities = await Community.find({
+      "joinRequests.userId": userId,
+      "joinRequests.access": true, // Chỉ lấy các community mà user đã được chấp nhận vào
+    }).select("_id name");
+
+    res.status(200).json({ success: true, data: communities });
   } catch (error) {
-    next(error);
+    console.error("Error fetching user communities:", error);
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
+
 exports.deleteUserFromCommunity = async (req, res, next) => {
   try {
     const cId = req.body.communityId;
@@ -177,3 +187,4 @@ exports.deleteUserFromCommunity = async (req, res, next) => {
     next(error);
   }
 };
+
