@@ -149,15 +149,33 @@ exports.accessRequest = async (req, res, next) => {
 };
 exports.getUserInCommunity = async (req, res, next) => {
   try {
-    const id = req.params.id;
-    const sub = await Subscription.find({ communityId: id });
-    if (sub.length > 0) {
-      res.status(200).json(sub);
+    const userId = req.params.id;
+    console.log("📌 Received User ID:", userId);
+
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      console.error(`❌ Invalid User ID: ${userId}`);
+      return res.status(400).json({ success: false, message: "Invalid User ID" });
     }
+
+    // ✅ Fetch subscriptions where the user has access to a community
+    const userCommunities = await Subscription.find({ userId, access: true })
+      .populate("communityId", "name description");
+
+    if (!userCommunities.length) {
+      return res.status(404).json({ success: false, message: "User has not joined any communities" });
+    }
+
+    // Extract the communities from subscriptions
+    const communities = userCommunities.map(sub => sub.communityId);
+
+    res.status(200).json({ success: true, data: communities });
+
   } catch (error) {
-    next(error);
+    console.error("❌ Server error fetching user communities:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
+
 exports.deleteUserFromCommunity = async (req, res, next) => {
   try {
     const cId = req.body.communityId;

@@ -43,28 +43,36 @@ exports.getPostById = async (req, res, next) => {
 
 // Controller xử lý tạo bài viết mới với multer
 exports.createNewPost = catchAsync(async (req, res, next) => {
-  let imageUrl = '';
+  try {
+    const token = req.headers.authorization?.split(" ")[1]; 
+    if (!token) {
+      return res.status(401).json({ status: "fail", message: "Unauthorized: Token required" });
+    }
 
-  // Nếu có file ảnh, xử lý upload
-  if (req.file) {
-    imageUrl = `/uploads/${req.file.filename}`;
+    let imageUrl = req.body.media && req.body.media.length > 0 ? req.body.media[0] : '';
+
+    const newPost = new Post({
+      communityId: req.body.communityId,
+      userId: req.body.userId,
+      title: req.body.title,
+      content: req.body.content,
+      media: imageUrl ? [imageUrl] : [],  
+    });
+
+    await newPost.save();
+
+    res.status(201).json({
+      status: 'success',
+      data: newPost,
+    });
+
+  } catch (error) {
+    console.error("❌ Error creating post:", error);
+    res.status(500).json({ status: "fail", message: "Internal server error" });
   }
-
-  const newPost = new Post({
-    communityId: req.body.communityId,
-    userId: req.body.userId,
-    title: req.body.title,
-    content: req.body.content,
-    media: imageUrl ? [imageUrl] : [],  // Lưu URL của ảnh vào mảng media
-  });
-
-  await newPost.save();
-
-  res.status(201).json({
-    status: 'success',
-    data: newPost,
-  });
 });
+
+
 
 exports.getAllPosts = factoryGetAll(Post);
 exports.updatePost = factoryUpdateOne(Post);
@@ -113,5 +121,59 @@ exports.filterPostsByTitle = async (req, res) => {
     res.status(200).json({ success: true, results: posts.length, data: posts });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
+  }
+};
+exports.votePost = async (req, res, next) => {
+  try {
+    console.log("Received vote request:", req.body); // ✅ LOG REQUEST BODY
+
+    const { id } = req.params;
+    const { userId, vote } = req.body;
+
+    // Ensure request data is valid
+    if (!userId || !["like", "dislike", "none"].includes(vote)) {
+      console.error("Invalid vote data:", req.body); // ✅ LOG INVALID DATA
+      return res.status(400).json({ status: "fail", message: "Invalid request data." });
+    }
+
+    // Find post by ID
+    const post = await Post.findById(id);
+    if (!post) {
+      console.error("Post not found:", id); // ✅ LOG IF POST NOT FOUND
+      return res.status(404).json({ status: "fail", message: "Post not found." });
+    }
+
+    // Initialize votes if undefined
+    if (!post.votes) {
+      post.votes = new Map();
+    }
+
+    // Process the vote
+    if (vote === "none") {
+      post.votes.delete(userId); // Remove vote
+    } else {
+      post.votes.set(userId, vote); // Add/update vote
+    }
+
+    // Count votes
+    let upVotes = 0, downVotes = 0;
+    post.votes.forEach((v) => {
+      if (v === "like") upVotes++;
+      if (v === "dislike") downVotes++;
+    });
+
+    // Update post with new counts
+    post.upVotes = upVotes;
+    post.downVotes = downVotes;
+
+    console.log("Updated votes:", { upVotes, downVotes }); // ✅ LOG UPDATED VOTES
+
+    // Save the post
+    await post.save();
+
+    return res.status(200).json({ success: true, data: post });
+  } catch (error) {
+    console.error("❌ Error in votePost:", error); // ✅ LOG ERROR DETAILS
+    return res.status(500).json({ status: "fail", message: "Internal server error." });
   }
 };
