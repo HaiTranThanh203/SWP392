@@ -32,31 +32,26 @@ exports.getCommentById = async (req, res, next) => {
 exports.createNewComment = async (req, res, next) => {
   try {
     const doc = await Comment.create(req.body);
+
     if (doc.parentId) {
       await Comment.findByIdAndUpdate(doc.parentId, {
         $addToSet: { childrens: doc._id },
       });
     }
+
     await Post.findByIdAndUpdate(doc.postId, {
       $inc: { commentCount: 1 },
     });
-    const populatedDoc = await Comment.findById(doc._id).populate("userId");
-    if (populatedDoc.tagInfo) {
-      const io = getIo();
-      const notification = await Notification.create({
-        userId: doc.tagInfo.userId,
-        resourceId: `comments/${populatedDoc._id}`,
-        notifType: "Tag",
-        title: "Replied",
-        description: `User ${req.body.id} has just tag you in a comment.`,
-      });
-      io.emit("newNotification", notification);
-    }
-    res.status(201).json(populatedDoc);
+
+    // FIX: Populate userId correctly before returning response
+    const populatedDoc = await Comment.findById(doc._id).populate("userId", "username avatar email");
+
+    res.status(201).json({ success: true, data: populatedDoc });
   } catch (error) {
     next(error);
   }
 };
+
 
 /**
  * Cập nhật 1 bình luận
@@ -103,28 +98,32 @@ exports.getCommentByPostId = async (req, res, next) => {
   try {
     const postId = req.params.id;
 
-    // Kiểm tra postId có hợp lệ không
+    // Check if postId is a valid MongoDB ObjectId
     if (!mongoose.Types.ObjectId.isValid(postId)) {
-      return res.status(400).json({ message: "Invalid Post ID format" });
+      console.error(`❌ Invalid Post ID received: ${postId}`);
+      return res.status(400).json({ success: false, message: "Invalid Post ID format" });
     }
 
     const comments = await Comment.find({ postId })
-      .populate("userId", "name avatar email") // Chỉ lấy thông tin cần thiết
+      .populate("userId", "username avatar")
       .populate("parentId")
       .populate("childrens")
-      .sort({createAt: -1});
+      .sort({ createdAt: -1 });
 
-    if (!comments || comments.length === 0) {
-      return res
-        .status(404)
-        .json({ message: "Không tìm thấy bình luận cho bài viết này" });
+    if (!comments.length) {
+      console.warn(`⚠️ No comments found for postId: ${postId}`);
+      return res.status(404).json({ success: false, message: "No comments found" });
     }
 
     res.status(200).json({ success: true, data: comments });
   } catch (error) {
-    next(error);
+    console.error("❌ Server error fetching comments:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
+
+
+
 
 exports.getAllComments = catchAsync(async (req, res, next) => {
   console.log("Inside getAll Comments");

@@ -120,7 +120,7 @@ const AppRoutes = () => {
             }
           />
           <Route
-            path="/postdetail"
+            path="/postdetail/:postId"
             element={
               <Layout>
                 <PostDetail />
@@ -168,7 +168,7 @@ const AppRoutes = () => {
             }
           />
           <Route
-            path="/editpost"
+            path="/editpost/:postId"
             element={
               <Layout>
                 <EditPost />
