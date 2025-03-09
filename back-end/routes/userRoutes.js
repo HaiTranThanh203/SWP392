@@ -8,7 +8,7 @@ const {
   logout,
 } = require("../controllers/authController");
 const { getUserProfile } = require("../controllers/userController");
-
+const subscriptionController = require("../controllers/subscriptionController");
 const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
@@ -23,7 +23,7 @@ router.get("/search", userController.searchUsers);
 // Ví dụ: GET http://localhost:9999/api/users/search?keyword=abc&userId=YOUR_USER_ID
 
 router.get("/search2", userController.searchUsers);
-
+router.get("/community-join", subscriptionController.getAllSubscriptions);
 router.get("/profile", protect, userController.getUserProfile);
 router.patch("/:id/toggle-active", userController.toggleUserActiveStatus);
 router.patch("/update-me", protect, userController.updateMe);
