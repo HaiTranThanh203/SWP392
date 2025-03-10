@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const Post = require("../models/postModel");
 const Friendship = require("../models/friendshipModel");
 const APIFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
@@ -257,41 +258,32 @@ exports.updateProfile = async (req, res) => {
 };
 
 //Hàm lấy post
-exports.getUserPosts = async (req, res) => {
+exports.getBookmarkedPosts = async (req, res) => {
   try {
-    res.set("Cache-Control", "no-store");
+    const userId = req.user.id; // ID của user lấy từ middleware auth
 
-    // Kiểm tra xem req.user.id có hợp lệ không
-    if (!req.user || !req.user.id) {
-      return res.status(401).json({
-        status: "fail",
-        message: "Không có quyền truy cập. Vui lòng đăng nhập lại!",
-      });
+    // Lấy danh sách ID các bài post mà user đã bookmark
+    const user = await User.findById(userId).select('bookmarks');
+    
+    if (!user) {
+      return res.status(404).json({ status: 'fail', message: 'Người dùng không tồn tại' });
     }
 
-    // Tìm tất cả bài post của user
-    const posts = await Post.find({ userId: req.user.id }).populate("userId", "username email");
-
-    if (!posts.length) {
-      return res.status(404).json({
-        status: "fail",
-        message: "Bạn chưa có bài viết nào!",
-      });
-    }
-
+    // Truy vấn danh sách bài viết dựa trên ID đã bookmark
+    const bookmarkedPosts = await Post.find({ _id: { $in: user.bookmarks || [] } });
     res.status(200).json({
-      status: "success",
-      message: "Lấy danh sách bài viết thành công",
-      data: posts,
+      status: 'success',
+      results: bookmarkedPosts.length,
+      data: bookmarkedPosts,
     });
   } catch (error) {
-    console.error("Lỗi khi lấy bài viết của người dùng:", error);
-    res.status(500).json({
-      status: "error",
-      message: "Lỗi server, vui lòng thử lại sau!",
-    });
+    console.error('Lỗi server:', error);
+    res.status(500).json({ status: 'error', message: 'Lỗi server!' });
   }
 };
+
+
+
 
 
 

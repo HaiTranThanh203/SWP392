@@ -13,7 +13,8 @@ function Profile() {
   const [editStudentCode, setEditStudentCode] = useState(false);
   const [newUsername, setNewUsername] = useState("");
   const [newStudentCode, setNewStudentCode] = useState("");
-  const [userPosts, setUserPosts] = useState([]); // State lưu bài viết
+  const [bookmarks, setBookmarks] = useState([]);
+
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -24,6 +25,8 @@ function Profile() {
           },
         });
         const data = await res.json();
+        // console.log("Dữ liệu user nhận được:", data); // Kiểm tra response từ API
+
         if (data.status === "success") {
           setUser(data.data);
           setNewUsername(data.data.username);
@@ -35,8 +38,29 @@ function Profile() {
     };
 
     fetchProfile();
-
   }, []);
+
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      try {
+        const res = await fetch("http://localhost:9999/api/v1/users/bookmarked-posts", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+        const data = await res.json();
+        if (data.status === "success") {
+          setBookmarks(data.data);
+        }
+      } catch (error) {
+        console.error("Lỗi khi lấy danh sách bookmark:", error);
+      }
+    };
+
+    fetchBookmarks();
+  }, []);
+
+
 
   useEffect(() => {
     if (isModalOpen) {
@@ -140,25 +164,8 @@ function Profile() {
     return <p>Đang tải...</p>;
   }
 
-  const getUserPosts = async () => {
-    try {
-      const res = await fetch("http://localhost:9999/api/v1/posts/user", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      const data = await res.json();
-      if (data.status === "success") {
-        setUserPosts(data.data);
-      }
-    } catch (error) {
-      console.error("Lỗi khi lấy danh sách bài viết:", error);
-    }
-  };
 
-  if (!user) {
-    return <p>Đang tải...</p>;
-  }
+
 
   return (
     <div className="p-6 bg-white rounded-lg shadow-md">
@@ -170,7 +177,7 @@ function Profile() {
         <div className="flex items-start">
           <div className="w-1/4">
             <img
-              src={uploadAvatar || user.avatar || frogImage}
+              src={user.avatar}
               alt="Avatar"
               className="w-24 h-24 rounded-full border border-gray-300"
             />
@@ -214,7 +221,7 @@ function Profile() {
                 <span className="w-1/4 font-semibold">Student Code:</span>
                 {editStudentCode ? (
                   <>
-                  <input
+                    <input
                       type="text"
                       value={newStudentCode}
                       onChange={(e) => setNewStudentCode(e.target.value)}
@@ -247,9 +254,93 @@ function Profile() {
           Change Password
         </button>
       </div>
-      
-      
 
+      <div className="mt-6 bg-white rounded-lg shadow-md p-6">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 mr-2 text-blue-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+            />
+          </svg>
+          Bookmarks
+        </h3>
+
+        {bookmarks.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {bookmarks.map((bookmark) => (
+              <div
+                key={bookmark.id}
+                className="border rounded-lg p-4 hover:shadow-lg transition-all duration-200 bg-gray-50 flex flex-col"
+              >
+                {/* Phần hiển thị ảnh */}
+                {bookmark.media && (
+                  <div className="mb-3">
+                    <img
+                      src={bookmark.media || 'frogImage'}
+                      alt={bookmark.title}
+                      className="w-full h-48 object-cover rounded-md"
+                      onError={(e) => {
+                        e.target.src = 'path/to/placeholder-image.jpg'; // Thêm ảnh placeholder nếu ảnh lỗi
+                      }}
+                    />
+                  </div>
+                )}
+
+                {/* Phần thông tin */}
+                <div className="flex-1">
+                  <h4 className="text-base font-medium text-gray-800 line-clamp-2 mb-2">
+                    {bookmark.title}
+                  </h4>
+                  {/* Thêm phần content */}
+                  {bookmark.content && (
+                    <p className="text-sm text-gray-600 line-clamp-3 mb-2">
+                      {bookmark.content}
+                    </p>
+                  )}
+                  {bookmark.description && (
+                    <p className="text-sm text-gray-600 line-clamp-2">
+                      {bookmark.description}
+                    </p>
+                  )}
+                  <div className="mt-2 text-xs text-gray-500">
+                    <span>Saved on: {new Date(bookmark.createdAt).toLocaleDateString()}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-8 text-gray-500">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-12 w-12 mb-4 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+              />
+            </svg>
+            <p className="text-base">No bookmarked posts yet.</p>
+            <p className="text-sm mt-2 text-gray-400">
+              Start bookmarking posts to see them here!
+            </p>
+          </div>
+        )}
+      </div>
 
       {isModalOpen && (
         <div className="fixed inset-0 flex justify-center items-center">
@@ -298,8 +389,8 @@ function Profile() {
         </div>
       )}
     </div>
-    
-    
+
+
 
 
   );
