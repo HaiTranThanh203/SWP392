@@ -7,7 +7,7 @@ const {
   changePassword,
   logout,
 } = require("../controllers/authController");
-const { getUserProfile } = require("../controllers/userController");
+const { getUserProfile,updateProfile,getUserPosts} = require("../controllers/userController");
 
 const router = express.Router();
 router.post("/signup", signup);
@@ -25,6 +25,8 @@ router.get("/search", userController.searchUsers);
 router.get("/search2", userController.searchUsers);
 
 router.get("/profile", protect, userController.getUserProfile);
+router.get("/my-posts", protect, getUserPosts);
+router.put("/update-profile", protect, updateProfile);
 router.patch("/:id/toggle-active", userController.toggleUserActiveStatus);
 router.patch("/update-me", protect, userController.updateMe);
 

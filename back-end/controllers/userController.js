@@ -225,7 +225,73 @@ exports.getUserProfile = async (req, res) => {
   }
 };
 
+//Hàm Update user profile
+exports.updateProfile = async (req, res) => {
+  try {
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({ message: "Vui lòng đăng nhập!" });
+    }
 
+    const { username, studentCode, avatar } = req.body; // Nhận URL ảnh từ frontend
+
+    // Cập nhật thông tin người dùng trong database
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { username, studentCode, avatar },
+      { new: true, runValidators: true }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "Không tìm thấy người dùng!" });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Cập nhật thông tin thành công!",
+      data: updatedUser,
+    });
+  } catch (error) {
+    console.error("Lỗi cập nhật hồ sơ:", error);
+    res.status(500).json({ message: "Lỗi server!" });
+  }
+};
+
+//Hàm lấy post
+exports.getUserPosts = async (req, res) => {
+  try {
+    res.set("Cache-Control", "no-store");
+
+    // Kiểm tra xem req.user.id có hợp lệ không
+    if (!req.user || !req.user.id) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Không có quyền truy cập. Vui lòng đăng nhập lại!",
+      });
+    }
+
+    // Tìm tất cả bài post của user
+    const posts = await Post.find({ userId: req.user.id }).populate("userId", "username email");
+
+    if (!posts.length) {
+      return res.status(404).json({
+        status: "fail",
+        message: "Bạn chưa có bài viết nào!",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Lấy danh sách bài viết thành công",
+      data: posts,
+    });
+  } catch (error) {
+    console.error("Lỗi khi lấy bài viết của người dùng:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Lỗi server, vui lòng thử lại sau!",
+    });
+  }
+};
 
 
 
