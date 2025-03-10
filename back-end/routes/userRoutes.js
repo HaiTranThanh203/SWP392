@@ -11,9 +11,11 @@ const {
 const { getUserProfile,updateProfile,getBookmarkedPosts} = require("../controllers/userController");
 const subscriptionController = require("../controllers/subscriptionController");
 
+
 const router = express.Router();
 router.post("/signup", signup);
 router.post("/login", login);
+
 
 router.post("/forgotPassword", forgotPassword);
 router.put("/change-password", protect, changePassword);

@@ -28,7 +28,10 @@ function Profile() {
         // console.log("Dữ liệu user nhận được:", data); // Kiểm tra response từ API
 
         if (data.status === "success") {
-          setUser(data.data);
+          setUser({
+            ...data.data,
+            avatar: data.data.avatar || "/default-avatar.png", // Nếu avatar null thì gán ảnh mặc định
+          });
           setNewUsername(data.data.username);
           setNewStudentCode(data.data.studentCode);
         }
