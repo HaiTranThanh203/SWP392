@@ -105,10 +105,13 @@ exports.getCommentByPostId = async (req, res, next) => {
     }
 
     const comments = await Comment.find({ postId })
-      .populate("userId", "username avatar")
-      .populate("parentId")
-      .populate("childrens")
-      .sort({ createdAt: -1 });
+  .populate("userId", "username avatar email")
+  .populate({
+    path: "childrens",
+    populate: { path: "userId", select: "username avatar email" }, // Populate children comments và userId trong đó
+  })
+  .sort({ createdAt: -1 });
+
 
     if (!comments.length) {
       console.warn(`⚠️ No comments found for postId: ${postId}`);
@@ -173,19 +176,76 @@ exports.getChildrenComments = catchAsync(async (req, res, next) => {
   res.status(200).json(response);
 });
 
-exports.voteComment = catchAsync(async (req, res, next) => {
-  const { id } = req.params;
-  const comment = await Comment.findById(id);
-  if (!comment.votes) comment.votes = new Map();
-  if (req.body.vote == "none") {
-    comment.votes.delete(req.body.id);
-  } else {
-    comment.votes.set(req.body.id, req.body.vote);
+exports.voteComment = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { userId, vote } = req.body;
+
+    // Kiểm tra hợp lệ
+    if (!userId || !["like", "dislike", "none"].includes(vote)) {
+      return res.status(400).json({ success: false, message: "Invalid vote data." });
+    }
+
+    // Tìm comment
+    const comment = await Comment.findById(id);
+    if (!comment) {
+      return res.status(404).json({ success: false, message: "Comment not found." });
+    }
+
+    // Xóa vote nếu người dùng chọn "none"
+    if (vote === "none") {
+      comment.votes.delete(userId);
+    } else {
+      comment.votes.set(userId, vote);
+    }
+
+    // Đếm lại số lượng like/dislike
+    let upVotes = 0, downVotes = 0;
+    comment.votes.forEach((v) => {
+      if (v === "like") upVotes++;
+      if (v === "dislike") downVotes++;
+    });
+
+    comment.upVotes = upVotes;
+    comment.downVotes = downVotes;
+
+    // Lưu lại
+    await comment.save();
+
+    res.status(200).json({ success: true, data: comment });
+  } catch (error) {
+    console.error("❌ Error voting comment:", error);
+    res.status(500).json({ success: false, message: "Internal server error." });
   }
-  const updatedComment = await Comment.findByIdAndUpdate(
-    id,
-    { votes: comment.votes },
-    { new: true }
-  ).lean();
-  res.status(200).json(updatedComment);
-});
+};
+exports.replyComment = async (req, res, next) => {
+  try {
+    const { userId, postId, parentId, content } = req.body;
+    if (!userId || !postId || !parentId || !content) {
+      return res.status(400).json({ success: false, message: "Missing required fields" });
+    }
+
+    // ✅ Tạo comment reply
+    const reply = await Comment.create({
+      userId,
+      postId,
+      parentId,
+      content,
+      hasParent: true,
+    });
+
+    // ✅ Cập nhật comment cha
+    await Comment.findByIdAndUpdate(parentId, {
+      $addToSet: { childrens: reply._id },
+    });
+
+    // ✅ Populate user để tránh "Ẩn Danh"
+    const populatedReply = await Comment.findById(reply._id).populate("userId", "username avatar");
+
+    res.status(201).json({ success: true, data: populatedReply });
+
+  } catch (error) {
+    console.error("❌ Error replying to comment:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};

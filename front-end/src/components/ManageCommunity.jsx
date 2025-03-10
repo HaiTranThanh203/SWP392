@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { uploadImageToSupabase } from "../utils/uploadImageSupabase";
 const ManageCommunity = ({ showModal, setShowModal, community }) => {
   const [communityName, setCommunityName] = useState("");
   const [description, setDescription] = useState("");
@@ -13,6 +14,7 @@ const ManageCommunity = ({ showModal, setShowModal, community }) => {
   const token = localStorage.getItem("token");
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [activeTab, setActiveTab] = useState("details");
+  const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     if (community) {
@@ -24,7 +26,16 @@ const ManageCommunity = ({ showModal, setShowModal, community }) => {
       setJoinRequests(community.joinRequests || []);
     }
   }, [community]);
-
+  const handleFileChange = async (event) => {
+    event.preventDefault();
+    const file = event.target.files[0];
+    if (file) {
+      const imageUrl = await uploadImageToSupabase(file, "fpt-image");
+      console.log("Uploaded image URL 2:", imageUrl);
+      setLogo(imageUrl);
+      setSelectedImage(imageUrl);
+    }
+  };
   const handleAccept = async (id) => {
     try {
       await axios.patch(
@@ -114,6 +125,16 @@ const ManageCommunity = ({ showModal, setShowModal, community }) => {
                 onClick={() => setActiveTab("requests")}
               >
                 Join Requests
+              </button>
+              <button
+                className={`pb-1 ${
+                  activeTab === "logo"
+                    ? "border-b-2 border-blue-500 text-blue-600"
+                    : "text-gray-500"
+                }`}
+                onClick={() => setActiveTab("logo")}
+              >
+                Logo
               </button>
             </div>
 
@@ -215,6 +236,35 @@ const ManageCommunity = ({ showModal, setShowModal, community }) => {
                     No join requests available
                   </p>
                 )}
+              </div>
+            )}
+            {activeTab === "logo" && (
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700">
+                  Upload Logo:
+                </label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="mt-2 p-2 border rounded-lg w-full"
+                />
+                {selectedImage && (
+                  <div className="mt-4">
+                    <p className="text-sm text-gray-500">Preview:</p>
+                    <img
+                      src={selectedImage}
+                      alt="Uploaded Logo"
+                      className="mt-2 max-w-xs rounded-lg shadow"
+                    />
+                  </div>
+                )}
+                <button
+                  className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition w-full"
+                  onClick={handleUpdate}
+                >
+                  Save
+                </button>
               </div>
             )}
 
