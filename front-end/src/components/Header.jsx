@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import { FaSearch, FaBell, FaUserAlt, FaCaretDown } from "react-icons/fa";
 import logo from "../assets/images/logo.png";
 import { searchCommunities, searchUsers } from "../services/SeachService";
-
 export default function Header() {
   const [query, setQuery] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("Community");
@@ -107,7 +106,10 @@ export default function Header() {
       <div className="flex items-center space-x-4">
         <FaBell className="text-gray-600 text-xl cursor-pointer" />
 
-        <button className="bg-white border border-gray-400 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-100 transition duration-300">
+        <button
+          className="bg-white border border-gray-400 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-100 transition duration-300"
+          onClick={() => navigate("/createpost")} // ✅ Điều hướng khi bấm nút
+        >
           Create Post
         </button>
 
