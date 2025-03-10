@@ -42,6 +42,7 @@ import DetailReport from "../components/admin/DetailReport.jsx";
 
 import ProtectedRoute from "./ProtectedRoute";
 
+
 // Layout component: hiển thị Header, Sidebar, Footer trừ các route login, signup, forgotpassword
 const Layout = ({ children }) => {
   const location = useLocation();
