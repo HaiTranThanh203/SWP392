@@ -27,7 +27,7 @@ router.get("/community-join", subscriptionController.getAllSubscriptions);
 router.get("/profile", protect, userController.getUserProfile);
 router.patch("/:id/toggle-active", userController.toggleUserActiveStatus);
 router.patch("/update-me", protect, userController.updateMe);
-
+router.get("/infor/:id", userController.getUserInfor);
 router.get("/:id", userController.getUserById);
 
 module.exports = router;
