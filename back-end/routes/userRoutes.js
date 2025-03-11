@@ -33,7 +33,7 @@ router.get("/bookmarked-posts", protect, userController.getBookmarkedPosts);
 router.put("/update-profile", protect, updateProfile);
 router.patch("/:id/toggle-active", userController.toggleUserActiveStatus);
 router.patch("/update-me", protect, userController.updateMe);
-
+router.get("/infor/:id", userController.getUserInfor);
 router.get("/:id", userController.getUserById);
 
 module.exports = router;
