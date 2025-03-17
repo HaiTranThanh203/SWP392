@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaUpload } from 'react-icons/fa';
 import { uploadImageToSupabase } from '../utils/uploadImageSupabase';
-
+import { useNavigate } from 'react-router-dom';
 const CreatePost = () => {
   const [communities, setCommunities] = useState([]);
   const [community, setCommunity] = useState('');
@@ -13,6 +13,7 @@ const CreatePost = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   // Lấy userId từ localStorage
   const user = JSON.parse(localStorage.getItem('user')) || null;
@@ -89,7 +90,7 @@ const CreatePost = () => {
       console.log("📌 Sending Post Data:", postData);
   
       const token = localStorage.getItem("token") || "";
-      console.log("🔑 Using token:", token);
+      
   
       const postRes = await axios.post(
         'http://localhost:9999/api/v1/posts/create',
@@ -105,7 +106,7 @@ const CreatePost = () => {
       console.log("✅ Full API Response:", postRes); // ✅ Thêm log toàn bộ phản hồi
   
       if (postRes && postRes.data) {  // ✅ Kiểm tra xem postRes.data có tồn tại không
-        console.log("✅ Post Created:", postRes.data);
+        let idCommunity = community
   
         if (postRes.status === 201) {
           setSuccess('🎉 Post created successfully!');
@@ -114,6 +115,7 @@ const CreatePost = () => {
           setDescription('');
           setImage(null);
           setPreviewImage(null);
+          navigate(`/viewcommunity/idCommunity`);
         } else {
           setError('❌ Failed to create post.');
         }
