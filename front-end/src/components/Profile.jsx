@@ -91,7 +91,7 @@ function Profile() {
     setSuccessMessage("");
 
     if (newPassword.length < 6) {
-      setErrorMessage("Mật khẩu mới phải có ít nhất 6 ký tự.");
+      setErrorMessage("New password must be at least 6 characters.");
       return;
     }
     try {
@@ -142,10 +142,10 @@ function Profile() {
         setUser(data.data);
         setNewUsername(data.data.username);
         setNewStudentCode(data.data.studentCode);
-        setSuccessMessage("Cập nhật thông tin thành công!");
+        setSuccessMessage("Information updated successfully!");
         setTimeout(() => setSuccessMessage(""), 3000);
       } else {
-        setErrorMessage(data.message || "Cập nhật hồ sơ thất bại.");
+        setErrorMessage(data.message || "Profile update failed");
       }
     } catch (error) {
       console.error("Lỗi cập nhật hồ sơ:", error);
