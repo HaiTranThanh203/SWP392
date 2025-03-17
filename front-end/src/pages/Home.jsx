@@ -110,7 +110,11 @@ export default function Home() {
         <div className="flex-1 p-6 space-y-6">
           {/* Post 1 */}
           {Post?.map((post, index) => (
-            <div key={post.id} className="bg-white p-4 rounded-lg shadow-md">
+            <div
+            key={post.id}
+            className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition"
+            onClick={() => navigate(`/postdetail/${post._id}`)} // Thêm sự kiện điều hướng
+          >
               <div className="flex items-center space-x-2">
                 <img
                   src={avatar2}
@@ -159,6 +163,12 @@ export default function Home() {
                           onClick={() => navigate(`/reportpost/${post._id}`)}
                         >
                           Report post
+                        </li>
+                        <li
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={() => navigate(`/editpost/${post._id}`)}
+                        >
+                          Edit Post
                         </li>
                       </ul>
                     </div>
