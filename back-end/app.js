@@ -60,6 +60,8 @@ app.use("/api/v1/notifications", notificationRouter);
 app.use("/api/v1/news", newsRouter);
 app.use("/api/v1/messages", chatRouter);
 app.use("/api/v1/friendships", friendRouter);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 
 // 3) ERROR HANDLING
 // Bắt lỗi các route API không hợp lệ
