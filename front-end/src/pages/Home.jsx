@@ -11,14 +11,44 @@ import avatar2 from "../assets/images/avatar2.png";
 import bag from "../assets/images/bag.png";
 import { doGetAllPost, doVotePost } from "../services/PostService";
 import { doGetUserById } from "../services/UserService";
+import axios from "axios";
+import { toast } from "react-toastify";
 export default function Home() {
   const [dropdownOpen, setDropdownOpen] = useState(null);
   const navigate = useNavigate();
   const storedUser = localStorage.getItem("user");
   const userId = storedUser ? JSON.parse(storedUser).id : null;
+
+  const [Post, setPost] = useState([]);
+
+  const [user, setUser] = useState("");
+  const token = localStorage.getItem("token");
+
   // Hàm mở/đóng dropdown của từng bài viết
   const toggleDropdown = (index) => {
     setDropdownOpen(dropdownOpen === index ? null : index);
+  };
+  const handleSave = (sid) => {
+    if (!user.bookmarks.includes(sid)) {
+      user.bookmarks.push(sid);
+    }
+    localStorage.setItem("user", JSON.stringify(user));
+    const data = JSON.stringify({ bookmarks: user.bookmarks });
+
+    axios
+      .patch("http://localhost:9999/api/v1/users/update-me", data, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        toast.success("Save post success!");
+        navigate(`/`);
+      })
+      .catch((error) => {
+        console.error("Lỗi khi gửi yêu cầu:", error);
+      });
   };
   const fetchUserDetail = async () => {
     try {
@@ -29,15 +59,15 @@ export default function Home() {
       console.error("Không thể lấy thông tin người dùng:", error);
     }
   };
-  const [Post, setPost] = useState([]);
-
-  const [user, setUser] = useState("");
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
         const data = await doGetAllPost(); // Gọi API đúng cách
-        setPost(Array.isArray(data) ? data : []); // Kiểm tra xem data có phải là mảng không
+        const filteredData = data.filter(
+          (post) => post.communityId.privacyType === "public"
+        );
+        setPost(filteredData); // Kiểm tra xem data có phải là mảng không
       } catch (error) {
         console.error("Lỗi khi lấy bài viết:", error);
         setPost([]); // Nếu lỗi, gán mảng rỗng để tránh lỗi UI
@@ -118,7 +148,10 @@ export default function Home() {
                   {dropdownOpen === 0 && (
                     <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
                       <ul>
-                        <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                        <li
+                          className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                          onClick={() => handleSave(post?._id)}
+                        >
                           Save post
                         </li>
                         <li
