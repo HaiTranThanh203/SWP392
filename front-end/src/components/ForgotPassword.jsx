@@ -24,7 +24,7 @@ function ForgotPassword() {
 
       // Xử lý phản hồi từ server
       if (response.data.status === 'success') {
-        setSuccessMessage('Một liên kết để thay đổi mật khẩu đã được gửi đến email của bạn.');
+        setSuccessMessage('A new password has been sent to your email.');
         setErrorMessage('');
       } else {
         setErrorMessage('Có lỗi xảy ra. Vui lòng thử lại!');
