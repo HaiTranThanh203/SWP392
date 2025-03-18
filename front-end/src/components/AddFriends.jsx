@@ -29,22 +29,35 @@ const AddFriends = () => {
       // Lấy thông tin người dùng hiện tại từ localStorage
       const currentUser = JSON.parse(localStorage.getItem("user"));
       const currentUserId = currentUser?.id;
+  
+      console.log("Trying to add friend with data:", {
+        requester: currentUserId,
+        recipient: friend._id,
+      });
+  
+      if (!currentUserId || !friend._id) {
+        throw new Error("Invalid user ID or friend ID");
+      }
+  
       // Gọi hàm addFriend, truyền requester và recipient
       await addFriend(currentUserId, friend._id);
+  
       // Cập nhật trạng thái của bạn đó thành đã gửi lời mời (hoặc đã là bạn)
       setFriendsList((prev) =>
         prev.map((f) => (f._id === friend._id ? { ...f, isAdded: true } : f))
       );
     } catch (error) {
       console.error("Error adding friend:", error);
-      // Lấy thông báo lỗi từ backend (nếu có)
+  
+      // Kiểm tra phản hồi từ backend
       const errorMsg =
-        error.response && error.response.data && error.response.data.message
-          ? error.response.data.message
-          : error.message;
-      toast.error(errorMsg); // Make sure to use alert in lowercase.
+        error.response?.data?.message || error.message || "Có lỗi xảy ra!";
+  
+      console.log("Toast Error Message:", errorMsg); // Xem log xem có lấy đúng message không
+      toast.error(errorMsg); // Hiển thị thông báo lỗi
     }
   };
+  
 
   return (
     <div className="bg-white p-8 rounded-2xl shadow-xl max-w-4xl mx-auto w-full border border-gray-200">

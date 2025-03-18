@@ -115,7 +115,7 @@ const CreatePost = () => {
           setDescription('');
           setImage(null);
           setPreviewImage(null);
-          navigate(`/viewcommunity/idCommunity`);
+          navigate(`/viewcommunity/${idCommunity}`);
         } else {
           setError('❌ Failed to create post.');
         }
@@ -160,8 +160,8 @@ const CreatePost = () => {
           >
             <option value="">-- Select Community --</option>
             {communities.length > 0 ? (
-              communities.map((comm) => (
-                <option key={comm._id} value={comm._id}>{comm.name}</option>
+              communities?.filter(a => a != null ).map((comm) => (
+                <option key={comm?._id} value={comm?._id}>{comm?.name}</option>
               ))
             ) : (
               <option value="" disabled>No communities joined</option>

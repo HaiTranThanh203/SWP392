@@ -24,7 +24,7 @@ export default function Home() {
     try {
       const userDetail = await doGetUserById(userId);
       setUser(userDetail.data);
-      console.log("Thông tin người dùng:", userDetail.data);
+ 
     } catch (error) {
       console.error("Không thể lấy thông tin người dùng:", error);
     }
@@ -36,7 +36,9 @@ export default function Home() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const data = await doGetAllPost(); // Gọi API đúng cách
+        const data = await doGetAllPost();
+    
+         // Gọi API đúng cách
         setPost(Array.isArray(data) ? data : []); // Kiểm tra xem data có phải là mảng không
       } catch (error) {
         console.error("Lỗi khi lấy bài viết:", error);
@@ -92,7 +94,8 @@ export default function Home() {
                   className="h-12 w-12 rounded-full"
                 />
                 <div>
-                  <h2 className="font-semibold text-lg">{post.title}</h2>
+                
+                  <h2 className="font-semibold text-lg">{post.userId.username}</h2>
                   <p
                     className="text-sm text-gray-500 cursor-pointer hover:underline"
                     onClick={() => {
