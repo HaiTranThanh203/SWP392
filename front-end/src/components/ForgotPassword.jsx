@@ -24,7 +24,7 @@ function ForgotPassword() {
 
       // Xử lý phản hồi từ server
       if (response.data.status === 'success') {
-        setSuccessMessage('Một liên kết để thay đổi mật khẩu đã được gửi đến email của bạn.');
+        setSuccessMessage('A new password has been sent to your email.');
         setErrorMessage('');
       } else {
         setErrorMessage('Có lỗi xảy ra. Vui lòng thử lại!');
@@ -63,7 +63,7 @@ function ForgotPassword() {
           <button 
             type="submit" 
             className="w-full py-2 px-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-md shadow-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50">
-            Gửi yêu cầu
+           Submit request
           </button>
         </form>
 
@@ -72,7 +72,7 @@ function ForgotPassword() {
         {errorMessage && <div className="mt-4 text-red-600 text-center">{errorMessage}</div>}
 
         <div className="mt-4 text-center">
-          <a href="/login" className="text-orange-500 hover:underline">Quay lại đăng nhập</a>
+          <a href="/login" className="text-orange-500 hover:underline">Back to login</a>
         </div>
       </div>
     </div>
