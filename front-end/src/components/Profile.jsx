@@ -94,7 +94,7 @@ function Profile() {
     setSuccessMessage("");
 
     if (newPassword.length < 6) {
-      setErrorMessage("Mật khẩu mới phải có ít nhất 6 ký tự.");
+      setErrorMessage("New password must be at least 6 characters.");
       return;
     }
     try {
@@ -122,13 +122,46 @@ function Profile() {
     }
   };
 
-  const handleUploadAvatar = (e) => {
+  // const handleUploadAvatar = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     setUploadAvatar(URL.createObjectURL(file));
+  //     updateProfile({ avatar: URL.createObjectURL(file) });
+  //   }
+  // };
+  const handleUploadAvatar = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      setUploadAvatar(URL.createObjectURL(file));
-      updateProfile({ avatar: URL.createObjectURL(file) });
+    if (!file) return;
+  
+    setUploadAvatar(URL.createObjectURL(file));
+  
+    const formData = new FormData();
+    formData.append("avatar", file);
+  
+    try {
+      const token = localStorage.getItem("token");
+  
+      const response = await fetch("http://localhost:9999/api/v1/users/update-avatar", {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+  
+      const data = await response.json();
+      if (data.status === "success") {
+        console.log("Cập nhật avatar thành công:", data.avatar);
+        updateProfile({ avatar: `http://localhost:9999${data.avatar}` });
+      } else {
+        console.error("Lỗi cập nhật avatar:", data.message);
+      }
+    } catch (error) {
+      console.error("Lỗi khi gửi yêu cầu:", error);
     }
   };
+  
+  
 
   const updateProfile = async (updateData) => {
     try {
@@ -145,10 +178,10 @@ function Profile() {
         setUser(data.data);
         setNewUsername(data.data.username);
         setNewStudentCode(data.data.studentCode);
-        setSuccessMessage("Cập nhật thông tin thành công!");
+        setSuccessMessage("Information updated successfully!");
         setTimeout(() => setSuccessMessage(""), 3000);
       } else {
-        setErrorMessage(data.message || "Cập nhật hồ sơ thất bại.");
+        setErrorMessage(data.message || "Profile update failed");
       }
     } catch (error) {
       console.error("Lỗi cập nhật hồ sơ:", error);

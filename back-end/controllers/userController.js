@@ -3,6 +3,8 @@ const Post = require("../models/postModel");
 const Friendship = require("../models/friendshipModel");
 const APIFeatures = require("../utils/apiFeatures");
 const catchAsync = require("../utils/catchAsync");
+const multer = require("multer");
+const path = require("path");
 const {
   factoryDeleteOne,
   factoryUpdateOne,
@@ -10,6 +12,26 @@ const {
   factoryGetAll,
   factoryCreateOne,
 } = require("./handlerFactory");
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/avatars/"); // Thư mục lưu ảnh
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname); // Đặt tên file tránh trùng lặp
+  },
+});
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    if (!file.mimetype.startsWith("image/")) {
+      return cb(new Error("Chỉ chấp nhận file ảnh!"), false);
+    }
+    cb(null, true);
+  },
+  limits: { fileSize: 2 * 1024 * 1024 }, // Giới hạn file 2MB
+});
 
 // CRUD
 const filterObj = (obj, ...excluded) => {
@@ -39,6 +61,7 @@ exports.createNewUser = factoryCreateOne(User);
 exports.getAllUsers = factoryGetAll(User);
 exports.updateUser = factoryUpdateOne(User);
 exports.deleteUser = factoryDeleteOne(User);
+exports.getUserInfor = factoryGetOne(User, "moderatorCommunities bookmarks");
 exports.getAllUsersPaginate = catchAsync(async (req, res, next) => {
   const { page = 1, limit = 10, status, email, username } = req.query;
 
@@ -226,6 +249,7 @@ exports.getUserProfile = async (req, res) => {
   }
 };
 
+
 //Hàm Update user profile
 exports.updateProfile = async (req, res) => {
   try {
@@ -282,7 +306,46 @@ exports.getBookmarkedPosts = async (req, res) => {
   }
 };
 
+// hàm update avatar
 
+
+exports.updateAvatar = async (req, res) => {
+  upload.single("avatar")(req, res, async (err) => {
+    try {
+      if (err) {
+        return res.status(400).json({ status: "fail", message: err.message });
+      }
+
+      if (!req.file) {
+        return res.status(400).json({ status: "fail", message: "Vui lòng chọn ảnh!" });
+      }
+
+      if (!req.user || !req.user.id) {
+        return res.status(401).json({ status: "fail", message: "Không tìm thấy thông tin user!" });
+      }
+
+      // Cập nhật avatar cho user
+      const user = await User.findByIdAndUpdate(
+        req.user.id,
+        { avatar: `/uploads/avatars/${req.file.filename}` },
+        { new: true }
+      );
+
+      if (!user) {
+        return res.status(404).json({ status: "fail", message: "Không tìm thấy user!" });
+      }
+
+      res.status(200).json({
+        status: "success",
+        message: "Cập nhật avatar thành công!",
+        avatar: user.avatar,
+      });
+    } catch (error) {
+      console.error("Lỗi khi cập nhật avatar:", error);
+      res.status(500).json({ status: "error", message: "Lỗi server!" });
+    }
+  });
+};
 
 
 

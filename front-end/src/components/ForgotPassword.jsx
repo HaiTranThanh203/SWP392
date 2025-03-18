@@ -25,7 +25,9 @@ function ForgotPassword() {
 
       // Xử lý phản hồi từ server
       if (response.data.status === 'success') {
+
         setSuccessMessage('New Password has sent into your email !!.');
+
         setErrorMessage('');
         // Bắt đầu cooldown 60 giây
         setCooldown(60);
@@ -102,7 +104,9 @@ function ForgotPassword() {
         {errorMessage && <div className="mt-4 text-red-600 text-center">{errorMessage}</div>}
 
         <div className="mt-4 text-center">
+
           <a href="/login" className="text-orange-500 hover:underline">Back To Login</a>
+
         </div>
       </div>
     </div>
