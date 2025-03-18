@@ -8,7 +8,7 @@ router.use(protect);
 router.route("/create").post(postController.createNewPost);
 router.route("/search").get(postController.filterPostsByTitle);
 router.route("/edit/:id").patch(postController.updatePost);
-router.route("/:id").get(postController.getPostById);
 router.route("/:id/vote").patch(postController.votePost);
+router.route("/:id").get(postController.getPostById);
 
 module.exports = router;

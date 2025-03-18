@@ -4,7 +4,7 @@ import { BASE_URL, getHeader } from "./api";
 export const doVotePost = async (postId, vote) => {
   try {
     const res = await axios.patch(
-      `${BASE_URL}/posts/vote/${postId}`,
+      `${BASE_URL}/posts/${postId}/vote`,
       { vote: vote },
       {
         headers: getHeader(),

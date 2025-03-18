@@ -80,6 +80,7 @@ export default function Home() {
   const handleVote = async (postId, vote) => {
     // Handle the vote up logic
     const res = await doVotePost(postId, vote);
+    console.log("Vote response:", res);
     // Update the commentList state with the new vote information
     setPost((prevList) =>
       prevList.map((post) => {
@@ -88,10 +89,10 @@ export default function Home() {
           const updatedVotes = { ...post.votes };
 
           // Update the votes based on the action
-          if (vote === true) {
-            updatedVotes[user.id] = true; // User voted up
-          } else if (vote === false) {
-            updatedVotes[user.id] = false; // User voted down
+          if (vote === "true") {
+            updatedVotes[user.id] = "true"; // User voted up
+          } else if (vote === "false") {
+            updatedVotes[user.id] = "false"; // User voted down
           } else {
             delete updatedVotes[user.id]; // User removed their vote
           }
@@ -111,10 +112,9 @@ export default function Home() {
           {/* Post 1 */}
           {Post?.map((post, index) => (
             <div
-            key={post.id}
-            className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition"
-            onClick={() => navigate(`/postdetail/${post._id}`)} // Thêm sự kiện điều hướng
-          >
+              key={post.id}
+              className="bg-white p-4 rounded-lg shadow-md cursor-pointer hover:shadow-lg transition"
+            >
               <div className="flex items-center space-x-2">
                 <img
                   src={avatar2}
@@ -175,7 +175,10 @@ export default function Home() {
                   )}
                 </div>
               </div>
-              <p className="mt-2 text-gray-700">
+              <p
+                className="mt-2 text-gray-700"
+                onClick={() => navigate(`/postdetail/${post._id}`)} // Thêm sự kiện điều hướng
+              >
                 {post.content.length > 200
                   ? `${post.content.substring(0, 200)}...`
                   : post.content}
@@ -198,20 +201,20 @@ export default function Home() {
                 <div className="flex items-center space-x-1 text-gray-500">
                   <FaThumbsUp
                     className={`text-lg cursor-pointer transition ${
-                      post.votes && post.votes[user.id] === true
+                      post.votes && post.votes[user.id] === "true"
                         ? "text-blue-500" // Đổi màu xanh khi user đã like
                         : "text-gray-400 hover:text-blue-500"
                     }`}
                     onClick={() =>
-                      post.votes && post.votes[user.id] === true
+                      post.votes && post.votes[user.id] === "true"
                         ? handleVote(post._id, "none")
-                        : handleVote(post._id, true)
+                        : handleVote(post._id, "true")
                     }
                   />
                   <span className="text-sm">
                     {
-                      Object.values(post.votes || {}).filter(
-                        (vote) => vote === true
+                      Object.values(post?.votes).filter(
+                        (vote) => vote === "true"
                       ).length
                     }
                   </span>
@@ -221,26 +224,29 @@ export default function Home() {
                 <div className="flex items-center space-x-1 text-gray-500">
                   <FaThumbsDown
                     className={`text-lg cursor-pointer transition ${
-                      post.votes && post.votes[user.id] === false
+                      post.votes && post.votes[user.id] === "false"
                         ? "text-red-500" // Đổi màu đỏ khi user đã dislike
                         : "text-gray-400 hover:text-red-500"
                     }`}
                     onClick={() =>
-                      post.votes && post.votes[user.id] === false
+                      post.votes && post.votes[user.id] === "false"
                         ? handleVote(post._id, "none")
-                        : handleVote(post._id, false)
+                        : handleVote(post._id, "false")
                     }
                   />
                   <span className="text-sm">
                     {
-                      Object.values(post.votes || {}).filter(
-                        (vote) => vote === false
+                      Object.values(post?.votes || {}).filter(
+                        (vote) => vote === "false"
                       ).length
                     }
                   </span>
                 </div>
                 <div className="flex items-center space-x-1 text-gray-500">
-                  <FaComment className="text-lg" />
+                  <FaComment
+                    className="text-lg"
+                    onClick={() => navigate(`/postdetail/${post._id}`)}
+                  />
                   <span className="text-sm">{post.commentCount}</span>
                 </div>
               </div>

@@ -41,7 +41,7 @@ const ViewCommunity = () => {
     axios
       .request(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        console.log("post", response.data);
         setCommunityPost(response.data);
       })
       .catch((error) => {
@@ -62,6 +62,7 @@ const ViewCommunity = () => {
   const handleVote = async (postId, vote) => {
     // Handle the vote up logic
     const res = await doVotePost(postId, vote);
+    console.log("Vote response:", res);
     // Update the commentList state with the new vote information
     setCommunityPost((prevList) =>
       prevList.map((post) => {
@@ -70,10 +71,10 @@ const ViewCommunity = () => {
           const updatedVotes = { ...post.votes };
 
           // Update the votes based on the action
-          if (vote === true) {
-            updatedVotes[user.id] = true; // User voted up
-          } else if (vote === false) {
-            updatedVotes[user.id] = false; // User voted down
+          if (vote === "true") {
+            updatedVotes[user.id] = "true"; // User voted up
+          } else if (vote === "false") {
+            updatedVotes[user.id] = "false"; // User voted down
           } else {
             delete updatedVotes[user.id]; // User removed their vote
           }
@@ -301,7 +302,7 @@ const ViewCommunity = () => {
                   <div className="ml-auto relative">
                     <FaEllipsisV
                       className="text-gray-600 cursor-pointer rotate-90"
-                      onClick={() => toggleDropdown(0)} // Mở hoặc đóng dropdown cho bài viết 1
+                      onClick={() => toggleDropdown(index)} // Mở hoặc đóng dropdown cho bài viết 1
                     />
                     {dropdownOpen === 0 && (
                       <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
@@ -328,6 +329,7 @@ const ViewCommunity = () => {
                     ? `${post.content.substring(0, 200)}...`
                     : post.content}
                 </p>
+
                 {post.media.length > 0 && (
                   <img
                     src={post.media[0]}
@@ -346,20 +348,20 @@ const ViewCommunity = () => {
                   <div className="flex items-center space-x-1 text-gray-500">
                     <FaThumbsUp
                       className={`text-lg cursor-pointer transition ${
-                        post.votes && post.votes[user.id] === true
+                        post.votes && post.votes[user.id] === "true"
                           ? "text-blue-500" // Đổi màu xanh khi user đã like
                           : "text-gray-400 hover:text-blue-500"
                       }`}
                       onClick={() =>
-                        post.votes && post.votes[user.id] === true
+                        post.votes && post.votes[user.id] === "true"
                           ? handleVote(post._id, "none")
-                          : handleVote(post._id, true)
+                          : handleVote(post._id, "true")
                       }
                     />
                     <span className="text-sm">
                       {
-                        Object.values(post.votes || {}).filter(
-                          (vote) => vote === true
+                        Object.values(post?.votes).filter(
+                          (vote) => vote === "true"
                         ).length
                       }
                     </span>
@@ -369,20 +371,20 @@ const ViewCommunity = () => {
                   <div className="flex items-center space-x-1 text-gray-500">
                     <FaThumbsDown
                       className={`text-lg cursor-pointer transition ${
-                        post.votes && post.votes[user.id] === false
+                        post.votes && post.votes[user.id] === "false"
                           ? "text-red-500" // Đổi màu đỏ khi user đã dislike
                           : "text-gray-400 hover:text-red-500"
                       }`}
                       onClick={() =>
-                        post.votes && post.votes[user.id] === false
+                        post.votes && post.votes[user.id] === "false"
                           ? handleVote(post._id, "none")
-                          : handleVote(post._id, false)
+                          : handleVote(post._id, "false")
                       }
                     />
                     <span className="text-sm">
                       {
-                        Object.values(post.votes || {}).filter(
-                          (vote) => vote === false
+                        Object.values(post?.votes || {}).filter(
+                          (vote) => vote === "false"
                         ).length
                       }
                     </span>
