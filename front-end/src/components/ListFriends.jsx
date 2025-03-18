@@ -120,7 +120,7 @@ const ListFriends = () => {
                 </div>
               ))
             ) : (
-              <div>Không có bạn bè nào</div>
+              <div>You do not have any friends yet.</div>
             )}
           </div>
         </div>
@@ -158,7 +158,7 @@ const ListFriends = () => {
                 </div>
               ))
             ) : (
-              <div>Không có lời mời nào</div>
+              <div>No invited </div>
             )}
           </div>
         </div>
