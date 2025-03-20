@@ -148,6 +148,40 @@ exports.accessRequest = async (req, res, next) => {
     next(error);
   }
 };
+exports.rejectRequest = async (req, res, next) => {
+  try {
+    const id = req.params.id; // Community ID
+    const rIds = req.body.ids; // Array of request IDs to reject
+
+    const community = await Community.findById(id);
+
+    if (community) {
+      const rejectedRequests = community.joinRequests.filter((item) =>
+        rIds.includes(item._id.toString())
+      ); // Filter out the rejected requests by _id
+
+      if (rejectedRequests.length > 0) {
+        // Use $pull to remove the rejected joinRequests from the community
+        await Community.findByIdAndUpdate(id, {
+          $pull: { joinRequests: { _id: { $in: rIds } } }, // Remove rejected requests
+        });
+
+        // Return the rejected requests as a response
+        res.status(200).json({
+          message: "Requests rejected successfully",
+          rejectedRequests,
+        });
+      } else {
+        res.status(404).json({ message: "No valid requests found to reject" });
+      }
+    } else {
+      res.status(404).json({ message: "Community not found" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.getUserInCommunity = async (req, res, next) => {
   try {
     const id = req.params.id;
