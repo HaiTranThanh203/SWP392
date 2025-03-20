@@ -8,8 +8,12 @@ import {
   FaQuestionCircle,
   FaBook,
   FaCaretDown,
-} from "react-icons/fa";
+
+  FaUserFriends
+} from "react-icons/fa"; // Import các icon
+
 import defaultLogo from "../assets/images/logo.png";
+
 export default function Sidebar() {
   const [isCommunitiesOpen, setIsCommunitiesOpen] = useState(false);
   const [user, setUser] = useState(null); // Lưu thông tin user
@@ -70,6 +74,12 @@ export default function Sidebar() {
           <FaComments className="text-xl" />
           <a href="/chat" className="text-lg hover:text-indigo-400">
             Chat
+          </a>
+        </li>
+        <li className="flex items-center space-x-4">
+          <FaUserFriends className="text-xl" />
+          <a href="/listfriend" className="text-lg hover:text-indigo-400">
+            Friends
           </a>
         </li>
 

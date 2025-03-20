@@ -114,7 +114,7 @@ function Login() {
           <div className="text-center mt-4">
             Chưa có tài khoản?{" "}
             <a href="/SignUp" className="text-orange-500 hover:underline">
-              Đăng ký
+             Register
             </a>
           </div>
 
@@ -123,7 +123,7 @@ function Login() {
               href="/ForgotPassword"
               className="text-orange-500 hover:underline"
             >
-              Quên mật khẩu
+             Forgot Password
             </a>
           </div>
         </form>

@@ -62,8 +62,8 @@ export default function Header() {
 
   return (
     <header className="bg-white p-4 shadow-md flex items-center justify-between w-full">
-      {/* Logo */}
-      <div className="flex items-center space-x-3">
+      {/* Logo and Title */}
+      <div className="flex items-center space-x-3 " onClick={() => navigate("/")}>
         <img src={logo} alt="Logo" className="h-8" />
         <h1 className="text-orange-500 text-xl font-semibold">
           FPT Student Space

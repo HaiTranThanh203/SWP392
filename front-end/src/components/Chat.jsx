@@ -3,7 +3,7 @@ import { FaPaperPlane, FaSearch } from "react-icons/fa";
 import avatarDefault from "../assets/images/avatar1.png";
 import socket from "../services/socketClient";
 import { toast } from "react-toastify";
-import { getFriends } from "../services/friendshipService";
+import { getFriends } from "../services/FriendShipService";
 import { sendMessage, getMessages } from "../services/MessageService";
 
 const Chat = () => {
@@ -248,25 +248,32 @@ const Chat = () => {
           )}
         </div>
 
-        {/* Form gửi tin nhắn */}
-        <form
-          onSubmit={handleSendMessage}
-          className="mt-2 pt-2 border-t border-gray-300 flex items-center"
-        >
-          <input
-            type="text"
-            placeholder="Type your message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md mr-3 text-sm"
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
-          >
-            <FaPaperPlane />
-          </button>
-        </form>
+     
+        {friends.length > 0 ? (
+  <form
+    onSubmit={handleSendMessage}
+    className="mt-2 pt-2 border-t border-gray-300 flex items-center"
+  >
+    <input
+      type="text"
+      placeholder="Type your message..."
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
+      className="w-full p-2 border border-gray-300 rounded-md mr-3 text-sm"
+    />
+    <button
+      type="submit"
+      className="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600"
+    >
+      <FaPaperPlane />
+    </button>
+  </form>
+) : (
+  <p className="text-gray-500 text-center mt-4">
+    Bạn chưa có bạn bè nào để nhắn tin.
+  </p>
+)}
+
       </div>
     </div>
   );
