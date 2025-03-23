@@ -61,6 +61,7 @@ exports.createNewUser = factoryCreateOne(User);
 exports.getAllUsers = factoryGetAll(User);
 exports.updateUser = factoryUpdateOne(User);
 exports.deleteUser = factoryDeleteOne(User);
+exports.getUserInfor = factoryGetOne(User, "moderatorCommunities bookmarks");
 exports.getAllUsersPaginate = catchAsync(async (req, res, next) => {
   const { page = 1, limit = 10, status, email, username } = req.query;
 
@@ -248,6 +249,7 @@ exports.getUserProfile = async (req, res) => {
   }
 };
 
+
 //Hàm Update user profile
 exports.updateProfile = async (req, res) => {
   try {
@@ -344,6 +346,7 @@ exports.updateAvatar = async (req, res) => {
     }
   });
 };
+
 
 
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import frogImage from "../assets/images/Avatar.png";
+import { useNavigate } from "react-router-dom";
 
 function Profile() {
   const [user, setUser] = useState(null);
@@ -14,7 +15,7 @@ function Profile() {
   const [newUsername, setNewUsername] = useState("");
   const [newStudentCode, setNewStudentCode] = useState("");
   const [bookmarks, setBookmarks] = useState([]);
-
+ const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -54,6 +55,8 @@ function Profile() {
         const data = await res.json();
         if (data.status === "success") {
           setBookmarks(data.data);
+          
+          
         }
       } catch (error) {
         console.error("Lỗi khi lấy danh sách bookmark:", error);
@@ -280,7 +283,7 @@ function Profile() {
       </div>
 
       <div className="flex justify-start space-x-4">
-        <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded">
+        <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded" onClick={() => window.location.href = "/listfriend"}>
           View List Friends
         </button>
         <button
@@ -316,6 +319,7 @@ function Profile() {
               <div
                 key={bookmark.id}
                 className="border rounded-lg p-4 hover:shadow-lg transition-all duration-200 bg-gray-50 flex flex-col"
+                onClick={() => navigate(`/postdetail/${bookmark.id}`)} // Added onClick to navigate to PostDeta page
               >
                 {/* Phần hiển thị ảnh */}
                 {bookmark.media && (

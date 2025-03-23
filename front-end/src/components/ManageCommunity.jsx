@@ -48,6 +48,18 @@ const ManageCommunity = ({ showModal, setShowModal, community }) => {
       console.error(error);
     }
   };
+  const handleReject = async (id) => {
+    try {
+      await axios.patch(
+        `http://localhost:9999/api/v1/communities/reject/${community.id}`,
+        { ids: [id] },
+        { headers: { "Content-Type": "application/json" } }
+      );
+      toast.success("User rejected successfully!");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleDelete = async () => {
     try {
@@ -221,10 +233,16 @@ const ManageCommunity = ({ showModal, setShowModal, community }) => {
                           <td className="border p-2">{request?.reason}</td>
                           <td className="border p-2">
                             <button
-                              className="px-3 py-1 bg-green-500 text-white rounded-md hover:bg-green-600 transition"
+                              className="px-2 py-1 text-sm bg-green-500 text-white rounded-md hover:bg-green-600 transition"
                               onClick={() => handleAccept(request?._id)}
                             >
                               Accept
+                            </button>
+                            <button
+                              className="px-2 py-1 text-sm bg-red-500 text-white rounded-md hover:bg-red-600 transition"
+                              onClick={() => handleReject(request?._id)}
+                            >
+                              Reject
                             </button>
                           </td>
                         </tr>

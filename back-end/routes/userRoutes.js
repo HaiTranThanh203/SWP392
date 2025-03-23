@@ -34,7 +34,7 @@ router.put("/update-profile", protect, updateProfile);
 router.put("/update-avatar", protect, userController.updateAvatar);
 router.patch("/:id/toggle-active", userController.toggleUserActiveStatus);
 router.patch("/update-me", protect, userController.updateMe);
-
+router.get("/infor/:id", userController.getUserInfor);
 router.get("/:id", userController.getUserById);
 
 module.exports = router;
