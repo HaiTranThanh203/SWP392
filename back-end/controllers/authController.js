@@ -49,7 +49,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     if (existingUser) {
       return res.status(400).json({
         status: "error",
-        message: "Email đã tồn tại. Vui lòng sử dụng email khác.",
+        message: "Email already exists. Please use another email.",
       });
     }
 
@@ -58,7 +58,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     if (existingStudentCode) {
       return res.status(400).json({
         status: "error",
-        message: "Mã sinh viên đã tồn tại. Vui lòng sử dụng mã sinh viên khác.",
+        message: "Student code already exists. Please use another student code.",
       });
     }
 

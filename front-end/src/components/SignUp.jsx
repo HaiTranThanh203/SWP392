@@ -15,6 +15,13 @@ function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    //kiểm tra định dạng username
+    const usernameRegex = /^[a-zA-Z0-9_]{4,25}$/;
+    if(!usernameRegex.test(username)){
+      setErrorMessage('Username must be 4-25 characters and not special characters');
+      return;
+    }
+
     // Kiểm tra định dạng email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -30,8 +37,9 @@ function SignUp() {
     }
 
     // Kiểm tra độ dài mật khẩu
-    if (password.length < 6) {
-      setErrorMessage('Password must be at least 6 characters.');
+    const passwordRegex = /^(?=.*[@#$%^&*!?])[A-Za-z\d@#$%^&*!?]{8,30}$/;
+    if (!passwordRegex.test(password)) {
+      setErrorMessage('Password must be at least 8 characters and have one special characters.');
       return;
     }
 
