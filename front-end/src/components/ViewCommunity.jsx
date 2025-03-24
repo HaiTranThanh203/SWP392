@@ -29,6 +29,7 @@ const ViewCommunity = () => {
   const token = localStorage.getItem("token");
   const [joinReason, setJoinReason] = useState("");
   const [showModal, setShowModal] = useState(false);
+  
   const navigate = useNavigate();
   const getCommunityPost = async () => {
     let config = {
@@ -179,14 +180,14 @@ const ViewCommunity = () => {
         console.error("Lỗi khi gửi yêu cầu:", error);
       });
   };
-  // Tạo state để quản lý dropdown của từng bài viết
-  const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(null); // Track only one dropdown open
+
 
   // Hàm mở/đóng dropdown của từng bài viết
   const toggleDropdown = (index) => {
-    setDropdownOpen(dropdownOpen === index ? null : index);
+    setDropdownOpen(dropdownOpen === index ? null : index); // Toggle open/close
   };
-
+  
   return (
     <>
       <div className="bg-gray-100 min-h-screen flex flex-col">
@@ -274,131 +275,129 @@ const ViewCommunity = () => {
           <div className="flex-1 p-6 space-y-6">
             {/* Post 1 */}
             {communityPost?.map((post, index) => (
-              <div key={post.id} className="bg-white p-4 rounded-lg shadow-md">
-                <div className="flex items-center space-x-2">
-                  <img
-                    src={avatar2}
-                    alt="User Avatar"
-                    className="h-12 w-12 rounded-full"
-                  />
-                  <div
-                    className="cursor-pointer p-4  bg-white 
-             hover:bg-white-100 transition duration-300 ease-in-out 
-             active:scale-95"
-                    onClick={() => navigate(`/postdetail/${post._id}`)}
-                  >
-                    <h2 className="font-semibold text-lg">{post.title}</h2>
-                    <p className="text-xs text-gray-500">
-                      {new Date(post.createdAt).toLocaleString("vi-VN", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        day: "2-digit",
-                        month: "2-digit",
-                        year: "numeric",
-                        hour12: false,
-                      })}
-                    </p>
-                  </div>
-                  <div className="ml-auto relative">
-                    <FaEllipsisV
-                      className="text-gray-600 cursor-pointer rotate-90"
-                      onClick={() => toggleDropdown(index)} // Mở hoặc đóng dropdown cho bài viết 1
-                    />
-                    {dropdownOpen === 0 && (
-                      <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
-                        <ul>
-                          <li
-                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => handleSave(post?._id)}
-                          >
-                            Save post
-                          </li>
-                          <li
-                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                            onClick={() => navigate(`/reportpost/${post._id}`)}
-                          >
-                            Report post
-                          </li>
-                        </ul>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <p className="mt-2 text-gray-700">
-                  {post.content.length > 200
-                    ? `${post.content.substring(0, 200)}...`
-                    : post.content}
-                </p>
+  <div key={post.id} className="bg-white p-4 rounded-lg shadow-md">
+    <div className="flex items-center space-x-2">
+      <img
+        src={avatar2}
+        alt="User Avatar"
+        className="h-12 w-12 rounded-full"
+      />
+      <div
+        className="cursor-pointer p-4 bg-white hover:bg-white-100 transition duration-300 ease-in-out active:scale-95"
+        onClick={(e) => {
+          e.stopPropagation(); // Ngăn sự kiện chuyển hướng khi nhấn vào phần tử ngoài bài đăng
+          navigate(`/postdetail/${post._id}`); // Chuyển hướng đến chi tiết bài đăng
+        }}
+      >
+        <h2 className="font-semibold text-lg">{post.title}</h2>
+        <p className="text-xs text-gray-500">
+          {new Date(post.createdAt).toLocaleString("vi-VN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour12: false,
+          })}
+        </p>
+      </div>
+      <div className="ml-auto relative">
+        <FaEllipsisV
+          className="text-gray-600 cursor-pointer rotate-90"
+          onClick={() => toggleDropdown(index)} // Toggle dropdown for the clicked post
+        />
+        {dropdownOpen === index && (
+          <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
+            <ul>
+              <li
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                onClick={() => handleSave(post?._id)}
+              >
+                Save post
+              </li>
+              <li
+                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                onClick={() => navigate(`/reportpost/${post._id}`)}
+              >
+                Report post
+              </li>
+              {post.userId === user.id && ( // Kiểm tra nếu người dùng là tác giả của bài viết
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => navigate(`/editpost/${post._id}`)} // Dẫn đến trang sửa bài viết
+                >
+                  Edit post
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
 
-                {post.media.length > 0 && (
-                  <img
-                    src={post.media[0]}
-                    alt="Post Media"
-                    className="mt-4 w-full h-64 object-cover"
-                  />
-                )}
-                {post.media.length == 0 && (
-                  <img
-                    src={bag}
-                    alt="Bag"
-                    className="mt-4 w-32 h-32 object-cover"
-                  />
-                )}
-                <div className="flex items-center space-x-6 mt-4">
-                  <div className="flex items-center space-x-1 text-gray-500">
-                    <FaThumbsUp
-                      className={`text-lg cursor-pointer transition ${
-                        post.votes && post.votes[user.id] === "true"
-                          ? "text-blue-500" // Đổi màu xanh khi user đã like
-                          : "text-gray-400 hover:text-blue-500"
-                      }`}
-                      onClick={() =>
-                        post.votes && post.votes[user.id] === "true"
-                          ? handleVote(post._id, "none")
-                          : handleVote(post._id, "true")
-                      }
-                    />
-                    <span className="text-sm">
-                      {
-                        Object.values(post?.votes).filter(
-                          (vote) => vote === "true"
-                        ).length
-                      }
-                    </span>
-                  </div>
+    <p className="mt-2 text-gray-700">
+      {post.content.length > 200
+        ? `${post.content.substring(0, 200)}...`
+        : post.content}
+    </p>
 
-                  {/* Nút Dislike */}
-                  <div className="flex items-center space-x-1 text-gray-500">
-                    <FaThumbsDown
-                      className={`text-lg cursor-pointer transition ${
-                        post.votes && post.votes[user.id] === "false"
-                          ? "text-red-500" // Đổi màu đỏ khi user đã dislike
-                          : "text-gray-400 hover:text-red-500"
-                      }`}
-                      onClick={() =>
-                        post.votes && post.votes[user.id] === "false"
-                          ? handleVote(post._id, "none")
-                          : handleVote(post._id, "false")
-                      }
-                    />
-                    <span className="text-sm">
-                      {
-                        Object.values(post?.votes || {}).filter(
-                          (vote) => vote === "false"
-                        ).length
-                      }
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-1 text-gray-500">
-                    <FaComment
-                      className="text-lg"
-                      onClick={() => navigate(`/postdetail/${post._id}`)}
-                    />
-                    <span className="text-sm">{post.commentCount}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
+    {post.media.length > 0 && (
+      <img
+        src={post.media[0]}
+        alt="Post Media"
+        className="mt-4 w-full h-64 object-cover"
+      />
+    )}
+    {post.media.length == 0 && (
+      <img
+        src={bag}
+        alt="Bag"
+        className="mt-4 w-32 h-32 object-cover"
+      />
+    )}
+    <div className="flex items-center space-x-6 mt-4">
+      <div className="flex items-center space-x-1 text-gray-500">
+        <FaThumbsUp
+          className={`text-lg cursor-pointer transition ${post.votes && post.votes[user.id] === "true"
+            ? "text-blue-500" // Đổi màu xanh khi user đã like
+            : "text-gray-400 hover:text-blue-500"
+            }`}
+          onClick={(e) => {
+            e.stopPropagation(); // Ngăn chuyển hướng khi ấn vào like
+            post.votes && post.votes[user.id] === "true"
+              ? handleVote(post._id, "none")
+              : handleVote(post._id, "true")
+          }}
+        />
+        <span className="text-sm">
+          {Object.values(post?.votes).filter((vote) => vote === "true").length}
+        </span>
+      </div>
+
+      {/* Nút Dislike */}
+      <div className="flex items-center space-x-1 text-gray-500">
+        <FaThumbsDown
+          className={`text-lg cursor-pointer transition ${post.votes && post.votes[user.id] === "false"
+            ? "text-red-500" // Đổi màu đỏ khi user đã dislike
+            : "text-gray-400 hover:text-red-500"
+            }`}
+          onClick={(e) => {
+            e.stopPropagation(); // Ngăn chuyển hướng khi ấn vào dislike
+            post.votes && post.votes[user.id] === "false"
+              ? handleVote(post._id, "none")
+              : handleVote(post._id, "false")
+          }}
+        />
+        <span className="text-sm">
+          {Object.values(post?.votes || {}).filter((vote) => vote === "false").length}
+        </span>
+      </div>
+    </div>
+  </div>
+))}
+
+
+
           </div>
           <ManageCommunity
             showModal={showModal}

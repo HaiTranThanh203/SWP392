@@ -20,29 +20,23 @@ const CreatePost = () => {
   const userId = user?.id || '';
 
   console.log("📌 Retrieved userId:", userId);
-
   useEffect(() => {
     if (!userId) {
       console.error("❌ userId is missing! API request not sent.");
       return;
     }
 
-    const apiUrl = `http://localhost:9999/api/v1/communities/get-user/${userId}`;
-    console.log("📌 Fetching communities from:", apiUrl);
-
-    axios.get(apiUrl)
-      .then(response => {
-        console.log("✅ API Response:", response.data);
-        if (response.data && response.data.success) {
-          setCommunities(response.data.data || []);
-        } else {
-          console.warn("⚠️ No communities found.");
-          setCommunities([]);
-        }
+    // Gọi API lấy các cộng đồng mà người dùng tham gia
+    axios
+      .get(`http://localhost:9999/api/v1/communities/getcommunity/${userId}`)
+      .then((response) => {
+        console.log("✅ API Response:", response.data);  // Log API response để kiểm tra
+        setCommunities(response.data.data || []);
+        
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("🚨 Error fetching user communities:", error.response?.data || error);
-        setCommunities([]);
+        setCommunities([]);  // Gán lại mảng rỗng trong trường hợp lỗi
       });
   }, [userId]);
 
@@ -63,35 +57,35 @@ const CreatePost = () => {
     setLoading(true);
     setError('');
     setSuccess('');
-  
+
     if (!community || !title.trim() || !description.trim()) {
       setError('⚠ Please select a community and fill in all required fields.');
       setLoading(false);
       return;
     }
-  
+
     try {
       let imageUrl = '';
-  
+
       if (image) {
         console.log("📸 Uploading file:", image);
         imageUrl = await uploadImageToSupabase(image);
         console.log("✅ Uploaded Image URL:", imageUrl);
       }
-  
+
       const postData = {
         userId,
         communityId: community,
         title,
         content: description,
-        media: imageUrl ? [imageUrl] : [], 
+        media: imageUrl ? [imageUrl] : [],
       };
-  
+
       console.log("📌 Sending Post Data:", postData);
-  
+
       const token = localStorage.getItem("token") || "";
-      
-  
+
+
       const postRes = await axios.post(
         'http://localhost:9999/api/v1/posts/create',
         postData,
@@ -102,12 +96,12 @@ const CreatePost = () => {
           }
         }
       );
-  
+
       console.log("✅ Full API Response:", postRes); // ✅ Thêm log toàn bộ phản hồi
-  
+
       if (postRes && postRes.data) {  // ✅ Kiểm tra xem postRes.data có tồn tại không
         let idCommunity = community
-  
+
         if (postRes.status === 201) {
           setSuccess('🎉 Post created successfully!');
           setCommunity('');
@@ -123,10 +117,10 @@ const CreatePost = () => {
         console.error("🚨 API Response missing data:", postRes);
         setError('❌ Unexpected response from the server.');
       }
-  
+
     } catch (error) {
       console.error("❌ Error submitting post:", error.response || error);
-  
+
       if (error.response) {
         console.log("🚨 Server Response Error:", error.response.data);
         setError(`🚨 Error: ${error.response.data.message || "Server error"}`);
@@ -137,9 +131,9 @@ const CreatePost = () => {
       setLoading(false);
     }
   };
-  
-  
-  
+
+
+
 
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
@@ -160,14 +154,19 @@ const CreatePost = () => {
           >
             <option value="">-- Select Community --</option>
             {communities.length > 0 ? (
-              communities?.filter(a => a != null ).map((comm) => (
-                <option key={comm?._id} value={comm?._id}>{comm?.name}</option>
+              communities.map((comm) => (
+                <option key={comm._id} value={comm._id}>{comm.name}</option>  // Sử dụng đúng trường name và _id
               ))
             ) : (
               <option value="" disabled>No communities joined</option>
             )}
           </select>
+
+
         </div>
+
+
+
 
         {/* Title */}
         <div className="mb-4">
@@ -224,5 +223,7 @@ const CreatePost = () => {
     </div>
   );
 };
+
+
 
 export default CreatePost;
