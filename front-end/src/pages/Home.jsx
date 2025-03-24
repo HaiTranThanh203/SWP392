@@ -190,7 +190,7 @@ export default function Home() {
                 <img
                   src={post.media[0]}
                   alt="Post Media"
-                  className="mt-4 w-full h-64 object-cover"
+                  className="mt-4 w-50 h-64 object-cover"
                 />
               )}
               {post.media.length == 0 && (

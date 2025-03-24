@@ -334,7 +334,7 @@ const PostDetail = () => {
                     key={index}
                     src={imageUrl}
                     alt={`Post Image ${index + 1}`}
-                    className="mt-2 w-full h-auto rounded-lg shadow-md"
+                    className="mt-2 w-100 h-auto rounded-lg shadow-md"
                   />
                 ))}
               </div>
