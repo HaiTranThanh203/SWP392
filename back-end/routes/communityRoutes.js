@@ -12,6 +12,7 @@ router.route("/get-post/:id").get(communityController.getPostInCommunity);
 router.get("/search", communityController.searchCommunities); // Tìm kiếm community
 router.get("/get-user/:id", communityController.getUserInCommunity);
 router.get("/:id", communityController.getCommunityById);
+router.get("/getcommunity/:userId", communityController.getCommunityByUserId);
 
 
 

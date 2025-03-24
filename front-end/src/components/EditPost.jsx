@@ -106,7 +106,7 @@ const EditPost = () => {
 
       if (response.status === 200) {
         setSuccess("✅ Post updated successfully!");
-        setTimeout(() => navigate(`/post/${postId}`), 1500);
+        setTimeout(() => navigate(`/postdetail/${postId}`), 1500);
       } else {
         setError("❌ Failed to update post.");
       }
@@ -125,26 +125,7 @@ const EditPost = () => {
       {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
 
       <form onSubmit={handlePostUpdate}>
-        {/* Community Dropdown */}
-        <div className="mb-4">
-          <label htmlFor="community" className="block text-sm text-gray-600 mb-2">Choose your community:</label>
-          <select
-            id="community"
-            value={community}
-            onChange={(e) => setCommunity(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
-            <option value="">-- Select Community --</option>
-            {communities.length > 0 ? (
-              communities.map((comm) => (
-                <option key={comm._id} value={comm._id}>{comm.name}</option>
-              ))
-            ) : (
-              <option value="" disabled>No communities joined</option>
-            )}
-          </select>
-        </div>
-
+        
         {/* Title Input */}
         <div className="mb-4">
           <label htmlFor="title" className="block text-sm text-gray-600 mb-2">Title:</label>

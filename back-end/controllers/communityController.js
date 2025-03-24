@@ -179,3 +179,22 @@ exports.deleteUserFromCommunity = async (req, res, next) => {
     next(error);
   }
 };
+exports.getCommunityByUserId = catchAsync(async (req, res, next) => {
+  const userId = req.params.userId;
+
+  // Tìm các community mà người dùng này đã tham gia
+  const communities = await Subscription.find({ userId })
+    .populate("communityId", "name logo description") // Thêm dữ liệu cộng đồng vào kết quả
+    .exec();
+
+  if (!communities || communities.length === 0) {
+    return next(new AppError("User is not part of any community.", 404));
+  }
+
+  // Trả về dữ liệu cộng đồng người dùng tham gia
+  res.status(200).json({
+    status: "success",
+    results: communities.length,
+    data: communities.map(sub => sub.communityId), // Chỉ trả về thông tin cộng đồng
+  });
+});
