@@ -183,21 +183,36 @@ const CreatePost = () => {
         </div>
 
         {/* Image Upload */}
-        <div className="mb-4">
-          <label htmlFor="image" className="block text-sm text-gray-600 mb-2">Upload Image:</label>
-          <input
-            id="image"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="hidden"
-          />
-          <label htmlFor="image" className="cursor-pointer flex items-center">
-            <span className="mr-2">Upload Image</span>
-            <FaUpload className="text-gray-600" />
-          </label>
-          {previewImage && <img src={previewImage} alt="Preview" className="mt-4 w-32 h-32 object-cover rounded-md" />}
-        </div>
+<div className="mb-4">
+  <label htmlFor="image" className="block text-sm text-gray-600 mb-2">Upload Image:</label>
+  <input
+    id="image"
+    type="file"
+    accept="image/*"
+    onChange={handleImageChange}
+    className="hidden"
+  />
+  <label htmlFor="image" className="cursor-pointer flex items-center">
+    <span className="mr-2">Upload Image</span>
+    <FaUpload className="text-gray-600" />
+  </label>
+  {previewImage && (
+    <div className="mt-4 flex items-center">
+      <img src={previewImage} alt="Preview" className="w-32 h-32 object-cover rounded-md" />
+      <button
+        type="button"
+        onClick={() => {
+          setPreviewImage(null);
+          setImage(null); // Xóa ảnh đã tải lên
+        }}
+        className="ml-4 text-red-500 text-sm"
+      >
+        Remove
+      </button>
+    </div>
+  )}
+</div>
+
 
         {/* Description */}
         <div className="mb-6">

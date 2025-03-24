@@ -41,37 +41,38 @@ const ReportPost = () => {
   }, [postId, token]);
 
   // ✅ Gửi báo cáo lên server
-  const handleReportPost = async () => {
-    if (!selectedReason) {
-      toast.error("⚠ Please select a reason for reporting!");
-      return;
-    }
+const handleReportPost = async () => {
+  if (selectedReason.length === 0) {
+    toast.error("⚠ Please select at least one reason for reporting!");
+    return;
+  }
 
-    try {
-      const reportData = {
-        userId: userId,
-        reportEntityId: postId, // ✅ Gửi postId vào reportEntityId
-        entityType: "Post",
-        description: selectedReason,
-        status: "Waiting",
-      };
+  try {
+    const reportData = {
+      userId: userId,
+      reportEntityId: postId, // ✅ Gửi postId vào reportEntityId
+      entityType: "Post",
+      description: selectedReason.join(", "), // Chuyển mảng lý do thành chuỗi
+      status: "Waiting",
+    };
 
-      console.log("📌 Sending report data:", reportData);
+    console.log("📌 Sending report data:", reportData);
 
-      await axios.post("http://localhost:9999/api/v1/reports/", reportData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    await axios.post("http://localhost:9999/api/v1/reports/", reportData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      toast.success("✅ Your report has been sent to admin!");
-      navigate("/");
-    } catch (error) {
-      console.error("❌ Error submitting report:", error.response?.data || error);
-      toast.error("🚨 Failed to submit report. Please try again.");
-    }
-  };
+    toast.success("✅ Your report has been sent to admin!");
+    navigate("/");
+  } catch (error) {
+    console.error("❌ Error submitting report:", error.response?.data || error);
+    toast.error("🚨 Failed to submit report. Please try again.");
+  }
+};
+
 
   if (loading) return <p className="text-center text-gray-500">Loading post...</p>;
   if (!post) return <p className="text-center text-red-500">🚨 Post not found!</p>;
@@ -107,30 +108,37 @@ const ReportPost = () => {
           </p>
 
           {/* ✅ Danh sách lý do báo cáo */}
-          <div className="mt-4 space-x-2">
-            {[
-              "Threatening violence",
-              "Sharing personal information",
-              "Copyright violation",
-              "Impersonation",
-              "Spam",
-              "Minor abuse or sexualization",
-              "Hate",
-              "Non-consensual intimate media",
-            ].map((reason, index) => (
-              <button
-                key={index}
-                className={`py-1 px-4 text-sm rounded-md border border-gray-300 ${
-                  selectedReason === reason
-                    ? "bg-blue-500 text-white"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-                onClick={() => setSelectedReason(reason)}
-              >
-                {reason}
-              </button>
-            ))}
-          </div>
+<div className="mt-4 space-y-2">
+  {[
+    "Threatening violence",
+    "Sharing personal information",
+    "Copyright violation",
+    "Impersonation",
+    "Spam",
+    "Minor abuse or sexualization",
+    "Hate",
+    "Non-consensual intimate media",
+  ].map((reason, index) => (
+    <div key={index} className="flex items-center space-x-2">
+      <input
+        type="checkbox"
+        id={reason}
+        value={reason}
+        checked={selectedReason.includes(reason)}
+        onChange={(e) => {
+          if (e.target.checked) {
+            setSelectedReason((prev) => [...prev, reason]); // Thêm lý do vào mảng
+          } else {
+            setSelectedReason((prev) => prev.filter((item) => item !== reason)); // Xóa lý do khỏi mảng
+          }
+        }}
+        className="h-4 w-4 border-gray-300 rounded"
+      />
+      <label htmlFor={reason} className="text-sm text-gray-700">{reason}</label>
+    </div>
+  ))}
+</div>
+
 
           {/* ✅ Nút gửi báo cáo */}
           <button

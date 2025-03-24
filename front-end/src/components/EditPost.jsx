@@ -125,7 +125,7 @@ const EditPost = () => {
       {success && <p className="text-green-500 text-sm mb-4">{success}</p>}
 
       <form onSubmit={handlePostUpdate}>
-        
+
         {/* Title Input */}
         <div className="mb-4">
           <label htmlFor="title" className="block text-sm text-gray-600 mb-2">Title:</label>
@@ -148,14 +148,27 @@ const EditPost = () => {
               Edit Images
             </label>
             {previewImage && (
-              <img
-                src={previewImage}
-                alt="Uploaded"
-                className="ml-4 w-16 h-16 object-cover rounded-md"
-              />
+              <div className="flex items-center">
+                <img
+                  src={previewImage}
+                  alt="Uploaded"
+                  className="ml-4 w-16 h-16 object-cover rounded-md"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setPreviewImage(null);
+                    setImage(null); // Xóa ảnh đã tải lên
+                  }}
+                  className="ml-2 text-red-500 text-sm"
+                >
+                  Remove
+                </button>
+              </div>
             )}
           </div>
         </div>
+
 
         {/* Description Textarea */}
         <div className="mb-6">
