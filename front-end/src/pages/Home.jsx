@@ -151,28 +151,39 @@ export default function Home() {
                 </p>
               </div>
               <div className="ml-auto relative">
-                <FaEllipsisV
-                  className="text-gray-600 cursor-pointer rotate-90"
-                  onClick={() => toggleDropdown(index)} // dùng index
-                />
-                {dropdownOpen === index && ( // so sánh với index
-                  <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
-                    <ul>
-                      <li
-                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                        onClick={() => handleSave(post?._id)}
-                      >
-                        Save post
-                      </li>
-                      <li
-                        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                        onClick={() => navigate(`/reportpost/${post._id}`)}
-                      >
-                        Report post
-                      </li>
-                    </ul>
-                  </div>
-                )}
+              <FaEllipsisV
+  className="text-gray-600 cursor-pointer rotate-90"
+  onClick={(e) => {
+    e.stopPropagation(); // Ngừng sự kiện chuyển hướng khi nhấn vào ba chấm
+    toggleDropdown(index); // Mở/đóng dropdown
+  }}
+/>
+
+{dropdownOpen === index && ( 
+  <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-md w-40 text-sm text-gray-700">
+    <ul>
+      <li
+        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+        onClick={(e) => {
+          e.stopPropagation(); // Ngừng sự kiện chuyển hướng khi nhấn vào Save post
+          handleSave(post?._id);
+        }}
+      >
+        Save post
+      </li>
+      <li
+        className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+        onClick={(e) => {
+          e.stopPropagation(); // Ngừng sự kiện chuyển hướng khi nhấn vào Report post
+          navigate(`/reportpost/${post._id}`);
+        }}
+      >
+        Report post
+      </li>
+    </ul>
+  </div>
+)}
+
               </div>
             </div>
           
