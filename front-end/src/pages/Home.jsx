@@ -122,7 +122,7 @@ export default function Home() {
           >
             <div className="flex items-center space-x-2">
               <img
-                src={avatar2}
+                src={post.userId.avatar || avatar2}
                 alt="User Avatar"
                 className="h-12 w-12 rounded-full"
               />
@@ -185,35 +185,34 @@ export default function Home() {
 )}
 
               </div>
-              <p
-                className="mt-2 text-gray-700"
-                onClick={() => navigate(`/postdetail/${post._id}`)} // Thêm sự kiện điều hướng
-              >
-                {post.content.length > 200
-                  ? `${post.content.substring(0, 200)}...`
-                  : post.content}
-              </p>
-              {post.media.length > 0 && (
-                <img
-                  src={post.media[0]}
-                  alt="Post Media"
-                  className="mt-4 w-50 h-64 object-cover"
-                />
-              )}
-              {post.media.length == 0 && (
-                <img
-                  src={bag}
-                  alt="Bag"
-                  className="mt-4 w-32 h-32 object-cover"
-                />
-              )}
-              <div className="flex items-center space-x-6 mt-4">
-                <div className="flex items-center space-x-1 text-gray-500">
-                  <FaThumbsUp
-                    className={`text-lg cursor-pointer transition ${
-                      post.votes && post.votes[user.id] === "true"
-                        ? "text-blue-500" // Đổi màu xanh khi user đã like
-                        : "text-gray-400 hover:text-blue-500"
+            </div>
+          
+            <p className="mt-2 text-gray-700">
+              {post.content.length > 200
+                ? `${post.content.substring(0, 200)}...`
+                : post.content}
+            </p>
+            {post.media.length > 0 && (
+              <img
+                src={post.media[0]}
+                alt="Post Media"
+                className="mt-4 w-64 h-64 object-cover"
+              />
+            )}
+            {post.media.length == 0 && (
+              <img
+                src={bag}
+                alt="Bag"
+                className="mt-4 w-32 h-32 object-cover"
+              />
+            )}
+            <div className="flex items-center space-x-6 mt-4">
+              {/* Like Button */}
+              <div className="flex items-center space-x-1 text-gray-500">
+                <FaThumbsUp
+                  className={`text-lg cursor-pointer transition ${post.votes && post.votes[user.id] === "true"
+                    ? "text-blue-500" // Đổi màu xanh khi user đã like
+                    : "text-gray-400 hover:text-blue-500"
                     }`}
                   onClick={(e) => {
                     e.stopPropagation(); // Chặn sự kiện chuyển hướng khi click like

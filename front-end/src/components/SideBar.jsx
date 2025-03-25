@@ -8,8 +8,7 @@ import {
   FaQuestionCircle,
   FaBook,
   FaCaretDown,
-
-  FaUserFriends
+  FaUserFriends,
 } from "react-icons/fa"; // Import các icon
 
 import defaultLogo from "../assets/images/logo.png";
@@ -29,26 +28,54 @@ export default function Sidebar() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const config = {
-          method: "get",
-          maxBodyLength: Infinity,
-          url: `http://localhost:9999/api/v1/users/infor/${userId}`,
-          headers: {
-            Authorization:
-              "Bearer " + JSON.parse(localStorage.getItem("user")).token,
-          },
-        };
+        const token = JSON.parse(localStorage.getItem("user")).token;
 
-        const response = await axios.request(config);
-        setUser(response.data.data); // Lưu thông tin user
-        setCommunities(response.data.data.moderatorCommunities || []); // Lưu danh sách communities
+        // Lấy thông tin user
+        const userResponse = await axios.get(
+          `http://localhost:9999/api/v1/users/infor/${userId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setUser(userResponse.data.data);
+
+        // Lấy các cộng đồng user làm moderator
+        const moderatorCommunities = (
+          userResponse.data.data.moderatorCommunities || []
+        ).map((c) => ({
+          ...c,
+          role: "Moderator",
+        }));
+
+        // Lấy các cộng đồng user tham gia
+        const memberCommunitiesResponse = await axios.get(
+          `http://localhost:9999/api/v1/communities/getcommunity/${userId}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const memberCommunities = (
+          memberCommunitiesResponse.data.data || []
+        ).map((c) => ({
+          ...c,
+          role: "Member",
+        }));
+
+        // Kết hợp hai loại communities
+        const combinedCommunities = [
+          ...moderatorCommunities,
+          ...memberCommunities,
+        ];
+        setCommunities(combinedCommunities);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error(
+          "🚨 Error fetching user data or communities:",
+          error.response?.data || error
+        );
+        setCommunities([]);
       }
     };
 
     fetchUserData();
-  }, []);
+  }, [userId]);
 
   return (
     <aside className="bg-white text-gray-800 w-64 p-6 space-y-8 shadow-md">
@@ -114,20 +141,26 @@ export default function Sidebar() {
             {/* Hiển thị danh sách cộng đồng */}
             {communities.length > 0 ? (
               communities.map((community, index) => (
-                <li key={index} className="flex items-center space-x-4">
-                  {/* Hiển thị ảnh của cộng đồng */}
+                <li
+                  key={index}
+                  className="flex items-center justify-between space-x-2"
+                >
                   <img
-                    src={community.logo || defaultLogo} // Đường dẫn ảnh của cộng đồng
+                    src={community.logo || defaultLogo}
                     alt={community.name}
-                    className="w-10 h-10 rounded-full object-cover"
+                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
                   />
-                  {/* Hiển thị tên của cộng đồng */}
                   <a
                     href={`/viewcommunity/${community._id}`}
-                    className="text-lg hover:text-indigo-400"
+                    className="text-lg hover:text-indigo-400 flex-1 truncate"
                   >
                     {community.name}
                   </a>
+                  {community.role === "Moderator" && (
+                    <span className="bg-green-100 text-green-600 text-xs font-semibold px-1 py-0.5 rounded whitespace-nowrap">
+                      Moderator
+                    </span>
+                  )}
                 </li>
               ))
             ) : (

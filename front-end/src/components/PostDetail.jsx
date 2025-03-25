@@ -432,6 +432,7 @@ const totalComments = countComments(comments);  // Get total comments count incl
           <div className="bg-white p-6 rounded-lg shadow-md mt-6">
             <form onSubmit={handleAddComment} className="flex items-center space-x-2">
               <img src={user.avatar || avatarDefault} alt="User Avatar" className="h-8 w-8 rounded-full" />
+          
               <input
                 type="text"
                 placeholder="Add a comment..."
