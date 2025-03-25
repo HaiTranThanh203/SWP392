@@ -93,8 +93,8 @@ function Profile() {
     setErrorMessage("");
     setSuccessMessage("");
 
-    if (newPassword.length < 6) {
-      setErrorMessage("New password must be at least 6 characters.");
+    if (newPassword.length < 8) {
+      setErrorMessage("New password must be at least 8 characters.");
       return;
     }
     try {
@@ -108,13 +108,13 @@ function Profile() {
       });
       const data = await res.json();
       if (data.status === "success") {
-        alert("Mật khẩu đã thay đổi, bạn sẽ được chuyển đến trang đăng nhập sau 3 giây!");
+        alert("Password changed, you will be redirected to login page in 3 seconds!");
         localStorage.removeItem("token");
         setTimeout(() => {
           window.location.href = "/login";
         }, 3000);
       } else {
-        setErrorMessage(data.message || "Đổi mật khẩu thất bại.");
+        setErrorMessage(data.message || "Password change failed.");
       }
     } catch (error) {
       console.error("Lỗi khi gọi API đổi mật khẩu:", error);
@@ -132,15 +132,15 @@ function Profile() {
   const handleUploadAvatar = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-  
+
     setUploadAvatar(URL.createObjectURL(file));
-  
+
     const formData = new FormData();
     formData.append("avatar", file);
-  
+
     try {
       const token = localStorage.getItem("token");
-  
+
       const response = await fetch("http://localhost:9999/api/v1/users/update-avatar", {
         method: "PUT",
         headers: {
@@ -148,7 +148,7 @@ function Profile() {
         },
         body: formData,
       });
-  
+
       const data = await response.json();
       if (data.status === "success") {
         console.log("Cập nhật avatar thành công:", data.avatar);
@@ -160,8 +160,8 @@ function Profile() {
       console.error("Lỗi khi gửi yêu cầu:", error);
     }
   };
-  
-  
+
+
 
   const updateProfile = async (updateData) => {
     try {
@@ -383,13 +383,33 @@ function Profile() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 flex justify-center items-center">
-          <div className="bg-white rounded-lg p-10 w-1/5 max-h-screen overflow-y-auto z-5 border-orange-400 border-2">
-            <h2 className="text-2xl font-semibold mb-4 text-center text-orange-400 ">Change Password</h2>
-            {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>}
-            {successMessage && <p className="text-green-500 mb-2">{successMessage}</p>}
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+        <div
+          className="fixed inset-0 flex justify-center items-center transition-opacity duration-300"
+          style={{
+            backgroundImage: `url('https://example.com/your-image.jpg')`, // Thay bằng URL hình ảnh của bạn
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: 'rgba(0, 0, 0, 0.5)', // Lớp phủ mờ tùy chọn
+            backdropFilter: 'blur(5px)', // Hiệu ứng làm mờ nền (tùy chọn)
+          }}
+        >
+          <div className="bg-white rounded-xl p-10 w-1/5 max-h-[90vh] overflow-y-auto z-50 border-orange-400 border-2 shadow-2xl transform transition-all duration-300 scale-100 hover:scale-[1.02]">
+            <h2 className="text-2xl font-semibold mb-6 text-center bg-gradient-to-r from-orange-400 to-orange-600 bg-clip-text text-transparent">
+              Change Password
+            </h2>
+            {errorMessage && (
+              <p className="text-red-500 mb-4 p-2 bg-red-50 rounded-md animate-pulse text-center">
+                {errorMessage}
+              </p>
+            )}
+            {successMessage && (
+              <p className="text-green-500 mb-4 p-2 bg-green-50 rounded-md animate-bounce text-center">
+                {successMessage}
+              </p>
+            )}
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm font-bold mb-2 transition-colors duration-200 hover:text-orange-400">
                 Old Password:
               </label>
               <input
@@ -397,29 +417,29 @@ function Profile() {
                 value={oldPassword}
                 autoComplete="new-password"
                 onChange={(e) => setOldPassword(e.target.value)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all duration-200 hover:border-orange-300"
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
+            <div className="mb-6">
+              <label className="block text-gray-700 text-sm font-bold mb-2 transition-colors duration-200 hover:text-orange-400">
                 New Password:
               </label>
               <input
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent transition-all duration-200 hover:border-orange-300"
               />
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-3">
               <button
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-2"
+                className="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 transform hover:-translate-y-1 hover:shadow-md"
                 onClick={handleCloseModal}
               >
                 Cancel
               </button>
               <button
-                className="bg-orange-400 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded"
+                className="bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-all duration-200 transform hover:-translate-y-1 hover:shadow-md"
                 onClick={handleChangePassword}
               >
                 Save
