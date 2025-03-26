@@ -1,0 +1,697 @@
+[{
+  "_id": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "moderators": [
+    {
+      "$oid": "67138908290ef9092c172bbf"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "public",
+  "memberCount": 8,
+  "postCount": 5,
+  "isActive": true,
+  "name": "public Community",
+  "description": "description",
+  "createdBy": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityRule": "rule",
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2024-10-27T07:13:42.761Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T03:50:18.742Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "moderators": [
+    {
+      "$oid": "67138908290ef9092c172bbf"
+    }
+  ],
+  "logo": "https://i1-dulich.vnecdn.net/2021/07/16/1-1626437591.jpg?w=1200&h=0&q=100&dpr=2&fit=crop&s=6lpdhgxgTYcbVie7Z_Hm0g",
+  "background": "hgf",
+  "privacyType": "restricted",
+  "memberCount": 4,
+  "postCount": 3,
+  "isActive": true,
+  "name": "newName12",
+  "description": "New des12",
+  "createdBy": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityRule": "New Rule12.new Rule",
+  "joinRequests": [
+    {
+      "access": false,
+      "_id": {
+        "$oid": "672b3e82404c7b313450e240"
+      },
+      "userId": {
+        "$oid": "672aeccf5dd7845ac0cdf308"
+      },
+      "reason": "fgfdsf"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-10-27T14:15:43.134Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:17:55.248Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672aed285dd7845ac0cdf313"
+  },
+  "moderators": [
+    {
+      "$oid": "672aeccf5dd7845ac0cdf308"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 1,
+  "isActive": true,
+  "name": "dfd",
+  "description": "dfdsf",
+  "createdBy": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "communityRule": "fdsfds.dfdsf.dfdsf",
+  "joinRequests": [
+    {
+      "access": false,
+      "_id": {
+        "$oid": "672b969f6acacf22b8b4fa7a"
+      },
+      "userId": {
+        "$oid": "672b88b843194d18dc17254e"
+      },
+      "reason": "fdsf"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-11-06T04:14:32.147Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T16:17:35.849Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672aedd95dd7845ac0cdf32d"
+  },
+  "moderators": [
+    {
+      "$oid": "672aeccf5dd7845ac0cdf308"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 0,
+  "isActive": true,
+  "name": "r",
+  "description": "tr",
+  "createdBy": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "communityRule": "ret",
+  "joinRequests": [
+    {
+      "access": false,
+      "_id": {
+        "$oid": "672b970b6acacf22b8b4fa85"
+      },
+      "userId": {
+        "$oid": "672b88b843194d18dc17254e"
+      },
+      "reason": "fdsf"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-11-06T04:17:29.065Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T16:19:23.429Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672aee845dd7845ac0cdf33f"
+  },
+  "moderators": [
+    {
+      "$oid": "672aeccf5dd7845ac0cdf308"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 1,
+  "isActive": true,
+  "name": "df",
+  "description": "fdsfdfsdf",
+  "createdBy": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "communityRule": "fdsfdsf",
+  "joinRequests": [
+    {
+      "access": false,
+      "_id": {
+        "$oid": "672b96086acacf22b8b4fa6a"
+      },
+      "userId": {
+        "$oid": "672b88b843194d18dc17254e"
+      },
+      "reason": ""
+    },
+    {
+      "access": false,
+      "_id": {
+        "$oid": "672b96916acacf22b8b4fa6c"
+      },
+      "userId": {
+        "$oid": "672b88b843194d18dc17254e"
+      },
+      "reason": ""
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-11-06T04:20:20.232Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T16:17:21.410Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672aeed75dd7845ac0cdf353"
+  },
+  "moderators": [
+    {
+      "$oid": "672aeccf5dd7845ac0cdf308"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 1,
+  "isActive": true,
+  "name": "dsd",
+  "description": "sdds",
+  "createdBy": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "communityRule": "dsd",
+  "joinRequests": [
+    {
+      "access": false,
+      "_id": {
+        "$oid": "672b97f06acacf22b8b4fab8"
+      },
+      "userId": {
+        "$oid": "672b88b843194d18dc17254e"
+      },
+      "reason": "gfg"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-11-06T04:21:43.186Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T16:23:12.569Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b7a5a404c7b313450e2e9"
+  },
+  "moderators": [
+    {
+      "$oid": "672b7a05404c7b313450e2de"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "public",
+  "memberCount": 1,
+  "postCount": 0,
+  "isActive": true,
+  "name": "fds",
+  "description": "fdsf",
+  "createdBy": {
+    "$oid": "672b7a05404c7b313450e2de"
+  },
+  "communityRule": "fdsf",
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2024-11-06T14:16:58.412Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T14:16:58.412Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b7a78404c7b313450e304"
+  },
+  "moderators": [
+    {
+      "$oid": "672b7a05404c7b313450e2de"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "public",
+  "memberCount": 1,
+  "postCount": 0,
+  "isActive": true,
+  "name": "123",
+  "description": "dsad",
+  "createdBy": {
+    "$oid": "672b7a05404c7b313450e2de"
+  },
+  "communityRule": "dsad",
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2024-11-06T14:17:28.005Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T14:17:28.005Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b7fc0404c7b313450e323"
+  },
+  "moderators": [
+    {
+      "$oid": "672b7a05404c7b313450e2de"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 0,
+  "isActive": true,
+  "name": "1234",
+  "description": "23321",
+  "createdBy": {
+    "$oid": "672b7a05404c7b313450e2de"
+  },
+  "communityRule": "",
+  "joinRequests": [
+    {
+      "access": false,
+      "_id": {
+        "$oid": "672b97ae6acacf22b8b4faa1"
+      },
+      "userId": {
+        "$oid": "672b88b843194d18dc17254e"
+      },
+      "reason": "fdf"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-11-06T14:40:00.643Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T16:22:06.164Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b859943194d18dc172505"
+  },
+  "moderators": [
+    {
+      "$oid": "672b7a05404c7b313450e2de"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 0,
+  "isActive": true,
+  "name": "fd12",
+  "description": "fdf",
+  "createdBy": {
+    "$oid": "672b7a05404c7b313450e2de"
+  },
+  "communityRule": "fdsf",
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2024-11-06T15:04:57.600Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T15:04:57.600Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b883143194d18dc172538"
+  },
+  "moderators": [
+    {
+      "$oid": "67138908290ef9092c172bbf"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 0,
+  "isActive": true,
+  "name": "fd",
+  "description": "fd",
+  "createdBy": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityRule": "fd",
+  "joinRequests": [
+    {
+      "access": false,
+      "_id": {
+        "$oid": "672b97286acacf22b8b4fa93"
+      },
+      "userId": {
+        "$oid": "672b88b843194d18dc17254e"
+      },
+      "reason": "hj"
+    }
+  ],
+  "createdAt": {
+    "$date": "2024-11-06T15:16:01.366Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T16:19:52.726Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b8bb56acacf22b8b4fa48"
+  },
+  "moderators": [
+    {
+      "$oid": "672b88b843194d18dc17254e"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 0,
+  "isActive": true,
+  "name": "fgf",
+  "description": "gfdgfd",
+  "createdBy": {
+    "$oid": "672b88b843194d18dc17254e"
+  },
+  "communityRule": "",
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2024-11-06T15:31:01.423Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T16:31:26.847Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677c840254921a5fe8b9e95e"
+  },
+  "moderators": [
+    {
+      "$oid": "67138908290ef9092c172bbf"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 1,
+  "isActive": true,
+  "name": "s",
+  "description": "aaa",
+  "createdBy": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityRule": "sas",
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2025-01-07T01:31:46.238Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-07T01:32:27.496Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67b5d7254e8273c998def0f1"
+  },
+  "name": "creatdse",
+  "description": "descriptionds",
+  "createdBy": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "moderators": [
+    {
+      "$oid": "67138908290ef9092c172bbf"
+    }
+  ],
+  "logo": "default.jpg",
+  "background": "default.jpg",
+  "privacyType": "public",
+  "memberCount": 2,
+  "postCount": 0,
+  "isActive": true,
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2025-02-19T13:05:41.765Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-20T03:18:47.459Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d7c8eff5351945f3a0a5fe"
+  },
+  "name": "Ki 8 - WDP301",
+  "description": "WDP301 là một môn làm việc nhóm coding by nodejs using expressjs for back-end and react js for fornt end . This class NJ1023",
+  "createdBy": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "moderators": [
+    {
+      "$oid": "67d7c335f5351945f3a0a4a4"
+    }
+  ],
+  "logo": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742265289587.jpg",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 8,
+  "communityRule": "Không share code.\nKhông hỏi bài bạn.\nKhông nghỉ họi quá nhiều.",
+  "isActive": true,
+  "joinRequests": [
+    {
+      "userId": {
+        "$oid": "67138908290ef9092c172bbf"
+      },
+      "reason": "i want to join class",
+      "access": false,
+      "_id": {
+        "$oid": "67d8d2eaf94a25fd55e104cf"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-17T07:02:07.324Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:34:53.771Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8cb91f94a25fd55e1028d"
+  },
+  "name": "Community PRM392",
+  "description": "Class PRM 392 ",
+  "createdBy": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "moderators": [
+    {
+      "$oid": "67138908290ef9092c172bbf"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "private",
+  "memberCount": 1,
+  "postCount": 0,
+  "communityRule": "Using Android Studio .\nUsing Node jS.",
+  "isActive": true,
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2025-03-18T01:25:37.023Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:25:37.023Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8ce79f94a25fd55e1037b"
+  },
+  "name": "Funny Game",
+  "description": "Funny Game is the community that all student want to play back-jack.",
+  "createdBy": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "moderators": [
+    {
+      "$oid": "67138908290ef9092c172bbf"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "public",
+  "memberCount": 2,
+  "postCount": 5,
+  "communityRule": "Do not cheat.\nDo not go away.\nFriendly.\nChatting.",
+  "isActive": true,
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2025-03-18T01:38:01.563Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:24:59.572Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8dab26ef8c892c6beb9e5"
+  },
+  "name": "Comunity Haitran 123",
+  "description": "test communutiy",
+  "createdBy": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "moderators": [
+    {
+      "$oid": "67d7c335f5351945f3a0a4a4"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "public",
+  "memberCount": 3,
+  "postCount": 3,
+  "communityRule": "no rule 1.\nno rule 2.\nno rule 3.",
+  "isActive": true,
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2025-03-18T02:30:10.247Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T01:48:15.657Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db920ad9183f5fd251493a"
+  },
+  "name": "Private Community",
+  "description": "Private Community",
+  "createdBy": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "moderators": [
+    {
+      "$oid": "67d7c335f5351945f3a0a4a4"
+    }
+  ],
+  "logo": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742443949186.png",
+  "background": "",
+  "privacyType": "private",
+  "memberCount": 1,
+  "postCount": 1,
+  "communityRule": "No share over weight",
+  "isActive": true,
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2025-03-20T03:56:58.081Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:14:36.378Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e1a2dcd6b3f3e6ce09115a"
+  },
+  "name": "Restrict Community ",
+  "description": "Community restric",
+  "createdBy": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "moderators": [
+    {
+      "$oid": "672771d791280123a871dabe"
+    }
+  ],
+  "logo": "",
+  "background": "",
+  "privacyType": "restricted",
+  "memberCount": 1,
+  "postCount": 0,
+  "communityRule": "rule 1:1\nrule 2:2\nrule 2:3",
+  "isActive": true,
+  "joinRequests": [],
+  "createdAt": {
+    "$date": "2025-03-24T18:22:20.732Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T18:22:20.732Z"
+  },
+  "__v": 0
+}]

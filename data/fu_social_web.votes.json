@@ -1,0 +1,70 @@
+[{
+  "_id": {
+    "$oid": "67178cf2a48c7d1ff0a884cc"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "voteEntityId": {
+    "$oid": "67138ba0290ef9092c172bc4"
+  },
+  "entityType": "Comment",
+  "isUpVote": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671a22d66b469e1990a8b245"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "voteEntityId": {
+    "$oid": "67138ba0290ef9092c172bc4"
+  },
+  "entityType": "Comment",
+  "isUpVote": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671a27d0a154bd2fbcbe067a"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "voteEntityId": {
+    "$oid": "6715f28b32b1f864b0814cfe"
+  },
+  "entityType": "Comment",
+  "isUpVote": true,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671a2909aae96c3464997ff5"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "voteEntityId": {
+    "$oid": "6715f28b32b1f864b0814cfe"
+  },
+  "entityType": "Comment",
+  "isUpVote": false,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671a2940aae96c3464997ff9"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "voteEntityId": {
+    "$oid": "6715f28b32b1f864b0814cfe"
+  },
+  "entityType": "Comment",
+  "isUpVote": false,
+  "__v": 0
+}]

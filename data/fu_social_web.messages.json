@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "67d8d36df94a25fd55e1053e"
+  },
+  "sender": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "recipient": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "content": "ba3debf0cf8f0b5799be9d7bb8fb927e:b3c88cdbe9e971ab8f4c242a1faf24c2",
+  "isRead": false,
+  "createdAt": {
+    "$date": "2025-03-18T01:59:09.652Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:59:09.652Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d376f94a25fd55e10540"
+  },
+  "sender": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "recipient": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "content": "fb56fe686d5301437078f781d9bb0094:ceac1cd176348232c50832b88a7081788fb923fc0a5fce0bb68a2d0b1737ff31",
+  "isRead": false,
+  "createdAt": {
+    "$date": "2025-03-18T01:59:18.979Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:59:18.979Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db96c9ee6d6c6083f13839"
+  },
+  "sender": {
+    "$oid": "67d8c904f94a25fd55e10084"
+  },
+  "recipient": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "content": "98a746d2e9cae81010ac63b879d6318d:19fbc8930751d44b4159e55a77401569",
+  "isRead": false,
+  "createdAt": {
+    "$date": "2025-03-20T04:17:13.287Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:17:13.287Z"
+  },
+  "__v": 0
+}]

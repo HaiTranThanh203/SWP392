@@ -1,0 +1,1060 @@
+[{
+  "_id": {
+    "$oid": "671de826180594244866bf6b"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-10-27T07:13:42.813Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-27T07:13:42.813Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671df03d8f1eee4f74130854"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-10-27T07:48:13.895Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-27T07:48:13.895Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671df0c9bd94a60b0c016685"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-10-27T07:50:33.469Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-27T07:50:33.469Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671df1f8d2723262d454f639"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-10-27T07:55:36.326Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-27T07:55:36.326Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671df2f674687d48d0bdc4ef"
+  },
+  "userId": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-10-27T07:59:50.403Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-27T07:59:50.403Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671df3d457a9f65fbc118161"
+  },
+  "userId": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-10-27T08:03:32.242Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-27T08:03:32.242Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671e4b0f57a9f65fbc118168"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-10-27T14:15:43.199Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-27T14:15:43.199Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671ef7d257a9f65fbc11816a"
+  },
+  "userId": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-10-28T02:32:50.914Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-28T02:32:50.914Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671ef83a57a9f65fbc11816d"
+  },
+  "userId": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-10-28T02:34:34.080Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-28T02:34:34.080Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672052e791427c53e85b95f4"
+  },
+  "userId": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-10-29T03:13:43.861Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-29T03:13:43.861Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672053286cc46b24447b7aea"
+  },
+  "userId": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-10-29T03:14:48.535Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-29T03:14:48.535Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67273f8b95626a30e07786e9"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "67273f8b95626a30e07786e6"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-03T09:16:59.458Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-03T09:16:59.458Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6727404095626a30e07786f6"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "6727404095626a30e07786f3"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-03T09:20:00.257Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-03T09:20:00.257Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67276a8695626a30e077872d"
+  },
+  "userId": {
+    "$oid": "672769bf95626a30e0778714"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-11-03T12:20:22.105Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-03T12:20:22.105Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6727737291280123a871daf9"
+  },
+  "userId": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-11-03T12:58:26.500Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-03T12:58:26.500Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67277f22f6c3b92bac045062"
+  },
+  "userId": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "createdAt": {
+    "$date": "2024-11-03T13:48:18.645Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-03T13:48:18.645Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67283054f074d2652c8a6f28"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "createdAt": {
+    "$date": "2024-11-04T02:24:20.189Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-04T02:24:20.189Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67284610429ffe5b40c9d096"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672769bf95626a30e0778714"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-11-04T03:57:04.425Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-04T03:57:04.425Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67284610429ffe5b40c9d097"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672769bf95626a30e0778714"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-11-04T03:57:04.426Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-04T03:57:04.426Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67284699de8d425d7c3d1194"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672769bf95626a30e0778714"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "member",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-11-04T03:59:21.782Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-04T03:59:21.782Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67284699de8d425d7c3d1195"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672769bf95626a30e0778714"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "member",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-11-04T03:59:21.785Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-04T03:59:21.785Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67285951de8d425d7c3d11ca"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "67285951de8d425d7c3d11c7"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-04T05:19:13.838Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-04T05:19:13.838Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67286088de8d425d7c3d11ed"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "member",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-11-04T05:50:00.642Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-04T05:50:00.642Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67297e75a2342853a077de8c"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "67297e64a2342853a077de80"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-11-05T02:09:57.303Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T02:09:57.303Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67297effa2342853a077dec3"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "67297ec6a2342853a077dea7"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "member",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-11-05T02:12:15.301Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T02:12:15.301Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67298fc0178f0d6284262524"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "67298ecd178f0d62842624ba"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "member",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-11-05T03:23:44.419Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T03:23:44.419Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6729e00d178f0d6284262698"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "67298ecd178f0d62842624ba"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "createdAt": {
+    "$date": "2024-11-05T09:06:21.916Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T09:06:21.916Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6729e24e178f0d62842626dc"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "6729e1ef178f0d62842626ad"
+  },
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "role": "member",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2024-11-05T09:15:58.495Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T09:15:58.495Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "672aed285dd7845ac0cdf316"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "communityId": {
+    "$oid": "672aed285dd7845ac0cdf313"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T04:14:32.211Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T04:14:32.211Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672aedd95dd7845ac0cdf330"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "communityId": {
+    "$oid": "672aedd95dd7845ac0cdf32d"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T04:17:29.112Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T04:17:29.112Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672aee845dd7845ac0cdf342"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "communityId": {
+    "$oid": "672aee845dd7845ac0cdf33f"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T04:20:20.250Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T04:20:20.250Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672aeed75dd7845ac0cdf356"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "communityId": {
+    "$oid": "672aeed75dd7845ac0cdf353"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T04:21:43.205Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T04:21:43.205Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b7a5a404c7b313450e2ec"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672b7a05404c7b313450e2de"
+  },
+  "communityId": {
+    "$oid": "672b7a5a404c7b313450e2e9"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T14:16:58.418Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T14:16:58.418Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b7a78404c7b313450e307"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672b7a05404c7b313450e2de"
+  },
+  "communityId": {
+    "$oid": "672b7a78404c7b313450e304"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T14:17:28.012Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T14:17:28.012Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b7fc0404c7b313450e326"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672b7a05404c7b313450e2de"
+  },
+  "communityId": {
+    "$oid": "672b7fc0404c7b313450e323"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T14:40:00.655Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T14:40:00.655Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b859943194d18dc172508"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672b7a05404c7b313450e2de"
+  },
+  "communityId": {
+    "$oid": "672b859943194d18dc172505"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T15:04:57.625Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T15:04:57.625Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b883143194d18dc17253b"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "672b883143194d18dc172538"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T15:16:01.384Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T15:16:01.384Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b8bb56acacf22b8b4fa4b"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "672b88b843194d18dc17254e"
+  },
+  "communityId": {
+    "$oid": "672b8bb56acacf22b8b4fa48"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2024-11-06T15:31:01.452Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T15:31:01.452Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "677c840254921a5fe8b9e961"
+  },
+  "access": true,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "677c840254921a5fe8b9e95e"
+  },
+  "role": "moderator",
+  "createdAt": {
+    "$date": "2025-01-07T01:31:46.351Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-07T01:31:46.351Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67b5d7254e8273c998def0f4"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "67b5d7254e8273c998def0f1"
+  },
+  "role": "moderator",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-02-19T13:05:41.792Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-19T13:05:41.792Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67b5da5d816181b8188f21dc"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "67b5d7254e8273c998def0f1"
+  },
+  "role": "member",
+  "access": true,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-02-19T13:19:25.652Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-19T13:19:25.652Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67b5dbd338608343c4a68f27"
+  },
+  "userId": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "communityId": {
+    "$oid": "67b5d7254e8273c998def0f1"
+  },
+  "role": "member",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-02-19T13:25:39.873Z"
+  },
+  "updatedAt": {
+    "$date": "2025-02-19T13:25:39.873Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d7c8eff5351945f3a0a601"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "67d7c8eff5351945f3a0a5fe"
+  },
+  "role": "moderator",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-17T07:02:07.338Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-17T07:02:07.338Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8c87bf94a25fd55e10027"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-18T01:12:27.388Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:12:27.388Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8c87bf94a25fd55e1002a"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "role": "member",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-18T01:12:27.827Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:12:27.827Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8cb91f94a25fd55e10290"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "67d8cb91f94a25fd55e1028d"
+  },
+  "role": "moderator",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-18T01:25:37.028Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:25:37.028Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8ce79f94a25fd55e1037e"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "67d8ce79f94a25fd55e1037b"
+  },
+  "role": "moderator",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-18T01:38:01.566Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:38:01.566Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8dab26ef8c892c6beb9e8"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "67d8dab26ef8c892c6beb9e5"
+  },
+  "role": "moderator",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-18T02:30:10.256Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:30:10.256Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db920ad9183f5fd251493d"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "67db920ad9183f5fd251493a"
+  },
+  "role": "moderator",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-20T03:56:58.085Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T03:56:58.085Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db962cee6d6c6083f13772"
+  },
+  "userId": {
+    "$oid": "67d8c904f94a25fd55e10084"
+  },
+  "communityId": {
+    "$oid": "67db920ad9183f5fd251493a"
+  },
+  "role": "member",
+  "access": true,
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-03-20T04:14:36.375Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:14:36.375Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "67db989bee6d6c6083f138fc"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "67d8ce79f94a25fd55e1037b"
+  },
+  "role": "member",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-20T04:24:59.571Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:24:59.571Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e1a2dcd6b3f3e6ce09115d"
+  },
+  "userId": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "communityId": {
+    "$oid": "67e1a2dcd6b3f3e6ce09115a"
+  },
+  "role": "moderator",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-24T18:22:20.736Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T18:22:20.736Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e209e5ccdaad13d649d6aa"
+  },
+  "userId": {
+    "$oid": "67d8c904f94a25fd55e10084"
+  },
+  "communityId": {
+    "$oid": "67d8dab26ef8c892c6beb9e5"
+  },
+  "role": "member",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-25T01:41:57.379Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T01:41:57.379Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e20b5fe79d76f48dfdfaa5"
+  },
+  "userId": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "communityId": {
+    "$oid": "67d8dab26ef8c892c6beb9e5"
+  },
+  "role": "member",
+  "access": true,
+  "createdAt": {
+    "$date": "2025-03-25T01:48:15.654Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T01:48:15.654Z"
+  },
+  "__v": 0
+}]

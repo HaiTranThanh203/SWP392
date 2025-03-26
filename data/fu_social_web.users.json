@@ -1,0 +1,456 @@
+[{
+  "_id": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "avatar": "default.jpg",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [
+    {
+      "$oid": "6724b39f59fe905fc8675ff5"
+    },
+    {
+      "$oid": "67b5c44be8fbbee8bb94c841"
+    }
+  ],
+  "moderatorCommunities": [
+    {
+      "$oid": "671de826180594244866bf68"
+    },
+    {
+      "$oid": "671e4b0f57a9f65fbc118165"
+    },
+    {
+      "$oid": "67273f8b95626a30e07786e6"
+    },
+    {
+      "$oid": "6727404095626a30e07786f3"
+    },
+    {
+      "$oid": "67285951de8d425d7c3d11c7"
+    },
+    {
+      "$oid": "672b883143194d18dc172538"
+    },
+    {
+      "$oid": "677c840254921a5fe8b9e95e"
+    },
+    {
+      "$oid": "67b5d7254e8273c998def0f1"
+    },
+    {
+      "$oid": "67d8cb91f94a25fd55e1028d"
+    },
+    {
+      "$oid": "67d8ce79f94a25fd55e1037b"
+    }
+  ],
+  "username": "Hieu",
+  "email": "hieunthe171606@fpt.edu.vn",
+  "password": "$2a$12$YzVlt05ZnUuxcJpqKEu5PeCToPAJGuiLt1VNzYDlO8vJh6M5F/jZ2",
+  "notifications": [],
+  "createdAt": {
+    "$date": "2024-10-19T10:25:12.936Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:00:53.749Z"
+  },
+  "__v": 0,
+  "studentCode": "HE171606"
+},
+{
+  "_id": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "avatar": "default.jpg",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [],
+  "moderatorCommunities": [],
+  "email": "hieuoka123@gmail.com",
+  "username": "hieu1",
+  "studentCode": "he1234567",
+  "password": "$2a$12$YzVlt05ZnUuxcJpqKEu5PeCToPAJGuiLt1VNzYDlO8vJh6M5F/jZ2",
+  "notifications": [],
+  "createdAt": {
+    "$date": "2024-10-27T07:59:14.007Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-27T07:59:14.007Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672769bf95626a30e0778714"
+  },
+  "avatar": "default.jpg",
+  "background": "default.jpg",
+  "role": "admin",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [],
+  "moderatorCommunities": [],
+  "email": "admin@gmail.com",
+  "username": "admin",
+  "password": "$2a$12$YzVlt05ZnUuxcJpqKEu5PeCToPAJGuiLt1VNzYDlO8vJh6M5F/jZ2",
+  "studentCode": "he123343",
+  "notifications": [],
+  "createdAt": {
+    "$date": "2024-11-03T12:17:03.710Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-03T12:17:03.710Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "avatar": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image//avatar2.png",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [],
+  "moderatorCommunities": [
+    {
+      "$oid": "67e1a2dcd6b3f3e6ce09115a"
+    }
+  ],
+  "email": "test2@gmail.com",
+  "username": "test2",
+  "password": "$2a$12$YzVlt05ZnUuxcJpqKEu5PeCToPAJGuiLt1VNzYDlO8vJh6M5F/jZ2",
+  "studentCode": "he12334231",
+  "notifications": [],
+  "createdAt": {
+    "$date": "2024-11-03T12:51:35.313Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T18:22:20.734Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67297e64a2342853a077de80"
+  },
+  "avatar": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image//avatar2.png",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [],
+  "moderatorCommunities": [],
+  "email": "test3@gmail.com",
+  "username": "hieuoka1233213",
+  "password": "$2a$12$lCGbpESM.b8jNxlDShNSLe0YjP/ZPFOjOhoZBMYhNmOWl3iGG71zG",
+  "studentCode": "he2321321312",
+  "notifications": [],
+  "createdAt": {
+    "$date": "2024-11-05T02:09:40.902Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T02:09:40.902Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67297ec6a2342853a077dea7"
+  },
+  "avatar": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image//avatar2.png",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [],
+  "moderatorCommunities": [],
+  "email": "test4@gmail.com",
+  "username": "23213adsd",
+  "password": "$2a$12$ULmrVcLb3TzSDLTw.bBPkuo3cFjN.xGtKjLjwT28NpL/9TYkgXY6e",
+  "studentCode": "he13123",
+  "notifications": [],
+  "createdAt": {
+    "$date": "2024-11-05T02:11:18.424Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T02:00:57.424Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67298ecd178f0d62842624ba"
+  },
+  "avatar": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image//avatar2.png",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [
+    {
+      "$oid": "6724b3d859fe905fc8675ffe"
+    }
+  ],
+  "moderatorCommunities": [],
+  "email": "test5@gmail.com",
+  "username": "hieuoka123321321",
+  "password": "$2a$12$CtkPWHXbF7VVLpxg9mfCse.rKLgJ2yJ8FpXYSfW6V6xw7Gjea/6Mu",
+  "studentCode": "he1312312",
+  "createdAt": {
+    "$date": "2024-11-05T03:19:41.900Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T02:00:58.207Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6729e1ef178f0d62842626ad"
+  },
+  "avatar": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image//avatar2.png",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [
+    {
+      "$oid": "6724b39f59fe905fc8675ff5"
+    },
+    {
+      "$oid": "6724b3d859fe905fc8675ffe"
+    }
+  ],
+  "moderatorCommunities": [],
+  "email": "test6@gmail.com",
+  "username": "dsffda",
+  "password": "$2a$12$YfMn2NdktHmKlwcK1LpiJ.M8/1YFKXTryLenMJOfd8m9jAi.IMAsW",
+  "studentCode": "he232132",
+  "createdAt": {
+    "$date": "2024-11-05T09:14:23.891Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T09:53:24.424Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "avatar": "default.jpg",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [],
+  "moderatorCommunities": [
+    {
+      "$oid": "672aed285dd7845ac0cdf313"
+    },
+    {
+      "$oid": "672aedd95dd7845ac0cdf32d"
+    },
+    {
+      "$oid": "672aee845dd7845ac0cdf33f"
+    },
+    {
+      "$oid": "672aeed75dd7845ac0cdf353"
+    }
+  ],
+  "email": "test7@fpt.edu.vn",
+  "username": "sdfdsf",
+  "password": "$2a$12$haUYwbTl3ZQCVjxaFk6T4uNmRd48LAINtCVz9oe.BX8xMqR4YnVD6",
+  "studentCode": "HE1312367",
+  "createdAt": {
+    "$date": "2024-11-06T04:13:03.509Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T04:21:43.194Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b75cc404c7b313450e2d9"
+  },
+  "avatar": "default.jpg",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [],
+  "moderatorCommunities": [],
+  "email": "test1@fpt.edu.vn",
+  "username": "hiey123",
+  "password": "$2a$12$7l7yD601i3LuUc7zepjrbOJp64oTWBCOcsARM0g4Au5WdC9RVsJw.",
+  "studentCode": "HE232133",
+  "createdAt": {
+    "$date": "2024-11-06T13:57:32.101Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T13:57:32.101Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b7a05404c7b313450e2de"
+  },
+  "avatar": "default.jpg",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [],
+  "moderatorCommunities": [
+    {
+      "$oid": "672b7a5a404c7b313450e2e9"
+    },
+    {
+      "$oid": "672b7a78404c7b313450e304"
+    },
+    {
+      "$oid": "672b7fc0404c7b313450e323"
+    },
+    {
+      "$oid": "672b859943194d18dc172505"
+    }
+  ],
+  "email": "test8@fpt.edu.vn",
+  "username": "dfds",
+  "password": "$2a$12$Y9/ob0mMq/JpbGsl608MK.FKBcxixt.A/CeDaRLZBFA0QEfXqB/qe",
+  "studentCode": "HE123456",
+  "createdAt": {
+    "$date": "2024-11-06T14:15:33.352Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T15:04:57.613Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b88b843194d18dc17254e"
+  },
+  "avatar": "default.jpg",
+  "background": "default.jpg",
+  "role": "student",
+  "isActive": true,
+  "followers": [],
+  "followings": [],
+  "bookmarks": [
+    {
+      "$oid": "672b3fcd404c7b313450e281"
+    }
+  ],
+  "moderatorCommunities": [
+    {
+      "$oid": "672b8bb56acacf22b8b4fa48"
+    }
+  ],
+  "email": "test9@fpt.edu.vn",
+  "username": "2313",
+  "password": "$2a$12$NedrI50TmY4TwDAc4Nt5xeApqXUEvvreyDo4NcBzdQzmOeUFkQtLG",
+  "studentCode": "HE232130",
+  "createdAt": {
+    "$date": "2024-11-06T15:18:16.612Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T16:41:35.083Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "username": "haitran123",
+  "email": "gtvvjetnam@gmail.com",
+  "avatar": "http://localhost:9999/uploads/avatars/1742443095097-pexels-chait-goli-1918290.jpg",
+  "background": "default.jpg",
+  "role": "student",
+  "password": "$2a$12$TNe4MQNZMpdKviiWxIVob.mfcsqq9mbjHFxqzQFma.2ScV3pfZXpi",
+  "isActive": true,
+  "studentCode": "he171884",
+  "followers": [],
+  "followings": [],
+  "bookmarks": [
+    {
+      "$oid": "67d8db754f197c5fd7143fa9"
+    },
+    {
+      "$oid": "67d8d269f94a25fd55e1044c"
+    },
+    {
+      "$oid": "67db90ead9183f5fd251479d"
+    }
+  ],
+  "moderatorCommunities": [
+    {
+      "$oid": "67d7c8eff5351945f3a0a5fe"
+    },
+    {
+      "$oid": "67d8dab26ef8c892c6beb9e5"
+    },
+    {
+      "$oid": "67db920ad9183f5fd251493a"
+    }
+  ],
+  "createdAt": {
+    "$date": "2025-03-17T06:37:41.192Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T18:18:40.390Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8c904f94a25fd55e10084"
+  },
+  "username": "hainopro",
+  "email": "haitthe171884@fpt.edu.vn",
+  "avatar": "http://localhost:9999/uploads/avatars/1742869633748-avatar-shin-cute-7.jpg",
+  "background": "default.jpg",
+  "role": "student",
+  "password": "$2a$12$YzVlt05ZnUuxcJpqKEu5PeCToPAJGuiLt1VNzYDlO8vJh6M5F/jZ2",
+  "isActive": true,
+  "studentCode": "he171880",
+  "followers": [],
+  "followings": [],
+  "bookmarks": [
+    {
+      "$oid": "67db90ead9183f5fd251479d"
+    },
+    {
+      "$oid": "67e20a47ccdaad13d649d6d9"
+    }
+  ],
+  "moderatorCommunities": [],
+  "createdAt": {
+    "$date": "2025-03-18T01:14:44.332Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T02:41:12.371Z"
+  },
+  "__v": 0
+}]

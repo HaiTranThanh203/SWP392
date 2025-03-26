@@ -375,7 +375,7 @@ const totalComments = countComments(comments);  // Get total comments count incl
                     key={index}
                     src={imageUrl}
                     alt={`Post Image ${index + 1}`}
-                    className="mt-2 w-full h-auto rounded-lg shadow-md"
+                    className="mt-2 w-100 h-auto rounded-lg shadow-md"
                   />
                 ))}
               </div>
@@ -432,6 +432,7 @@ const totalComments = countComments(comments);  // Get total comments count incl
           <div className="bg-white p-6 rounded-lg shadow-md mt-6">
             <form onSubmit={handleAddComment} className="flex items-center space-x-2">
               <img src={user.avatar || avatarDefault} alt="User Avatar" className="h-8 w-8 rounded-full" />
+          
               <input
                 type="text"
                 placeholder="Add a comment..."

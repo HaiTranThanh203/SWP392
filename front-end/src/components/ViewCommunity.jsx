@@ -278,8 +278,8 @@ const ViewCommunity = () => {
   <div key={post.id} className="bg-white p-4 rounded-lg shadow-md">
     <div className="flex items-center space-x-2">
       <img
-        src={avatar2}
-        alt="User Avatar"
+        src={post.userId.avatar || avatar1}
+        alt="User Avatar 2"
         className="h-12 w-12 rounded-full"
       />
       <div
@@ -288,8 +288,9 @@ const ViewCommunity = () => {
           e.stopPropagation(); // Ngăn sự kiện chuyển hướng khi nhấn vào phần tử ngoài bài đăng
           navigate(`/postdetail/${post._id}`); // Chuyển hướng đến chi tiết bài đăng
         }}
-      >
-        <h2 className="font-semibold text-lg">{post.title}</h2>
+      > 
+      <h2 className="font-semibold text-lg">{post.userId.username}</h2>
+        <h1 className="font-semibold text-lg">{post.title}</h1>
         <p className="text-xs text-gray-500">
           {new Date(post.createdAt).toLocaleString("vi-VN", {
             hour: "2-digit",

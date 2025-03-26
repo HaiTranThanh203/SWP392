@@ -63,7 +63,7 @@ function Login() {
       style={{ backgroundImage: `url(${background})` }}
     >
       <div className="bg-white p-10 rounded-xl shadow-md w-full max-w-lg border-[9px] border-gray-300">
-        <h1 className="text-2xl font-bold mb-6 text-center">Sign IN</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">SIGN IN</h1>
 
         <div className="relative flex justify-center mb-4">
           <div className="w-20 h-20 rounded-full border-4 border-orange-500 bg-white overflow-hidden">
@@ -112,7 +112,7 @@ function Login() {
           </button>
 
           <div className="text-center mt-4">
-            Chưa có tài khoản?{" "}
+             Do not have an account ?{" "}
             <a href="/SignUp" className="text-orange-500 hover:underline">
              Register
             </a>

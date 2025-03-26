@@ -94,11 +94,15 @@ exports.getPostInCommunity = async (req, res, next) => {
   try {
     const id = req.params.id;
     console.log("community id", id);
+    
     const posts = await Post.find({
       communityId: new mongoose.Types.ObjectId(id),
-    }).exec();
+    })
+    .sort({ _id: -1 })
+       .populate("userId", "username")  // Thêm vào đây, sắp xếp giảm dần theo id (mới nhất lên đầu)
+    .exec();
 
-    if (posts) {
+    if (posts && posts.length > 0) {
       res.status(200).json(posts);
       console.log("Post found", posts);
     } else {
@@ -108,6 +112,7 @@ exports.getPostInCommunity = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.accessRequest = async (req, res, next) => {
   try {
     const id = req.params.id;

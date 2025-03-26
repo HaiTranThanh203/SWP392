@@ -122,7 +122,7 @@ export default function Home() {
           >
             <div className="flex items-center space-x-2">
               <img
-                src={avatar2}
+                src={post.userId.avatar || avatar2}
                 alt="User Avatar"
                 className="h-12 w-12 rounded-full"
               />
@@ -196,7 +196,7 @@ export default function Home() {
               <img
                 src={post.media[0]}
                 alt="Post Media"
-                className="mt-4 w-full h-64 object-cover"
+                className="mt-4 w-64 h-64 object-cover"
               />
             )}
             {post.media.length == 0 && (
