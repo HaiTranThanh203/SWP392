@@ -1,0 +1,112 @@
+[{
+  "_id": {
+    "$oid": "67d8d520f94a25fd55e106e7"
+  },
+  "image": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742263583046.png",
+  "title": "Thông báo về chính sách Học trước với các môn học trên Coursera",
+  "content": "Ngày 19/12/2024 nhà trường đã có thông báo như sau:\n1. Những sinh viên đã có chứng chỉ môn học Coursera có tên trong môn học của học kỳ tiếp theo (Sp2025), được cấp trước ngày 19/12/2024, sẽ được hoàn trả học phí.\n2. Chính sách Học trước Hoàn tiền này sẽ không còn được áp dụng từ học kỳ tới, vì việc học trước thi trước một môn học có trong chương trình đào tạo không phải là lý do để hoàn học phí, và account Coursera nhà trường cấp cho sinh viên để khuyến khích sinh viên học thêm các nội dung khác ngoài chương trình để nâng cao trình độ và phục vụ công việc của các em sau này.\nNay nhà trường xin thông báo bổ sung:\n3. Với những sinh viên đã nộp tiền thi thẩm định cho môn học Coursera không có tên trong môn học của học kỳ tiếp theo (Sp2025), nhà trường sẽ hoàn lại khoản tiền này.\n4. Các môn Coursera học trước được bảo lưu kết quả và được cộng điểm bonus.",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-18T02:06:24.281Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:06:24.281Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d577f94a25fd55e106fd"
+  },
+  "image": "123",
+  "title": " Thông báo điểm thi kết thúc học phần lần 2 COV111, COV121, COV131 half 1 học kỳ Spring 2025",
+  "content": "Phòng Khảo thí thông báo đã có điểm thi kết thúc học phần lần 2 COV111, COV121, COV131 half 1 học kỳ Spring 2025, các em đăng nhập FAP để xem chi tiết điểm.",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-18T02:07:51.576Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:08:02.048Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d5b5f94a25fd55e1070e"
+  },
+  "image": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742263732157.png",
+  "title": " Thông báo điểm thi kết thúc học phần lần 1 các môn tiếng anh, cờ half 1, JPD336, MLN131, điểm thi kết thúc học phần lần 2 MLN111 và danh sách thi kết thúc học phần lần 2 ngày 13/3/2025",
+  "content": "Phòng Khảo thí thông báo đã có điểm thi kết thúc học phần lần 1 các môn tiếng anh ENT104, ENT203, TRS401, TRS501, TRS601, các môn cờ COV111, COV121, COV131 half 1, JPD336, MLN131, điểm thi kết thúc học phần lần 2 MLN111, các em đăng nhập FAP để xem chi tiết điểm.\n\nPhòng Khảo thí thông báo đã có danh sách thi kết thúc học phần lần 2 các môn tiếng anh half 1 ENT104, ENT203, TRS401, TRS501, TRS601, môn nhật JPD336 ngày 13/03/2025 học kỳ Spring 2025, các em đăng nhập fap.fpt.edu.vn (phần View exam schedule (Xem lịch thi) ) để xem lịch thi và phòng thi lần 2 của mình. \n\nKhi đi thi các em nhớ mang theo 1 trong những giấy tờ sau: căn cước công dân/hộ chiếu/ CMT hoặc bằng lái xe, bắt buộc mang và sử dụng tai nghe có dây để thi nghe.\n\nCác em nhớ đến phòng thi đúng giờ quy định, quá 5 phút các em sẽ không được vào phòng thi.\n\nTrân trọng thông báo.\nPhòng Khảo thí",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-18T02:08:53.218Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:08:53.218Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d618f94a25fd55e10798"
+  },
+  "image": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742263831541.jpg",
+  "title": " Thông báo điểm thi kết thúc học phần lần 1 các môn tiếng anh, cờ half 1, JPD336, MLN131, điểm thi kết thúc học phần lần 2 MLN111 và danh sách thi kết thúc học phần lần 2 ngày 13/3/2025",
+  "content": "Phòng Khảo thí thông báo đã có điểm thi kết thúc học phần lần 1 các môn tiếng anh ENT104, ENT203, TRS401, TRS501, TRS601, các môn cờ COV111, COV121, COV131 half 1, JPD336, MLN131, điểm thi kết thúc học phần lần 2 MLN111, các em đăng nhập FAP để xem chi tiết điểm.\n\nPhòng Khảo thí thông báo đã có danh sách thi kết thúc học phần lần 2 các môn tiếng anh half 1 ENT104, ENT203, TRS401, TRS501, TRS601, môn nhật JPD336 ngày 13/03/2025 học kỳ Spring 2025, các em đăng nhập fap.fpt.edu.vn (phần View exam schedule (Xem lịch thi) ) để xem lịch thi và phòng thi lần 2 của mình. \n\nKhi đi thi các em nhớ mang theo 1 trong những giấy tờ sau: căn cước công dân/hộ chiếu/ CMT hoặc bằng lái xe, bắt buộc mang và sử dụng tai nghe có dây để thi nghe.\n\nCác em nhớ đến phòng thi đúng giờ quy định, quá 5 phút các em sẽ không được vào phòng thi.\n\nTrân trọng thông báo.\nPhòng Khảo thí",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-18T02:10:32.242Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:10:32.242Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d64df94a25fd55e107b8"
+  },
+  "image": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742263884261.jpg",
+  "title": " Thông báo điểm thi kết thúc học phần lần 2 COV111, COV121, COV131 half 1 học kỳ Spring 2025",
+  "content": "Phòng Khảo thí thông báo đã có điểm thi kết thúc học phần lần 2 COV111, COV121, COV131 half 1 học kỳ Spring 2025, các em đăng nhập FAP để xem chi tiết điểm.",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-18T02:11:25.008Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:11:25.008Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d68df94a25fd55e107ce"
+  },
+  "image": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742263948124.jpg",
+  "title": "V/v: Mở chức năng đổi chéo lớp Tiếng anh dự bị (TRS) và Võ tại Half 2 - Học kỳ Spring 2025.",
+  "content": "Phòng Tổ chức và quản lý Đào tạo thông báo về việc mở chức năng đổi chéo lớp Tiếng anh dự bị (TRS) và Võ tại Half 2 - Học kỳ Spring 2025.\n\nSinh viên thao tác trên hệ thống FAP từ 14h00 ngày 15/03/2025 đến 14h00 ngày 16/03/2025 ở mục sau:\n\nYêu cầu đổi chéo lớp với sinh viên\nTrân trọng.",
+  "isActive": false,
+  "createdAt": {
+    "$date": "2025-03-18T02:12:29.295Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:12:59.105Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d68df94a25fd55e107d2"
+  },
+  "image": "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742263949061.jpg",
+  "title": "V/v: Mở chức năng đổi chéo lớp Tiếng anh dự bị (TRS) và Võ tại Half 2 - Học kỳ Spring 2025.",
+  "content": "Phòng Tổ chức và quản lý Đào tạo thông báo về việc mở chức năng đổi chéo lớp Tiếng anh dự bị (TRS) và Võ tại Half 2 - Học kỳ Spring 2025.\n\nSinh viên thao tác trên hệ thống FAP từ 14h00 ngày 15/03/2025 đến 14h00 ngày 16/03/2025 ở mục sau:\n\nYêu cầu đổi chéo lớp với sinh viên\nTrân trọng.",
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-18T02:12:29.760Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:12:29.760Z"
+  },
+  "__v": 0
+}]

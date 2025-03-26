@@ -1,0 +1,190 @@
+[{
+  "_id": {
+    "$oid": "67d7c583f5351945f3a0a508"
+  },
+  "requester": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "recipient": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "status": "accepted",
+  "createdAt": {
+    "$date": "2025-03-17T06:47:31.874Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:18:19.524Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d7c585f5351945f3a0a50b"
+  },
+  "requester": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "recipient": {
+    "$oid": "671df2d274687d48d0bdc4ed"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-03-17T06:47:33.020Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-17T06:47:33.020Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d7c585f5351945f3a0a50e"
+  },
+  "requester": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "recipient": {
+    "$oid": "67297e64a2342853a077de80"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-03-17T06:47:33.690Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-17T06:47:33.690Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d7c586f5351945f3a0a511"
+  },
+  "requester": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "recipient": {
+    "$oid": "67298ecd178f0d62842624ba"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-03-17T06:47:34.249Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-17T06:47:34.249Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8cbc4f94a25fd55e102fe"
+  },
+  "requester": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "recipient": {
+    "$oid": "67d8c904f94a25fd55e10084"
+  },
+  "status": "rejected",
+  "createdAt": {
+    "$date": "2025-03-18T01:26:28.751Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:16:49.079Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8cdc1f94a25fd55e10336"
+  },
+  "requester": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "recipient": {
+    "$oid": "67d8c904f94a25fd55e10084"
+  },
+  "status": "accepted",
+  "createdAt": {
+    "$date": "2025-03-18T01:34:57.657Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:14:10.352Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e19b5dc252617e1767f4cd"
+  },
+  "requester": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "recipient": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-03-24T17:50:21.906Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T17:50:21.906Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e19b96c252617e1767f4e1"
+  },
+  "requester": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "recipient": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-03-24T17:51:18.305Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T17:51:18.305Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e1a02ed6b3f3e6ce090fcb"
+  },
+  "requester": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "recipient": {
+    "$oid": "67d8c904f94a25fd55e10084"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-03-24T18:10:54.570Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T18:10:54.570Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e1a03ad6b3f3e6ce090fd0"
+  },
+  "requester": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "recipient": {
+    "$oid": "67297e64a2342853a077de80"
+  },
+  "status": "pending",
+  "createdAt": {
+    "$date": "2025-03-24T18:11:06.317Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T18:11:06.317Z"
+  },
+  "__v": 0
+}]
