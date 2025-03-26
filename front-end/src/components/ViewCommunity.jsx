@@ -322,7 +322,7 @@ const ViewCommunity = () => {
               >
                 Report post
               </li>
-              {post.userId === user.id && ( // Kiểm tra nếu người dùng là tác giả của bài viết
+              {post.userId._id === user.id && ( // Kiểm tra nếu người dùng là tác giả của bài viết
                 <li
                   className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
                   onClick={() => navigate(`/editpost/${post._id}`)} // Dẫn đến trang sửa bài viết
