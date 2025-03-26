@@ -1,0 +1,407 @@
+[{
+  "_id": {
+    "$oid": "6724b39f59fe905fc8675ff5"
+  },
+  "media": [],
+  "upVotes": 1,
+  "downVotes": 0,
+  "isEdited": false,
+  "isActive": true,
+  "title": "des2",
+  "content": "hel22",
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "createdAt": {
+    "$date": "2024-11-01T10:55:27.573Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:17:55.246Z"
+  },
+  "__v": 0,
+  "commentCount": 2,
+  "votes": {
+    "67138908290ef9092c172bbf": "like"
+  }
+},
+{
+  "_id": {
+    "$oid": "6724b3d859fe905fc8675ffe"
+  },
+  "media": [],
+  "upVotes": 0,
+  "downVotes": 0,
+  "isEdited": false,
+  "isActive": false,
+  "title": "asa",
+  "content": "sas",
+  "communityId": {
+    "$oid": "671e4b0f57a9f65fbc118165"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "createdAt": {
+    "$date": "2024-11-01T10:56:24.375Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T01:59:34.856Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b3f04404c7b313450e257"
+  },
+  "media": [],
+  "commentCount": 0,
+  "isEdited": false,
+  "isActive": true,
+  "title": "dfdsf",
+  "content": "dfdsfd",
+  "communityId": {
+    "$oid": "672aed285dd7845ac0cdf313"
+  },
+  "userId": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "createdAt": {
+    "$date": "2024-11-06T10:03:48.569Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T10:03:48.569Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b3f39404c7b313450e264"
+  },
+  "media": [],
+  "commentCount": 0,
+  "isEdited": false,
+  "isActive": true,
+  "title": "fdf",
+  "content": "fdsf",
+  "communityId": {
+    "$oid": "672aeed75dd7845ac0cdf353"
+  },
+  "userId": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "createdAt": {
+    "$date": "2024-11-06T10:04:41.707Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T10:04:41.707Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b3fcd404c7b313450e281"
+  },
+  "media": [],
+  "commentCount": 0,
+  "isEdited": false,
+  "isActive": true,
+  "title": "fdsf",
+  "content": "fdsf",
+  "communityId": {
+    "$oid": "672aee845dd7845ac0cdf33f"
+  },
+  "userId": {
+    "$oid": "672aeccf5dd7845ac0cdf308"
+  },
+  "createdAt": {
+    "$date": "2024-11-06T10:07:09.128Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-06T10:26:39.518Z"
+  },
+  "__v": 0,
+  "votes": {
+    "672aeccf5dd7845ac0cdf308": false
+  }
+},
+{
+  "_id": {
+    "$oid": "677c842b54921a5fe8b9e972"
+  },
+  "media": [],
+  "commentCount": 0,
+  "votes": {},
+  "isEdited": false,
+  "isActive": true,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "677c840254921a5fe8b9e95e"
+  },
+  "title": "as",
+  "content": "ass",
+  "createdAt": {
+    "$date": "2025-01-07T01:32:27.472Z"
+  },
+  "updatedAt": {
+    "$date": "2025-01-07T01:32:27.472Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67b5c44be8fbbee8bb94c841"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "title": "String 1",
+  "content": "String 1",
+  "media": [],
+  "commentCount": 0,
+  "votes": {
+    "671df2d274687d48d0bdc4ed": true,
+    "67138908290ef9092c172bbf": "like"
+  },
+  "isEdited": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-02-19T11:45:15.620Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:18:06.600Z"
+  },
+  "__v": 0,
+  "downVotes": 0,
+  "upVotes": 1
+},
+{
+  "_id": {
+    "$oid": "67b5f5f173c92ed79c9fd46e"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "671de826180594244866bf68"
+  },
+  "title": "String 2",
+  "content": "String 2",
+  "media": [],
+  "commentCount": 0,
+  "votes": {
+    "67d7c335f5351945f3a0a4a4": "true"
+  },
+  "isEdited": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-02-19T15:17:05.292Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:34:57.378Z"
+  },
+  "__v": 0,
+  "downVotes": 0,
+  "upVotes": 1
+},
+{
+  "_id": {
+    "$oid": "67d7c9e5f5351945f3a0a69a"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "67d7c8eff5351945f3a0a5fe"
+  },
+  "title": "@all @SE1833 @SE1834 @SDN302",
+  "content": "Từ tuần sau các nhóm triển khai project, để giúp các bạn học trung bình và chưa có thời gian nghiên cứu 1 số module (cả BE và FE) trong 1 dự án làm web (full stack). Cô khuyến khích các bạn học tốt đăng ký trình bày 1 số module đó, cô sẽ + vào điểm project (1đ cho 1 module – tính vào phần nâng cao của project). Mỗi module các em nên để vào 1 project riêng biệt để các bạn dễ hiểu hơn. Mỗi phần trình bày nên có 1 file doc (ngắn gọn để note lại xem cần thư viện gì? Cài đặt nó hoặc cấu hình – dạng file README cũng được) + project cài đặt cả BE và FE. Một số module cô gợi ý:\n- Đăng nhập, đăng ký – lưu tài khoản trong collection của MongoDB (có sử dụng Authenication)\n- Đăng nhập sử dụng bên thứ 3 (google hoặc facebook hoặc dùng firebase…)\n- Lấy lại password sử dụng thư viện\n- Up load file ảnh (lấy được url) dùng thư viện (hoặc bên thứ 3)\n- Up load, down load file (có thể nhiều file) dùng thư viện\n- Notification (nhắn tin) dùng bên thứ 3 hoặc thư viện\n- Xử lý giỏ hàng (hoặc yêu thích hoặc album của tôi) dạng dùng session hoặc cookie….\n- Thanh toán dùng bên thứ 3\n- Lựa chọn khác",
+  "media": [
+    "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742195171950.png"
+  ],
+  "commentCount": 2,
+  "votes": {
+    "67d7c335f5351945f3a0a4a4": "true",
+    "67138908290ef9092c172bbf": "like"
+  },
+  "upVotes": 2,
+  "downVotes": 0,
+  "isEdited": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-17T07:06:13.289Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T17:04:32.333Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d269f94a25fd55e1044c"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "communityId": {
+    "$oid": "67d8ce79f94a25fd55e1037b"
+  },
+  "title": "Who want to play jack post with me !!!",
+  "content": "Play Earth ",
+  "media": [
+    "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742262885729.png"
+  ],
+  "commentCount": 2,
+  "votes": {
+    "67138908290ef9092c172bbf": "like",
+    "67d7c335f5351945f3a0a4a4": "true",
+    "672769bf95626a30e0778714": "false",
+    "67d8c904f94a25fd55e10084": "true"
+  },
+  "upVotes": 2,
+  "downVotes": 0,
+  "isEdited": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-18T01:54:49.353Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T02:40:02.961Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8db754f197c5fd7143fa9"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "67d7c8eff5351945f3a0a5fe"
+  },
+  "title": "Test Edit ",
+  "content": "WelCOME",
+  "media": [
+    "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742265202953.jpg"
+  ],
+  "commentCount": 0,
+  "votes": {},
+  "upVotes": 0,
+  "downVotes": 0,
+  "isEdited": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-18T02:33:25.524Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T02:33:25.524Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db90ead9183f5fd251479d"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "67d8dab26ef8c892c6beb9e5"
+  },
+  "title": "Share Tài Liệu Kì 8",
+  "content": "Ai có ảnh mặt trăng đẹp đẹp cho tôi xin với.",
+  "media": [
+    "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742442728150.png"
+  ],
+  "commentCount": 1,
+  "votes": {
+    "67d7c335f5351945f3a0a4a4": "true",
+    "672771d791280123a871dabe": "true",
+    "672769bf95626a30e0778714": "true",
+    "67d8c904f94a25fd55e10084": "true"
+  },
+  "upVotes": 1,
+  "downVotes": 0,
+  "isEdited": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-20T03:52:10.789Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T01:42:01.733Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db9233d9183f5fd2514988"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "communityId": {
+    "$oid": "67db920ad9183f5fd251493a"
+  },
+  "title": "Private Community Ahihi",
+  "content": "show private community.",
+  "media": [
+    "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742443057861.jpg"
+  ],
+  "commentCount": 2,
+  "votes": {
+    "67d7c335f5351945f3a0a4a4": "true",
+    "67d8c904f94a25fd55e10084": "true",
+    "672771d791280123a871dabe": "true"
+  },
+  "upVotes": 0,
+  "downVotes": 0,
+  "isEdited": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-20T03:57:39.485Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T18:21:12.575Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e20a47ccdaad13d649d6d9"
+  },
+  "userId": {
+    "$oid": "67d8c904f94a25fd55e10084"
+  },
+  "communityId": {
+    "$oid": "67d8dab26ef8c892c6beb9e5"
+  },
+  "title": "Chào cả nhà ",
+  "content": "Chào cả nhà tôi là người mới ạ\n",
+  "media": [
+    "https://mqnvueuojtbesgyibkus.supabase.co/storage/v1/object/public/fpt-image/1742867014813.jpg"
+  ],
+  "commentCount": 0,
+  "votes": {
+    "67d8c904f94a25fd55e10084": "true",
+    "672771d791280123a871dabe": "true"
+  },
+  "upVotes": 0,
+  "downVotes": 0,
+  "isEdited": false,
+  "isActive": true,
+  "createdAt": {
+    "$date": "2025-03-25T01:43:35.716Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T02:35:05.970Z"
+  },
+  "__v": 0
+}]

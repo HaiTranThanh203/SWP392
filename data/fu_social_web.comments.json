@@ -1,0 +1,452 @@
+[{
+  "_id": {
+    "$oid": "67138ba0290ef9092c172bc4"
+  },
+  "childrens": [
+    "6715f28b32b1f864b0814cfe",
+    {
+      "$oid": "671606ec1b53b1b8e5d90e71"
+    },
+    {
+      "$oid": "67160724d7216d3368bd0fdf"
+    },
+    {
+      "$oid": "671a1cffcb57b9515458c380"
+    },
+    {
+      "$oid": "6715f28b32b1f864b0814cfe"
+    }
+  ],
+  "upVotes": 8,
+  "downVotes": 3,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "content": "conmyenkjf",
+  "createdAt": {
+    "$date": "2024-10-19T10:36:16.945Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-25T03:18:08.606Z"
+  },
+  "__v": 2,
+  "parentId": {
+    "$oid": "67138ba0290ef9092c172bc4"
+  }
+},
+{
+  "_id": {
+    "$oid": "6715f28b32b1f864b0814cfe"
+  },
+  "childrens": [],
+  "upVotes": 21,
+  "downVotes": 6,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "content": "fgdfgd",
+  "parentId": {
+    "$oid": "67138ba0290ef9092c172bc4"
+  },
+  "createdAt": {
+    "$date": "2024-10-21T06:19:55.085Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-24T11:34:50.424Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67160693de41b850d478fb31"
+  },
+  "childrens": [],
+  "upVotes": 0,
+  "downVotes": 0,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "content": "fgdfgdffsdfd",
+  "parentId": {
+    "$oid": "67138ba0290ef9092c172bc4"
+  },
+  "createdAt": {
+    "$date": "2024-10-21T07:45:23.028Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-21T07:45:23.028Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67160724d7216d3368bd0fdf"
+  },
+  "childrens": [],
+  "upVotes": 0,
+  "downVotes": 0,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "content": "fgdfgdfdfgsetfsdfd",
+  "createdAt": {
+    "$date": "2024-10-21T07:47:48.478Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-21T07:47:48.478Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671a1cdf37c7922a88eb3ef3"
+  },
+  "childrens": [],
+  "upVotes": 0,
+  "downVotes": 0,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "content": "conmyen",
+  "parentId": {
+    "$oid": "67138ba0290ef9092c172bc4"
+  },
+  "createdAt": {
+    "$date": "2024-10-24T10:09:35.480Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-24T10:09:35.480Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "671a1cffcb57b9515458c380"
+  },
+  "childrens": [],
+  "upVotes": 0,
+  "downVotes": 0,
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "content": "conmyen",
+  "parentId": {
+    "$oid": "67138ba0290ef9092c172bc4"
+  },
+  "createdAt": {
+    "$date": "2024-10-24T10:10:07.915Z"
+  },
+  "updatedAt": {
+    "$date": "2024-10-24T10:10:07.915Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67298f13178f0d62842624e9"
+  },
+  "hasParent": false,
+  "childrens": [
+    {
+      "$oid": "67298f19178f0d62842624ed"
+    }
+  ],
+  "isEdited": false,
+  "postId": {
+    "$oid": "6724b39f59fe905fc8675ff5"
+  },
+  "content": "dsa",
+  "parentId": null,
+  "userId": {
+    "$oid": "67298ecd178f0d62842624ba"
+  },
+  "createdAt": {
+    "$date": "2024-11-05T03:20:51.762Z"
+  },
+  "updatedAt": {
+    "$date": "2024-11-05T04:23:42.753Z"
+  },
+  "__v": 0,
+  "votes": {}
+},
+{
+  "_id": {
+    "$oid": "67298f19178f0d62842624ed"
+  },
+  "hasParent": true,
+  "childrens": [],
+  "isEdited": false,
+  "postId": {
+    "$oid": "6724b39f59fe905fc8675ff5"
+  },
+  "content": "sdad",
+  "parentId": {
+    "$oid": "67298f13178f0d62842624e9"
+  },
+  "userId": {
+    "$oid": "67298ecd178f0d62842624ba"
+  },
+  "createdAt": {
+    "$date": "2024-11-05T03:20:57.240Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:17:59.484Z"
+  },
+  "__v": 0,
+  "downVotes": 0,
+  "upVotes": 1,
+  "votes": {
+    "67138908290ef9092c172bbf": "like"
+  }
+},
+{
+  "_id": {
+    "$oid": "67d7cb1ff5351945f3a0a706"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "postId": {
+    "$oid": "67d7c9e5f5351945f3a0a69a"
+  },
+  "parentId": null,
+  "hasParent": false,
+  "childrens": [],
+  "content": "chú ý mọi người làm đầy đủ để nộp nhé",
+  "isEdited": false,
+  "votes": {},
+  "upVotes": 0,
+  "downVotes": 0,
+  "createdAt": {
+    "$date": "2025-03-17T07:11:27.173Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-17T07:11:27.173Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8c9aaf94a25fd55e100d4"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "postId": {
+    "$oid": "67d7c9e5f5351945f3a0a69a"
+  },
+  "parentId": null,
+  "hasParent": false,
+  "childrens": [],
+  "content": "Vâng cô",
+  "isEdited": false,
+  "votes": {},
+  "upVotes": 0,
+  "downVotes": 0,
+  "createdAt": {
+    "$date": "2025-03-18T01:17:30.891Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-18T01:17:30.891Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db95caee6d6c6083f136f7"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "postId": {
+    "$oid": "67db9233d9183f5fd2514988"
+  },
+  "parentId": null,
+  "hasParent": false,
+  "childrens": [
+    {
+      "$oid": "67db95dbee6d6c6083f136fc"
+    },
+    {
+      "$oid": "67db95edee6d6c6083f13705"
+    }
+  ],
+  "content": "test commnet",
+  "isEdited": false,
+  "votes": {
+    "67d7c335f5351945f3a0a4a4": "like"
+  },
+  "upVotes": 1,
+  "downVotes": 0,
+  "createdAt": {
+    "$date": "2025-03-20T04:12:58.086Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:13:33.743Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db95dbee6d6c6083f136fc"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "postId": {
+    "$oid": "67db9233d9183f5fd2514988"
+  },
+  "parentId": {
+    "$oid": "67db95caee6d6c6083f136f7"
+  },
+  "hasParent": true,
+  "childrens": [],
+  "content": "oke test thử nhánh 2",
+  "isEdited": false,
+  "votes": {
+    "67d7c335f5351945f3a0a4a4": "like"
+  },
+  "upVotes": 1,
+  "downVotes": 0,
+  "createdAt": {
+    "$date": "2025-03-20T04:13:15.288Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:13:18.877Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db95edee6d6c6083f13705"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "postId": {
+    "$oid": "67db9233d9183f5fd2514988"
+  },
+  "parentId": {
+    "$oid": "67db95caee6d6c6083f136f7"
+  },
+  "hasParent": true,
+  "childrens": [],
+  "content": "123",
+  "isEdited": false,
+  "votes": {},
+  "upVotes": 0,
+  "downVotes": 0,
+  "createdAt": {
+    "$date": "2025-03-20T04:13:33.742Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:13:33.742Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67db964cee6d6c6083f137da"
+  },
+  "userId": {
+    "$oid": "67d8c904f94a25fd55e10084"
+  },
+  "postId": {
+    "$oid": "67db9233d9183f5fd2514988"
+  },
+  "parentId": null,
+  "hasParent": false,
+  "childrens": [],
+  "content": "hello ",
+  "isEdited": false,
+  "votes": {},
+  "upVotes": 0,
+  "downVotes": 0,
+  "createdAt": {
+    "$date": "2025-03-20T04:15:08.682Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-20T04:15:08.682Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e17f5dc252617e1767f211"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "postId": {
+    "$oid": "67d8d269f94a25fd55e1044c"
+  },
+  "parentId": null,
+  "hasParent": false,
+  "childrens": [],
+  "content": "good",
+  "isEdited": false,
+  "votes": {
+    "67d7c335f5351945f3a0a4a4": "like"
+  },
+  "upVotes": 1,
+  "downVotes": 0,
+  "createdAt": {
+    "$date": "2025-03-24T15:50:53.629Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T15:50:57.507Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e1a05ed6b3f3e6ce091009"
+  },
+  "userId": {
+    "$oid": "672769bf95626a30e0778714"
+  },
+  "postId": {
+    "$oid": "67d8d269f94a25fd55e1044c"
+  },
+  "parentId": null,
+  "hasParent": false,
+  "childrens": [],
+  "content": "ảnh đẹp mà bro",
+  "isEdited": false,
+  "votes": {},
+  "upVotes": 0,
+  "downVotes": 0,
+  "createdAt": {
+    "$date": "2025-03-24T18:11:42.997Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-24T18:11:42.997Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67e20853ccdaad13d649d57d"
+  },
+  "userId": {
+    "$oid": "672771d791280123a871dabe"
+  },
+  "postId": {
+    "$oid": "67db90ead9183f5fd251479d"
+  },
+  "parentId": null,
+  "hasParent": false,
+  "childrens": [],
+  "content": "Tôi có này bạn ơi",
+  "isEdited": false,
+  "votes": {},
+  "upVotes": 0,
+  "downVotes": 0,
+  "createdAt": {
+    "$date": "2025-03-25T01:35:15.319Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T01:35:15.319Z"
+  },
+  "__v": 0
+}]

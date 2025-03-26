@@ -12,38 +12,61 @@ const {
   factoryGetOne,
   factoryGetAll,
   factoryCreateOne,
-
 } = require("./handlerFactory");
-
 
 exports.searchCommunities = catchAsync(async (req, res, next) => {
   const { query } = req.query;
 
   if (!query) {
     return res.status(400).json({
-      status: 'fail',
-      message: 'Query parameter is required for searching',
+      status: "fail",
+      message: "Query parameter is required for searching",
     });
   }
 
   // Tìm kiếm theo name của community
-  const searchFilter = { name: new RegExp(query, 'i') };
+  const searchFilter = { name: new RegExp(query, "i") };
 
   const communities = await Community.find(searchFilter)
-    .select('name description logo memberCount') // Chỉ lấy các trường cần thiết
+    .select("name description logo memberCount") // Chỉ lấy các trường cần thiết
     .limit(100); // Giới hạn số lượng kết quả trả về
 
   res.status(200).json({
-    status: 'success',
+    status: "success",
     results: communities.length,
     data: communities,
   });
 });
 
+exports.factoryGetAll = (Model) =>
+  catchAsync(async (req, res, next) => {
+    // Tìm tất cả bản ghi của mô hình và populate userId
+    const docs = await Model.find()
+      .populate("userId", "name email") // Thêm populate vào đây, ví dụ lấy name và email từ user
+      .exec();
+
+    res.status(200).json({
+      status: "success",
+      results: docs.length,
+      data: docs,
+    });
+  });
 // CRUD
 exports.getCommunityById = factoryGetOne(Community);
 exports.createNewCommunity = factoryCreateOne(Community);
-exports.getAllCommunities = factoryGetAll(Community);
+exports.getAllCommunities = catchAsync(async (req, res, next) => {
+  const docs = await Community.find()
+    .populate("createdBy", "name email") // Đảm bảo rằng trường này tồn tại và đúng
+    .populate("moderators", "name email") // Nếu có
+    .exec();
+
+  res.status(200).json({
+    status: "success",
+    results: docs.length,
+    data: docs,
+  });
+});
+
 exports.updateCommunity = factoryUpdateOne(Community);
 exports.deleteCommunity = factoryDeleteOne(Community);
 exports.addUserById = subscriptionController.createNewSubscription;
@@ -71,11 +94,15 @@ exports.getPostInCommunity = async (req, res, next) => {
   try {
     const id = req.params.id;
     console.log("community id", id);
+    
     const posts = await Post.find({
       communityId: new mongoose.Types.ObjectId(id),
-    }).exec();
+    })
+    .sort({ _id: -1 })
+       .populate("userId", "username")  // Thêm vào đây, sắp xếp giảm dần theo id (mới nhất lên đầu)
+    .exec();
 
-    if (posts) {
+    if (posts && posts.length > 0) {
       res.status(200).json(posts);
       console.log("Post found", posts);
     } else {
@@ -85,6 +112,7 @@ exports.getPostInCommunity = async (req, res, next) => {
     next(error);
   }
 };
+
 exports.accessRequest = async (req, res, next) => {
   try {
     const id = req.params.id;
@@ -125,3 +153,87 @@ exports.accessRequest = async (req, res, next) => {
     next(error);
   }
 };
+exports.rejectRequest = async (req, res, next) => {
+  try {
+    const id = req.params.id; // Community ID
+    const rIds = req.body.ids; // Array of request IDs to reject
+
+    const community = await Community.findById(id);
+
+    if (community) {
+      const rejectedRequests = community.joinRequests.filter((item) =>
+        rIds.includes(item._id.toString())
+      ); // Filter out the rejected requests by _id
+
+      if (rejectedRequests.length > 0) {
+        // Use $pull to remove the rejected joinRequests from the community
+        await Community.findByIdAndUpdate(id, {
+          $pull: { joinRequests: { _id: { $in: rIds } } }, // Remove rejected requests
+        });
+
+        // Return the rejected requests as a response
+        res.status(200).json({
+          message: "Requests rejected successfully",
+          rejectedRequests,
+        });
+      } else {
+        res.status(404).json({ message: "No valid requests found to reject" });
+      }
+    } else {
+      res.status(404).json({ message: "Community not found" });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getUserInCommunity = async (req, res, next) => {
+  try {
+    const id = req.params.id;
+    const sub = await Subscription.find({ communityId: id });
+    if (sub.length > 0) {
+      res.status(200).json(sub);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteUserFromCommunity = async (req, res, next) => {
+  try {
+    const cId = req.body.communityId;
+    const uid = req.body.userId;
+
+    // Cập nhật các trường cần thiết về null
+    await Subscription.updateMany(
+      { userId: uid, communityId: cId },
+      { $set: { userId: null, communityId: null } }
+    );
+
+    res.status(204).json({
+      message: "success",
+      data: null,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+exports.getCommunityByUserId = catchAsync(async (req, res, next) => {
+  const userId = req.params.userId;
+
+  // Tìm các community mà người dùng này đã tham gia
+  const communities = await Subscription.find({ userId })
+    .populate("communityId", "name logo description") // Thêm dữ liệu cộng đồng vào kết quả
+    .exec();
+
+  if (!communities || communities.length === 0) {
+    return next(new AppError("User is not part of any community.", 404));
+  }
+
+  // Trả về dữ liệu cộng đồng người dùng tham gia
+  res.status(200).json({
+    status: "success",
+    results: communities.length,
+    data: communities.map(sub => sub.communityId), // Chỉ trả về thông tin cộng đồng
+  });
+});

@@ -1,0 +1,63 @@
+[{
+  "_id": {
+    "$oid": "67d8d3dcf94a25fd55e105b2"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "reportEntityId": {
+    "$oid": "67b5f5f173c92ed79c9fd46e"
+  },
+  "entityType": "Post",
+  "description": "Sharing personal information",
+  "status": "Cancel",
+  "createdAt": {
+    "$date": "2025-03-18T02:01:00.330Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T01:59:59.239Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d3f0f94a25fd55e105f8"
+  },
+  "userId": {
+    "$oid": "67d7c335f5351945f3a0a4a4"
+  },
+  "reportEntityId": {
+    "$oid": "67b5f5f173c92ed79c9fd46e"
+  },
+  "entityType": "Post",
+  "description": "Non-consensual intimate media",
+  "status": "Cancel",
+  "createdAt": {
+    "$date": "2025-03-18T02:01:20.882Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T01:59:59.239Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67d8d43ff94a25fd55e10655"
+  },
+  "userId": {
+    "$oid": "67138908290ef9092c172bbf"
+  },
+  "reportEntityId": {
+    "$oid": "6724b3d859fe905fc8675ffe"
+  },
+  "entityType": "Post",
+  "description": "Minor abuse or sexualization",
+  "status": "Approved",
+  "createdAt": {
+    "$date": "2025-03-18T02:02:39.546Z"
+  },
+  "updatedAt": {
+    "$date": "2025-03-25T01:59:34.863Z"
+  },
+  "__v": 0
+}]
