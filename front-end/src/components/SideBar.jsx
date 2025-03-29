@@ -64,6 +64,8 @@ export default function Sidebar() {
           ...moderatorCommunities,
           ...memberCommunities,
         ];
+        console.log("🚀 Communities:", combinedCommunities);
+        
         setCommunities(combinedCommunities);
       } catch (error) {
         console.error(

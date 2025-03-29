@@ -7,7 +7,8 @@ import { api,BASE_URL} from "./api";
 export async function searchCommunities(query) {
     try {
         const endpoint = `http://localhost:9999/api/v1/communities/search?query=${query}`;
-        const response = await api.get(endpoint);  // Không dùng params
+        const response = await api.get(endpoint);// Kiểm tra dữ liệu trả về từ API
+          // Không dùng params
         return response.data;
     } catch (error) {
         console.error("Error searching communities:", error);

@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react'; 
-import { useParams, useNavigate } from 'react-router-dom';
-import { getReportById, updateReport, deactivatePost } from '../../services/ReportService';
-import { message } from 'antd';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  getReportById,
+  updateReport,
+  deactivatePost,
+} from "../../services/ReportService";
+import { message } from "antd";
+import violationpicture from "../../assets/images/violationpicture.png";
 
 const DetailReport = () => {
   const { id } = useParams();
@@ -9,45 +14,45 @@ const DetailReport = () => {
   const [reportDetail, setReportDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isActionTaken, setIsActionTaken] = useState(false);
-
+  const [refreshToggle, setRefreshToggle] = useState(false);
   useEffect(() => {
     const fetchReportDetail = async () => {
       try {
         const res = await getReportById(id);
-        console.log('Report detail:', res);
-        
         setReportDetail(res.data);
       } catch (error) {
-        console.error('Error fetching report details:', error);
+        console.error("Error fetching report details:", error);
       } finally {
         setLoading(false);
       }
     };
 
     fetchReportDetail();
-  }, [id]);
+  }, [id, refreshToggle]); // 👈 theo dõi refreshToggle
 
   const handleDeactivateAndApprove = async () => {
     try {
-      await deactivatePost(reportDetail.reportEntityId?._id, 'Approved');
-      await updateReport(id, { status: 'Approved' });
-      message.success('Bài viết đã bị vô hiệu hóa và báo cáo đã được phê duyệt.');
-      setReportDetail(prev => ({ ...prev, status: 'Approved' }));
+      await deactivatePost(reportDetail.reportEntityId?._id, "Approved");
+      await updateReport(id, { status: "Approved" });
+      message.success(
+        "Bài viết đã bị vô hiệu hóa và báo cáo đã được phê duyệt."
+      );
+      setReportDetail((prev) => ({ ...prev, status: "Approved" }));
       setIsActionTaken(true);
     } catch (error) {
-      message.error('Lỗi khi xử lý báo cáo: ' + error.message);
+      message.error("Lỗi khi xử lý báo cáo: " + error.message);
     }
   };
 
   const handleCancelReport = async () => {
     try {
-      await deactivatePost(reportDetail.reportEntityId._id, 'Cancel');
-      await updateReport(id, { status: 'Cancel' });
-      message.success('Báo cáo đã được hủy.');
-      setReportDetail(prev => ({ ...prev, status: 'Cancel' }));
+      await deactivatePost(reportDetail.reportEntityId._id, "Cancel");
+      await updateReport(id, { status: "Cancel" });
+      message.success("Báo cáo đã được hủy.");
+      setReportDetail((prev) => ({ ...prev, status: "Cancel" }));
       setIsActionTaken(true);
     } catch (error) {
-      message.error('Lỗi khi hủy báo cáo: ' + error.message);
+      message.error("Lỗi khi hủy báo cáo: " + error.message);
     }
   };
 
@@ -64,7 +69,9 @@ const DetailReport = () => {
   }
 
   if (!reportDetail) {
-    return <div className="text-center mt-4">Không tìm thấy chi tiết báo cáo</div>;
+    return (
+      <div className="text-center mt-4">Không tìm thấy chi tiết báo cáo</div>
+    );
   }
 
   return (
@@ -72,7 +79,7 @@ const DetailReport = () => {
       <div className="w-full max-w-3xl bg-white rounded-lg shadow-md">
         {/* Back Button */}
         <div className="p-4">
-          <button 
+          <button
             onClick={handleBack}
             className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded"
           >
@@ -87,38 +94,44 @@ const DetailReport = () => {
             {/* Left Column */}
             <div className="md:w-1/2 flex flex-col items-center space-y-4">
               <div className="w-[350px] flex flex-col">
-                <span className="font-semibold">Người dùng đăng bài:</span>
+                <span className="font-semibold">Authour:</span>
                 <p>{reportDetail.userId?.username || "N/A"}</p>
               </div>
               <div className="w-[350px] flex flex-col">
-                <span className="font-semibold">Tiêu đề bài viết:</span>
-                <p>{reportDetail.reportEntityId?.title}</p>
+                <span className="font-semibold">Content:</span>
+                <p>
+                  {reportDetail.reportEntityId?.title ||
+                    "The article has been hidden title."}
+                </p>
               </div>
               <div className="w-[350px] flex flex-col">
-                <span className="font-semibold">Nội dung bài viết:</span>
-                <p>{reportDetail.reportEntityId?.content}</p>
+                <span className="font-semibold">Description:</span>
+                <p>
+                  {reportDetail.reportEntityId?.content ||
+                    "The article has been hidden. "}
+                </p>
               </div>
               <div className="w-[350px] flex flex-col">
-                <span className="font-semibold">Lý do báo cáo:</span>
+                <span className="font-semibold">Reason for report:</span>
                 <p>{reportDetail.description}</p>
               </div>
               <div className="w-[350px] flex flex-col">
-                <span className="font-semibold">Trạng thái:</span>
+                <span className="font-semibold">Status:</span>
                 <p>{reportDetail.status}</p>
               </div>
-              {reportDetail.status === 'Waiting' && !isActionTaken && (
+              {reportDetail.status === "Waiting" && !isActionTaken && (
                 <div className="flex space-x-4 mt-2">
                   <button
                     onClick={handleDeactivateAndApprove}
                     className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
                   >
-                    Đánh dấu là Đã xử lý
+                    Mark as Approved
                   </button>
                   <button
                     onClick={handleCancelReport}
                     className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded"
                   >
-                    Hủy báo cáo
+                    Cancel Report
                   </button>
                 </div>
               )}
@@ -126,11 +139,12 @@ const DetailReport = () => {
             {/* Right Column */}
             <div className="md:w-1/2 flex flex-col items-center mt-6 md:mt-0">
               <img
-                src={reportDetail.postImage || 'default_image_url.jpg'}
+                src={reportDetail.reportEntityId?.media[0] || violationpicture}
                 alt="Post"
-                className="w-full max-h-64 object-cover rounded mb-2"
+                className="w-64 max-h-64 object-cover rounded mb-2"
               />
-              <p className="text-center font-semibold mt-2">Hình ảnh bài viết</p>
+
+              <p className="text-center font-semibold mt-2">Image Post</p>
             </div>
           </div>
         </div>

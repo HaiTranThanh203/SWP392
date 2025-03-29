@@ -103,7 +103,7 @@ const ManageCommunity = ({ showModal, setShowModal, community }) => {
   return (
     <>
       {showModal && (
-        <div className="min-h-screen inset-0 flex items-center justify-center bg-white bg-opacity-50 z-50">
+        <div className="min-h-screen inset-0 flex items-start justify-start bg-white bg-opacity-50 z-50">
           <div className="bg-white rounded-lg shadow-lg w-96 p-6">
             {/* Header */}
             <div className="flex justify-between items-center border-b pb-2">

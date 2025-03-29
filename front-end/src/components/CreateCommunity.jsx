@@ -122,7 +122,8 @@ const CreateCommunity = () => {
       </div>
 
       {showPreview && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-r from-pink-100 via-purple-100 to-blue-100 bg-opacity-60">
+
           <div className="bg-white rounded-lg shadow-lg p-6 max-w-lg">
             <div className="flex justify-between items-center border-b pb-2">
               <h2 className="text-xl font-bold">Community Preview</h2>

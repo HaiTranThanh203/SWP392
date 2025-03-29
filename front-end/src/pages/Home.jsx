@@ -199,13 +199,7 @@ export default function Home() {
                 className="mt-4 w-64 h-64 object-cover"
               />
             )}
-            {post.media.length == 0 && (
-              <img
-                src={bag}
-                alt="Bag"
-                className="mt-4 w-32 h-32 object-cover"
-              />
-            )}
+            
             <div className="flex items-center space-x-6 mt-4">
               {/* Like Button */}
               <div className="flex items-center space-x-1 text-gray-500">

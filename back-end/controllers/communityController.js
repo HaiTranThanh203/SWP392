@@ -99,7 +99,7 @@ exports.getPostInCommunity = async (req, res, next) => {
       communityId: new mongoose.Types.ObjectId(id),
     })
     .sort({ _id: -1 })
-       .populate("userId", "username")  // Thêm vào đây, sắp xếp giảm dần theo id (mới nhất lên đầu)
+       .populate("userId", "username avatar")  // Thêm vào đây, sắp xếp giảm dần theo id (mới nhất lên đầu)
     .exec();
 
     if (posts && posts.length > 0) {

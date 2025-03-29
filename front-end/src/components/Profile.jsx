@@ -266,7 +266,8 @@ function Profile() {
                       onChange={(e) => setNewStudentCode(e.target.value)}
                       className="w-3/4 border rounded p-1"
                     />
-                    <button onClick={handleStudentCodeEdit}>Save</button>
+                    <button  
+                    onClick={handleStudentCodeEdit}>Save</button>
                   </>
                 ) : (
                   <>

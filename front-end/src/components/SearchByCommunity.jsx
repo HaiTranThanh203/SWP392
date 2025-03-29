@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaCheckCircle, FaPlusCircle } from "react-icons/fa";
 import axios from "axios";
-
+import defaultLogo from "../assets/images/logo.png"; // Đường dẫn đến ảnh mặc định
 const API_URL = "http://localhost:9999/api/v1/users/community-join";
 
 const SearchByCommunity = () => {
@@ -26,6 +26,8 @@ const SearchByCommunity = () => {
   const fetchJoinStatus = async () => {
     try {
       const response = await axios.get(API_URL);
+      console.log("Join status response:", response.data); // Kiểm tra dữ liệu trả về từ API
+      
       setJoinStatus(response.data); // Lưu trạng thái từ API
     } catch (error) {
       console.error("Error fetching join status:", error);
@@ -73,7 +75,7 @@ const SearchByCommunity = () => {
                 >
                   <td className="py-6 px-6">
                     <img
-                      src={group.image || "default.jpg"}
+                      src={group.logo || defaultLogo}
                       alt={group.name}
                       className="h-16 w-16 rounded-full object-cover border-2 border-indigo-200 hover:scale-105 transition-transform duration-300"
                     />

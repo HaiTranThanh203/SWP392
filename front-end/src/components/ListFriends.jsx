@@ -6,6 +6,7 @@ import {
   getUserFriendships,
   acceptFriendRequest,
   rejectFriendRequest,
+  getFriends,
   unfriend,
 } from '../services/FriendShipService';
 
@@ -20,12 +21,16 @@ const ListFriends = () => {
   const [pendingInvitations, setPendingInvitations] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFriend, setSelectedFriend] = useState(null);
+  const [listFriends, setListFriends] = useState([]);
 
   // Lấy danh sách mối quan hệ của user
   const fetchFriendships = async () => {
     try {
       const res = await getUserFriendships(currentUserId);
+      const res2 = await getFriends(currentUserId);
       if (res.success) {
+        console.log('Danh sách mối quan hệ:', res);
+        setListFriends(res2.data);
         setAcceptedFriends(res.accepted);
         setPendingInvitations(res.pending);
       }
@@ -95,34 +100,45 @@ const ListFriends = () => {
           <h2 className="font-semibold text-lg mb-4">List Friends</h2>
           <div className="border-b border-gray-300 mb-4"></div>
           <div className="grid grid-cols-2 gap-6">
-            {acceptedFriends && acceptedFriends.length > 0 ? (
-              acceptedFriends.map((friendship) => (
-                <div
-                  key={friendship.friend._id}
-                  className="flex items-center justify-center"
-                >
-                  <img
-                    src={friendship.friend.avatar || '/default-avatar.png'}
-                    alt={
-                      friendship.friend.displayName ||
-                      friendship.friend.username
-                    }
-                    className="h-16 w-16 rounded-full"
-                  />
-                  <span className="ml-2">
-                    {friendship.friend.displayName ||
-                      friendship.friend.username}
-                  </span>
-                  <FaTimes
-                    className="ml-2 text-red-500 cursor-pointer"
-                    onClick={() => openModal(friendship)}
-                  />
-                </div>
-              ))
-            ) : (
-              <div>You do not have any friends yet.</div>
-            )}
-          </div>
+  {acceptedFriends && acceptedFriends.length > 0 ? (
+    acceptedFriends.map((friendship) => (
+      <div
+        key={friendship.friend._id}
+        className="flex items-center justify-center"
+      >
+        <img
+          src={friendship.friend.avatar || '/default-avatar.png'}
+          alt={friendship.friend.displayName || friendship.friend.username}
+          className="h-16 w-16 rounded-full"
+        />
+        <span className="ml-2">
+          {friendship.friend.displayName || friendship.friend.username}
+        </span>
+        <FaTimes
+          className="ml-2 text-red-500 cursor-pointer"
+          onClick={() => openModal(friendship)}
+        />
+      </div>
+    ))
+  ) : listFriends && listFriends.length > 0 ? (
+    listFriends.map((friend) => (
+      <div key={friend._id} className="flex items-center justify-center">
+        <img
+          src={friend.avatar || '/default-avatar.png'}
+          alt={friend.displayName || friend.username}
+          className="h-16 w-16 rounded-full"
+        />
+        <span className="ml-2">
+          {friend.displayName || friend.username}
+        </span>
+        {/* Bạn có thể thêm nút hủy kết bạn ở đây nếu cần */}
+      </div>
+    ))
+  ) : (
+    <div>You do not have any friends yet.</div>
+  )}
+</div>
+
         </div>
 
         {/* Danh sách lời mời kết bạn */}
